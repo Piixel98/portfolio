@@ -7,7 +7,7 @@
     "location": "Barcelona",
     "githubLabel": "github.com/Piixel98",
     "githubUrl": "https://github.com/Piixel98",
-    "footerText": "\u00a9 2025 Jordi Sanchez \u00b7 Software Engineer"
+    "footerText": "\u00a9 2026 Jordi Sanchez \u00b7 Software Engineer"
   },
   "nav": {
     "links": [
@@ -76,7 +76,7 @@
         "dates": "2024 - Present",
         "title": "Software Engineer",
         "company": "SEGULA TECHNOLOGIES",
-        "location": "Badia del Valles, Barcelona",
+        "location": "Barcelona",
         "bullets": [
           "Free-flow tolling systems - backend services & data processing for an internationally deployed, mission-critical platform",
           "Designed and implemented backend services handling large volumes of transactional data with strict performance SLAs",
@@ -91,7 +91,7 @@
         "dates": "2020 - 2024",
         "title": "Software Engineer",
         "company": "MAAS",
-        "location": "Spain",
+        "location": "Barberà del Vallés",
         "bullets": [
           "Backend development, system integrations and process automation as core focus areas",
           "Designed, developed and maintained Python-based REST and SOAP APIs using FastAPI",
@@ -106,7 +106,7 @@
         "dates": "2018 - 2020",
         "title": "IT Systems Administrator",
         "company": "MAAS",
-        "location": "Spain",
+        "location": "Barberà del Vallés",
         "bullets": [
           "Managed critical IT infrastructure: Active Directory, SQL Server, Office 365, backups and disaster recovery",
           "Implemented security best practices, audits and monitoring using Wazuh",
@@ -127,7 +127,7 @@
         "institution": "UOC - Universitat Oberta de Catalunya",
         "description": "Comprehensive computer science program covering software engineering, distributed systems, databases, algorithms and computer networks. Completed while working professionally full-time.",
         "highlights": ["Software Engineering", "Distributed Systems", "Databases & Data Structures", "Computer Networks"],
-        "icon": "Bsc"
+        "icon": "UOC"
       },
       {
         "dates": "2017 - 2019",
@@ -135,7 +135,7 @@
         "institution": "IES Badia del Valles",
         "description": "Vocational training focused on IT infrastructure, network administration, systems security and server management. Foundation for the systems administration career path.",
         "highlights": ["Network Administration", "Systems Security", "Server Management", "IT Infrastructure"],
-        "icon": "HT"
+        "icon": "IB"
       }
     ]
   },
