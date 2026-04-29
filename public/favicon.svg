@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">JS</title>
+  <rect width="64" height="64" rx="12" fill="#080c12"/>
+  <path d="M12 48V16h10v24c0 5.5-3.5 8-8.5 8H12Zm28 .5c-6.8 0-11.5-3-13.5-7.8l7.5-4c1.3 2.6 3 4 6 4 2.4 0 4-1 4-2.8 0-2.2-2.2-2.9-6.2-4.2-5.8-1.8-10.2-4.3-10.2-10.2 0-5.5 4.5-9.5 11.1-9.5 5.4 0 9.5 2.3 12 6.4l-7 4.5c-1.2-2-2.7-3.1-5-3.1-2 0-3.2.9-3.2 2.4 0 1.9 1.7 2.6 5.7 3.9 6.3 2 10.8 4.5 10.8 10.6 0 6.2-4.9 9.8-12 9.8Z" fill="#3b82f6"/>
+  <path d="M14 56h36" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+</svg>
