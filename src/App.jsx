@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import {
   About,
   AiProjects,
@@ -112,6 +113,8 @@ export default function App() {
           {portfolio.profile.githubLabel}
         </p>
       </footer>
+
+      <SpeedInsights />
     </>
   )
 }
