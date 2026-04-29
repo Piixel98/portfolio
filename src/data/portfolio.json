@@ -1,0 +1,192 @@
+{
+  "profile": {
+    "name": "Jordi",
+    "surname": "Sanchez",
+    "initials": "JS",
+    "role": "Software Engineer",
+    "location": "Barcelona",
+    "githubLabel": "github.com/Piixel98",
+    "githubUrl": "https://github.com/Piixel98",
+    "footerText": "\u00a9 2025 Jordi Sanchez \u00b7 Software Engineer"
+  },
+  "nav": {
+    "links": [
+      { "label": "About", "href": "#about" },
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Education", "href": "#education" },
+      { "label": "Languages", "href": "#languages" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "Contact", "href": "#contact" }
+    ]
+  },
+  "hero": {
+    "label": "Software Engineer \u00b7 Barcelona",
+    "phrases": [
+      "Backend & Cloud-Native Systems",
+      "Data Pipelines & Microservices",
+      "Mission-Critical Platforms",
+      "Python \u00b7 PostgreSQL \u00b7 Azure"
+    ],
+    "description": "Designing and operating large-scale, data-intensive backend platforms in mission-critical environments. 5+ years delivering systems that scale.",
+    "primaryCta": { "label": "View Projects", "href": "#projects" },
+    "secondaryCta": { "label": "Contact Me", "href": "#contact" },
+    "badges": [
+      "Python \u00b7 Java \u00b7 Node.js",
+      "Cloud-Native \u00b7 Microservices",
+      "Azure \u00b7 AWS \u00b7 Kubernetes"
+    ],
+    "availability": "Open to opportunities",
+    "codeBackground": "async def process_transaction(payload: dict) -> Result:\n    async with db.transaction() as tx:\n        event = await tx.events.create(payload)\n        await pipeline.emit(\"transaction.created\", event)\n        metrics.increment(\"transactions.processed\")\n        return Result.ok(event.id)\n\n@app.on_event(\"startup\")\nasync def lifespan():\n    await redis.ping()\n    await db.connect()\n    logger.info(\"System operational\")\n\nclass EventPipeline:\n    def __init__(self, broker: MessageBroker):\n        self.broker = broker\n        self.handlers: dict[str, list] = {}\n\n    async def emit(self, event: str, payload: dict):\n        for handler in self.handlers.get(event, []):\n            await handler(payload)"
+  },
+  "about": {
+    "tag": "// about",
+    "title": ["Backend engineer.", "Systems thinker."],
+    "paragraphs": [
+      "Extensive experience designing and operating large-scale, data-intensive backend platforms in mission-critical environments. Strong focus on Python microservices, event-driven architectures, data pipelines and cloud-native systems.",
+      "Known for delivering end-to-end solutions - from architecture decisions to production monitoring - and collaborating across Product and Engineering to ensure high data quality, reliability and long-term scalability.",
+      "Active participation in internationally deployed projects contributing to large-scale, mission-critical platforms with high availability, strict performance requirements and operational SLAs."
+    ],
+    "skills": [
+      { "label": "Backend", "pills": ["Python", "FastAPI", "Node.js", "Java", "REST", "SOAP", "GraphQL"] },
+      { "label": "Data & Storage", "pills": ["PostgreSQL", "Redis", "Apache Kafka", "Apache Airflow", "ELK Stack", "SQL Server", "pgvector"] },
+      { "label": "AI & LLM", "pills": ["LangChain", "RAG Pipelines", "LLM APIs", "AI Agents", "OpenAI API", "Anthropic API", "Vector DBs"] },
+      { "label": "Cloud & DevOps", "pills": ["Azure", "AWS", "Docker", "Kubernetes", "Terraform", "CI/CD", "GitLab", "IaC"] },
+      { "label": "Security", "pills": ["JWT", "OAuth 2.0", "OpenID Connect", "Wazuh", "Security Audits"] },
+      { "label": "Observability", "pills": ["Grafana", "ELK Stack", "Prometheus", "Distributed Tracing"] }
+    ],
+    "stats": [
+      { "num": 5, "suffix": "+", "label": "Years of professional experience" },
+      { "num": 2, "suffix": "", "label": "Companies, international deployments" },
+      { "num": 10, "suffix": "+", "label": "Core technologies mastered" }
+    ],
+    "terminal": {
+      "whoami": "jordi.sanchez - software.engineer",
+      "skills": ["python \u00b7 postgresql \u00b7 redis", "azure \u00b7 kubernetes \u00b7 ci/cd"],
+      "status": "open to new opportunities"
+    }
+  },
+  "experience": {
+    "tag": "// experience",
+    "title": "Work history",
+    "jobs": [
+      {
+        "dates": "2024 - Present",
+        "title": "Software Engineer",
+        "company": "SEGULA TECHNOLOGIES",
+        "location": "Badia del Valles, Barcelona",
+        "bullets": [
+          "Free-flow tolling systems - backend services & data processing for an internationally deployed, mission-critical platform",
+          "Designed and implemented backend services handling large volumes of transactional data with strict performance SLAs",
+          "PostgreSQL as core system for structured, high-integrity data management",
+          "Participated in architecture decisions for hybrid cloud and on-prem environments",
+          "End-to-end ownership: design, implementation, testing, deployment and production monitoring",
+          "Cross-functional collaboration for incident resolution, improving system reliability"
+        ],
+        "stack": ["Python", "Node.js", "PostgreSQL", "Redis", "Azure/AWS", "GitLab", "ELK", "Grafana"]
+      },
+      {
+        "dates": "2020 - 2024",
+        "title": "Software Engineer",
+        "company": "MAAS",
+        "location": "Spain",
+        "bullets": [
+          "Backend development, system integrations and process automation as core focus areas",
+          "Designed, developed and maintained Python-based REST and SOAP APIs using FastAPI",
+          "Built and deployed Dockerized services with full CI/CD pipelines",
+          "RPA solutions with Selenium for automating interactions with legacy and third-party systems",
+          "Integrated multiple heterogeneous internal and external platforms, orchestrating end-to-end data flows",
+          "Improved system observability, automation and integration efficiency across the organization"
+        ],
+        "stack": ["Python", "FastAPI", "PostgreSQL", "Kubernetes", "Azure", "Selenium", "Docker", "CI/CD"]
+      },
+      {
+        "dates": "2018 - 2020",
+        "title": "IT Systems Administrator",
+        "company": "MAAS",
+        "location": "Spain",
+        "bullets": [
+          "Managed critical IT infrastructure: Active Directory, SQL Server, Office 365, backups and disaster recovery",
+          "Implemented security best practices, audits and monitoring using Wazuh",
+          "Linux systems administration across private and cloud environments",
+          "VoIP systems support and administration of business-critical platforms"
+        ],
+        "stack": ["Active Directory", "SQL Server", "Windows/Linux", "Wazuh", "Office 365", "Scripting"]
+      }
+    ]
+  },
+  "education": {
+    "tag": "// education",
+    "title": "Academic background",
+    "items": [
+      {
+        "dates": "2019 - 2024",
+        "degree": "Bachelor's Degree in Computer Science",
+        "institution": "UOC - Universitat Oberta de Catalunya",
+        "description": "Comprehensive computer science program covering software engineering, distributed systems, databases, algorithms and computer networks. Completed while working professionally full-time.",
+        "highlights": ["Software Engineering", "Distributed Systems", "Databases & Data Structures", "Computer Networks"],
+        "icon": "Bsc"
+      },
+      {
+        "dates": "2017 - 2019",
+        "degree": "Higher Technician in Network Systems Administration",
+        "institution": "IES Badia del Valles",
+        "description": "Vocational training focused on IT infrastructure, network administration, systems security and server management. Foundation for the systems administration career path.",
+        "highlights": ["Network Administration", "Systems Security", "Server Management", "IT Infrastructure"],
+        "icon": "HT"
+      }
+    ]
+  },
+  "languages": {
+    "tag": "// languages",
+    "title": "Languages",
+    "items": [
+      { "name": "Spanish", "level": "Native", "flag": "ES", "bar": 100, "desc": "Mother tongue" },
+      { "name": "Catalan", "level": "Native", "flag": "CA", "bar": 100, "desc": "Mother tongue" },
+      { "name": "English", "level": "Advanced", "flag": "EN", "bar": 80, "desc": "Professional proficiency \u00b7 B2/C1" }
+    ]
+  },
+  "projects": {
+    "tag": "// selected work",
+    "title": "What I've built",
+    "intro": "End-to-end ownership across backend systems, data pipelines and integrations in production environments.",
+    "items": [
+      {
+        "num": "01",
+        "context": "SEGULA TECHNOLOGIES \u00b7 2024 - Present",
+        "title": "Free-Flow Tolling Platform",
+        "desc": "Backend platform for barrier-free tolling systems deployed internationally. Handles millions of transactional events with high availability, strict performance SLAs and real-time data processing pipelines. Hybrid cloud and on-prem architecture decisions.",
+        "stack": ["Python", "PostgreSQL", "Redis", "Azure/AWS", "ELK Stack", "Grafana", "Node.js"],
+        "badges": ["Mission-Critical", "International Scale", "High-Volume Data"]
+      },
+      {
+        "num": "02",
+        "context": "MAAS \u00b7 2020 - 2024",
+        "title": "System Integration & Automation Platform",
+        "desc": "Suite of integrations between heterogeneous internal and external platforms. REST and SOAP APIs, RPA solutions with Selenium for legacy system automation, and end-to-end data flow orchestration - improving operational efficiency and reliability at scale.",
+        "stack": ["Python", "FastAPI", "Selenium", "Docker", "Kubernetes", "CI/CD", "Azure"],
+        "badges": ["Process Automation", "RPA", "Data Pipelines"]
+      },
+      {
+        "num": "03",
+        "context": "MAAS \u00b7 2020 - 2024",
+        "title": "Operational Back-Office Systems",
+        "desc": "Design, development and evolution of back-office operational systems supporting core business workflows - incident management, operational monitoring and day-to-day business processes. Focus on observability, reliability and long-term maintainability.",
+        "stack": ["Python", "PostgreSQL", "Azure", "GitLab", "Docker"],
+        "badges": ["Reliability", "Observability", "Business-Critical"]
+      }
+    ]
+  },
+  "contact": {
+    "tag": "// contact",
+    "title": ["Let's build something", "reliable."],
+    "intro": "Open to senior backend, platform engineering and cloud-native opportunities. Let's talk.",
+    "copyButton": "Copy email address",
+    "copiedButton": "\u2713 Email copied!",
+    "items": [
+      { "label": "EMAIL", "value": "jordisanchezmora98@gmail.com", "href": "mailto:jordisanchezmora98@gmail.com", "copyValue": "jordisanchezmora98@gmail.com" },
+      { "label": "LINKEDIN", "value": "in/jsanchezm98", "href": "https://www.linkedin.com/in/jsanchezm98/"},
+      { "label": "GITHUB", "value": "github.com/Piixel98", "href": "https://github.com/Piixel98"},
+      { "label": "LOCATION", "value": "Badia del Valles, Barcelona \u00b7 ES", "href": null }
+    ]
+  }
+}
