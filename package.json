@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "links:check": "node scripts/validate-links.mjs",
     "test": "vitest --run",
     "test:watch": "vitest",
     "e2e": "playwright test"
