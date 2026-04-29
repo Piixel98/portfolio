@@ -8,9 +8,11 @@ import Languages from './components/Languages'
 import Projects from './components/Projects'
 import AiProjects from './components/AiProjects'
 import Contact from './components/Contact'
-import portfolio from './data/portfolio.json'
+import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
+import portfolio from './data/portfolio'
 
 export default function App() {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const cursorRef = useRef(null)
   const cursorRingRef = useRef(null)
   const ringX = useRef(0)
@@ -19,6 +21,8 @@ export default function App() {
   const mouseY = useRef(0)
 
   useEffect(() => {
+    let animationFrameId
+
     const moveCursor = (e) => {
       mouseX.current = e.clientX
       mouseY.current = e.clientY
@@ -26,42 +30,65 @@ export default function App() {
         cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
       }
     }
-    document.addEventListener('mousemove', moveCursor)
-
     const animRing = () => {
       ringX.current += (mouseX.current - ringX.current) * 0.12
       ringY.current += (mouseY.current - ringY.current) * 0.12
       if (cursorRingRef.current) {
         cursorRingRef.current.style.transform = `translate(${ringX.current}px, ${ringY.current}px) translate(-50%, -50%)`
       }
-      requestAnimationFrame(animRing)
+      animationFrameId = requestAnimationFrame(animRing)
     }
-    animRing()
+
+    if (!prefersReducedMotion) {
+      document.addEventListener('mousemove', moveCursor)
+      animationFrameId = requestAnimationFrame(animRing)
+    }
 
     const onScroll = () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+      const scrollableHeight = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0,
+      )
+      const pct = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0
+      const width = `${Math.min(Math.max(pct, 0), 100)}%`
       const el = document.getElementById('scroll-progress')
-      if (el) el.style.width = pct + '%'
+      if (el) el.style.width = width
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
 
-    const fadeObserver = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.js-fade').forEach(el => fadeObserver.observe(el))
+    const fadeElements = document.querySelectorAll('.js-fade')
+    let fadeObserver
+
+    if (prefersReducedMotion) {
+      fadeElements.forEach((el) => el.classList.add('visible'))
+    } else {
+      fadeObserver = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add('visible')
+          }),
+        { threshold: 0.1 },
+      )
+      fadeElements.forEach((el) => fadeObserver.observe(el))
+    }
 
     return () => {
       document.removeEventListener('mousemove', moveCursor)
       window.removeEventListener('scroll', onScroll)
-      fadeObserver.disconnect()
+      if (animationFrameId) cancelAnimationFrame(animationFrameId)
+      fadeObserver?.disconnect()
     }
-  }, [])
+  }, [prefersReducedMotion])
 
   return (
     <>
-      <div id="cursor" ref={cursorRef} />
-      <div id="cursor-ring" ref={cursorRingRef} />
+      {!prefersReducedMotion && (
+        <>
+          <div id="cursor" ref={cursorRef} aria-hidden="true" />
+          <div id="cursor-ring" ref={cursorRingRef} aria-hidden="true" />
+        </>
+      )}
       <div id="scroll-progress" />
 
       <Navbar nav={portfolio.nav} profile={portfolio.profile} />

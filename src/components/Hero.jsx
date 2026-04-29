@@ -1,20 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
 
 export default function Hero({ hero, profile }) {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const [text, setText] = useState('')
   const [phraseIdx, setPhraseIdx] = useState(0)
   const [charIdx, setCharIdx] = useState(0)
   const [deleting, setDeleting] = useState(false)
   const timeoutRef = useRef(null)
   const phrases = hero.phrases
+  const displayedText = prefersReducedMotion ? phrases[0] : text
 
   useEffect(() => {
+    if (prefersReducedMotion) return undefined
+
     const phrase = phrases[phraseIdx]
     if (!deleting) {
       if (charIdx < phrase.length) {
         timeoutRef.current = setTimeout(() => {
           setText(phrase.slice(0, charIdx + 1))
-          setCharIdx(c => c + 1)
+          setCharIdx((c) => c + 1)
         }, 75)
       } else {
         timeoutRef.current = setTimeout(() => setDeleting(true), 1800)
@@ -22,17 +27,22 @@ export default function Hero({ hero, profile }) {
     } else if (charIdx > 0) {
       timeoutRef.current = setTimeout(() => {
         setText(phrase.slice(0, charIdx - 1))
-        setCharIdx(c => c - 1)
+        setCharIdx((c) => c - 1)
       }, 38)
     } else {
-      setDeleting(false)
-      setPhraseIdx(i => (i + 1) % phrases.length)
+      timeoutRef.current = setTimeout(() => {
+        setDeleting(false)
+        setPhraseIdx((i) => (i + 1) % phrases.length)
+      }, 0)
     }
     return () => clearTimeout(timeoutRef.current)
-  }, [charIdx, deleting, phraseIdx, phrases])
+  }, [charIdx, deleting, phraseIdx, phrases, prefersReducedMotion])
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center pt-28 px-[5%] overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col justify-center pt-28 px-[5%] overflow-hidden"
+    >
       <div className="grid-bg" />
 
       <pre className="absolute bottom-0 right-0 w-[52%] opacity-[0.04] font-mono text-[13px] leading-loose text-blue-400 pointer-events-none p-10 whitespace-pre hidden lg:block">
@@ -46,13 +56,16 @@ export default function Hero({ hero, profile }) {
         </div>
 
         <h1 className="font-mono font-bold text-[clamp(44px,7vw,80px)] leading-[1.03] tracking-[-3px] mb-4">
-          {profile.name}<br />
+          {profile.name}
+          <br />
           <span className="text-blue-400">{profile.surname}</span>
         </h1>
 
         <div className="font-mono text-[clamp(15px,2vw,20px)] text-[#5A6478] font-light mb-8 min-h-[30px]">
-          <span className="text-emerald-400">{text}</span>
-          <span className="tw-cursor text-blue-400">|</span>
+          <span className="text-emerald-400">{displayedText}</span>
+          <span className="tw-cursor text-blue-400" aria-hidden="true">
+            |
+          </span>
         </div>
 
         <p className="max-w-[540px] text-[#5A6478] text-[16px] leading-[1.75] mb-11">
@@ -60,13 +73,20 @@ export default function Hero({ hero, profile }) {
         </p>
 
         <div className="flex gap-4 flex-wrap mb-12">
-          <a href={hero.primaryCta.href} className="btn-primary">{hero.primaryCta.label}</a>
-          <a href={hero.secondaryCta.href} className="btn-secondary">{hero.secondaryCta.label}</a>
+          <a href={hero.primaryCta.href} className="btn-primary">
+            {hero.primaryCta.label}
+          </a>
+          <a href={hero.secondaryCta.href} className="btn-secondary">
+            {hero.secondaryCta.label}
+          </a>
         </div>
 
         <div className="flex gap-3 flex-wrap">
-          {hero.badges.map(badge => (
-            <span key={badge} className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-[#5A6478] tracking-[0.05em]">
+          {hero.badges.map((badge) => (
+            <span
+              key={badge}
+              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-[#5A6478] tracking-[0.05em]"
+            >
               {badge}
             </span>
           ))}

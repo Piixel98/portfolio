@@ -22,21 +22,21 @@ export default {
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',
         'draw-line': 'drawLine 1.2s ease forwards',
-        'blink': 'blink 1s step-end infinite',
-        'counter': 'counter 1.5s ease forwards',
+        blink: 'blink 1s step-end infinite',
+        counter: 'counter 1.5s ease forwards',
       },
       keyframes: {
         fadeUp: {
           from: { opacity: '0', transform: 'translateY(24px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
         drawLine: {
           from: { height: '0' },
-          to:   { height: '100%' },
+          to: { height: '100%' },
         },
         blink: {
           '0%, 100%': { opacity: '1' },
-          '50%':      { opacity: '0' },
+          '50%': { opacity: '0' },
         },
       },
     },

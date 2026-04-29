@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" role="img" aria-labelledby="title desc">
+  <title id="title">Jordi Sánchez Software Engineer</title>
+  <desc id="desc">Portfolio preview card for Jordi Sánchez, Software Engineer.</desc>
+  <rect width="1200" height="630" fill="#080C12"/>
+  <path d="M0 0h1200v630H0z" fill="#080C12"/>
+  <g opacity=".22">
+    <path d="M0 120h1200M0 240h1200M0 360h1200M0 480h1200M120 0v630M240 0v630M360 0v630M480 0v630M600 0v630M720 0v630M840 0v630M960 0v630M1080 0v630" stroke="#3B82F6"/>
+  </g>
+  <text x="96" y="250" fill="#E8EAF0" font-family="Arial, sans-serif" font-size="76" font-weight="700">Jordi Sánchez</text>
+  <text x="100" y="330" fill="#3B82F6" font-family="Arial, sans-serif" font-size="42">Software Engineer</text>
+  <text x="100" y="400" fill="#10B981" font-family="Arial, sans-serif" font-size="28">Backend · Cloud-Native · Data Pipelines · AI Systems</text>
+</svg>

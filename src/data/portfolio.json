@@ -50,12 +50,46 @@
       "Active participation in internationally deployed projects contributing to large-scale, mission-critical platforms with high availability, strict performance requirements and operational SLAs."
     ],
     "skills": [
-      { "label": "Backend", "pills": ["Python", "FastAPI", "Node.js", "Java", "REST", "SOAP", "GraphQL"] },
-      { "label": "Data & Storage", "pills": ["PostgreSQL", "Redis", "Apache Kafka", "Apache Airflow", "ELK Stack", "SQL Server", "pgvector"] },
-      { "label": "AI & LLM", "pills": ["LangChain", "RAG Pipelines", "LLM APIs", "AI Agents", "OpenAI API", "Anthropic API", "Vector DBs"] },
-      { "label": "Cloud & DevOps", "pills": ["Azure", "AWS", "Docker", "Kubernetes", "Terraform", "CI/CD", "GitLab", "IaC"] },
-      { "label": "Security", "pills": ["JWT", "OAuth 2.0", "OpenID Connect", "Wazuh", "Security Audits"] },
-      { "label": "Observability", "pills": ["Grafana", "ELK Stack", "Prometheus", "Distributed Tracing"] }
+      {
+        "label": "Backend",
+        "pills": ["Python", "FastAPI", "Node.js", "Java", "REST", "SOAP", "GraphQL"]
+      },
+      {
+        "label": "Data & Storage",
+        "pills": [
+          "PostgreSQL",
+          "Redis",
+          "Apache Kafka",
+          "Apache Airflow",
+          "ELK Stack",
+          "SQL Server",
+          "pgvector"
+        ]
+      },
+      {
+        "label": "AI & LLM",
+        "pills": [
+          "LangChain",
+          "RAG Pipelines",
+          "LLM APIs",
+          "AI Agents",
+          "OpenAI API",
+          "Anthropic API",
+          "Vector DBs"
+        ]
+      },
+      {
+        "label": "Cloud & DevOps",
+        "pills": ["Azure", "AWS", "Docker", "Kubernetes", "Terraform", "CI/CD", "GitLab", "IaC"]
+      },
+      {
+        "label": "Security",
+        "pills": ["JWT", "OAuth 2.0", "OpenID Connect", "Wazuh", "Security Audits"]
+      },
+      {
+        "label": "Observability",
+        "pills": ["Grafana", "ELK Stack", "Prometheus", "Distributed Tracing"]
+      }
     ],
     "stats": [
       { "num": 5, "suffix": "+", "label": "Years of professional experience" },
@@ -85,7 +119,16 @@
           "End-to-end ownership: design, implementation, testing, deployment and production monitoring",
           "Cross-functional collaboration for incident resolution, improving system reliability"
         ],
-        "stack": ["Python", "Node.js", "PostgreSQL", "Redis", "Azure/AWS", "GitLab", "ELK", "Grafana"]
+        "stack": [
+          "Python",
+          "Node.js",
+          "PostgreSQL",
+          "Redis",
+          "Azure/AWS",
+          "GitLab",
+          "ELK",
+          "Grafana"
+        ]
       },
       {
         "dates": "2020 - 2024",
@@ -100,7 +143,16 @@
           "Integrated multiple heterogeneous internal and external platforms, orchestrating end-to-end data flows",
           "Improved system observability, automation and integration efficiency across the organization"
         ],
-        "stack": ["Python", "FastAPI", "PostgreSQL", "Kubernetes", "Azure", "Selenium", "Docker", "CI/CD"]
+        "stack": [
+          "Python",
+          "FastAPI",
+          "PostgreSQL",
+          "Kubernetes",
+          "Azure",
+          "Selenium",
+          "Docker",
+          "CI/CD"
+        ]
       },
       {
         "dates": "2018 - 2020",
@@ -113,7 +165,14 @@
           "Linux systems administration across private and cloud environments",
           "VoIP systems support and administration of business-critical platforms"
         ],
-        "stack": ["Active Directory", "SQL Server", "Windows/Linux", "Wazuh", "Office 365", "Scripting"]
+        "stack": [
+          "Active Directory",
+          "SQL Server",
+          "Windows/Linux",
+          "Wazuh",
+          "Office 365",
+          "Scripting"
+        ]
       }
     ]
   },
@@ -126,7 +185,12 @@
         "degree": "Bachelor's Degree in Computer Science",
         "institution": "UOC - Universitat Oberta de Catalunya",
         "description": "Comprehensive computer science program covering software engineering, distributed systems, databases, algorithms and computer networks. Completed while working professionally full-time.",
-        "highlights": ["Software Engineering", "Distributed Systems", "Databases & Data Structures", "Computer Networks"],
+        "highlights": [
+          "Software Engineering",
+          "Distributed Systems",
+          "Databases & Data Structures",
+          "Computer Networks"
+        ],
         "icon": "UOC"
       },
       {
@@ -134,7 +198,12 @@
         "degree": "Higher Technician in Network Systems Administration",
         "institution": "IES Badia del Valles",
         "description": "Vocational training focused on IT infrastructure, network administration, systems security and server management. Foundation for the systems administration career path.",
-        "highlights": ["Network Administration", "Systems Security", "Server Management", "IT Infrastructure"],
+        "highlights": [
+          "Network Administration",
+          "Systems Security",
+          "Server Management",
+          "IT Infrastructure"
+        ],
         "icon": "IB"
       }
     ]
@@ -145,7 +214,13 @@
     "items": [
       { "name": "Spanish", "level": "Native", "flag": "ES", "bar": 100, "desc": "Mother tongue" },
       { "name": "Catalan", "level": "Native", "flag": "CA", "bar": 100, "desc": "Mother tongue" },
-      { "name": "English", "level": "Advanced", "flag": "EN", "bar": 80, "desc": "Professional proficiency \u00b7 B2/C1" }
+      {
+        "name": "English",
+        "level": "Advanced",
+        "flag": "EN",
+        "bar": 80,
+        "desc": "Professional proficiency \u00b7 B2/C1"
+      }
     ]
   },
   "projects": {
@@ -188,8 +263,21 @@
         "context": "Personal Project \u00b7 2025",
         "title": "RAG Document Assistant",
         "desc": "Retrieval-Augmented Generation system that ingests technical documentation (PDFs, Markdown) and exposes a conversational API. Uses pgvector on PostgreSQL for vector storage - leveraging existing database expertise - and LangChain for orchestration. Designed with production concerns in mind: chunking strategies, hybrid search (semantic + keyword), and response streaming via FastAPI.",
-        "stack": ["Python", "FastAPI", "LangChain", "PostgreSQL", "pgvector", "OpenAI API", "Docker"],
-        "highlights": ["Semantic + keyword hybrid search", "Streaming responses", "Production-grade chunking", "REST API"],
+        "stack": [
+          "Python",
+          "FastAPI",
+          "LangChain",
+          "PostgreSQL",
+          "pgvector",
+          "OpenAI API",
+          "Docker"
+        ],
+        "highlights": [
+          "Semantic + keyword hybrid search",
+          "Streaming responses",
+          "Production-grade chunking",
+          "REST API"
+        ],
         "badge": "RAG \u00b7 Vector Search",
         "github": "github.com/Piixel98",
         "githubUrl": "https://github.com/Piixel98",
@@ -199,8 +287,21 @@
         "context": "Personal Project \u00b7 2025",
         "title": "Operational AI Agent",
         "desc": "Autonomous agent built with LangChain tool-calling that automates multi-step operational workflows: reads from APIs, queries databases, generates structured reports and dispatches actions. Evolved naturally from prior RPA and process automation experience - replacing brittle Selenium scripts with LLM-driven reasoning. Includes a Redis-based memory layer for session persistence across interactions.",
-        "stack": ["Python", "LangChain", "Redis", "FastAPI", "PostgreSQL", "Anthropic API", "Docker"],
-        "highlights": ["Tool-calling & function execution", "Redis memory layer", "Multi-step reasoning", "API + DB integration"],
+        "stack": [
+          "Python",
+          "LangChain",
+          "Redis",
+          "FastAPI",
+          "PostgreSQL",
+          "Anthropic API",
+          "Docker"
+        ],
+        "highlights": [
+          "Tool-calling & function execution",
+          "Redis memory layer",
+          "Multi-step reasoning",
+          "API + DB integration"
+        ],
         "badge": "AI Agents \u00b7 Automation",
         "github": "github.com/Piixel98",
         "githubUrl": "https://github.com/Piixel98",
@@ -210,8 +311,22 @@
         "context": "Personal Project \u00b7 2025",
         "title": "Event Stream Processor + LLM Enrichment",
         "desc": "Data pipeline that consumes events from Apache Kafka, applies LLM-based enrichment (entity extraction, classification, anomaly flagging) and persists enriched records to PostgreSQL. Orchestrated with Apache Airflow. Built to explore AI-augmented data pipelines as a natural evolution of existing backend pipeline experience. Includes a minimal Grafana dashboard for pipeline observability.",
-        "stack": ["Python", "Apache Kafka", "Apache Airflow", "PostgreSQL", "OpenAI API", "Grafana", "Docker", "FastAPI"],
-        "highlights": ["Real-time Kafka consumption", "LLM entity extraction", "Airflow orchestration", "Grafana observability"],
+        "stack": [
+          "Python",
+          "Apache Kafka",
+          "Apache Airflow",
+          "PostgreSQL",
+          "OpenAI API",
+          "Grafana",
+          "Docker",
+          "FastAPI"
+        ],
+        "highlights": [
+          "Real-time Kafka consumption",
+          "LLM entity extraction",
+          "Airflow orchestration",
+          "Grafana observability"
+        ],
         "badge": "MLOps \u00b7 Data Pipelines",
         "github": "github.com/Piixel98",
         "githubUrl": "https://github.com/Piixel98",
@@ -226,9 +341,18 @@
     "copyButton": "Copy email address",
     "copiedButton": "\u2713 Email copied!",
     "items": [
-      { "label": "EMAIL", "value": "jordisanchezmora98@gmail.com", "href": "mailto:jordisanchezmora98@gmail.com", "copyValue": "jordisanchezmora98@gmail.com" },
-      { "label": "LINKEDIN", "value": "in/jsanchezm98", "href": "https://www.linkedin.com/in/jsanchezm98/"},
-      { "label": "GITHUB", "value": "github.com/Piixel98", "href": "https://github.com/Piixel98"},
+      {
+        "label": "EMAIL",
+        "value": "jordisanchezmora98@gmail.com",
+        "href": "mailto:jordisanchezmora98@gmail.com",
+        "copyValue": "jordisanchezmora98@gmail.com"
+      },
+      {
+        "label": "LINKEDIN",
+        "value": "in/jsanchezm98",
+        "href": "https://www.linkedin.com/in/jsanchezm98/"
+      },
+      { "label": "GITHUB", "value": "github.com/Piixel98", "href": "https://github.com/Piixel98" },
       { "label": "LOCATION", "value": "Badia del Valles, Barcelona \u00b7 ES", "href": null }
     ]
   }

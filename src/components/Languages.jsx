@@ -21,7 +21,9 @@ export default function Languages({ languages }) {
             </div>
 
             <div className="font-mono text-[17px] font-medium text-[#E8EAF0] mb-1">{lang.name}</div>
-            <div className={`font-mono text-[11px] tracking-wide border inline-block px-2.5 py-0.5 rounded-sm mb-4 ${LEVEL_COLOR[lang.level] || LEVEL_COLOR.Advanced}`}>
+            <div
+              className={`font-mono text-[11px] tracking-wide border inline-block px-2.5 py-0.5 rounded-sm mb-4 ${LEVEL_COLOR[lang.level] || LEVEL_COLOR.Advanced}`}
+            >
               {lang.level}
             </div>
             <div className="text-[12px] text-[#5A6478] mb-4">{lang.desc}</div>

@@ -1,11 +1,11 @@
+import { externalLinkProps } from '../config/site'
+
 export default function AiProjects({ aiProjects }) {
   return (
     <section id="ai-projects" className="px-[5%] py-24">
       <span className="tag">{aiProjects.tag}</span>
       <h2 className="section-title mb-3">{aiProjects.title}</h2>
-      <p className="text-[#5A6478] max-w-xl mb-14 text-[15px]">
-        {aiProjects.intro}
-      </p>
+      <p className="text-[#5A6478] max-w-xl mb-14 text-[15px]">{aiProjects.intro}</p>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-6xl">
         {aiProjects.items.map((project, i) => (
@@ -36,30 +36,33 @@ export default function AiProjects({ aiProjects }) {
               <h3 className="text-[21px] font-medium mb-4 text-[#E8EAF0] leading-tight">
                 {project.title}
               </h3>
-              <p className="text-[14px] text-[#5A6478] leading-[1.75] mb-5">
-                {project.desc}
-              </p>
+              <p className="text-[14px] text-[#5A6478] leading-[1.75] mb-5">{project.desc}</p>
 
               <ul className="font-mono text-[11px] text-[#5A6478] leading-relaxed space-y-2 mb-6">
-                {project.highlights.map(highlight => (
+                {project.highlights.map((highlight) => (
                   <li key={highlight} className="flex gap-2">
-                    <span className="text-emerald-400">✓</span>
+                    <span className="text-emerald-400" aria-hidden="true">
+                      ✓
+                    </span>
                     <span>{highlight}</span>
                   </li>
                 ))}
               </ul>
 
               <div className="flex flex-wrap gap-1.5 mb-6">
-                {project.stack.map(tag => <span key={tag} className="pill">{tag}</span>)}
+                {project.stack.map((tag) => (
+                  <span key={tag} className="pill">
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               <a
                 href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-[11px] text-[#5A6478] hover:text-blue-400 transition-colors mt-auto"
+                {...externalLinkProps}
+                className="font-mono text-[11px] text-[#5A6478] hover:text-blue-400 transition-colors mt-auto rounded focus-visible"
               >
-                {project.github} ↗
+                {project.github} <span aria-hidden="true">↗</span>
               </a>
             </div>
           </article>
