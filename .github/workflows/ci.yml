@@ -15,9 +15,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run format:check
       - run: npm run lint
       - run: npm run test
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
       - name: Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
