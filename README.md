@@ -78,6 +78,7 @@ Edit that file to change the hero, skills, experience, education, projects, AI p
 - `src/components/index.js` is the component barrel used by `App.jsx`
 - `src/data/` contains the editable portfolio JSON and its Zod validation schema
 - `src/hooks/` contains reusable React hooks
+- `src/i18n/` contains locale configuration and language resolution helpers
 - `src/services/` contains integrations such as observability
 - `src/utils/` contains framework-agnostic helpers for browser APIs and link safety
 - `public/` contains static assets
