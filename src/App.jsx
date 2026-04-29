@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import About from './components/About'
-import Experience from './components/Experience'
-import Education from './components/Education'
-import Languages from './components/Languages'
-import Projects from './components/Projects'
-import AiProjects from './components/AiProjects'
-import Contact from './components/Contact'
+import {
+  About,
+  AiProjects,
+  Contact,
+  Education,
+  Experience,
+  Hero,
+  Languages,
+  Navbar,
+  Projects,
+} from './components'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 import portfolio from './data/portfolio'
 

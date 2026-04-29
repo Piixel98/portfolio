@@ -91,7 +91,7 @@ export default function Hero({ hero, profile }) {
             </span>
           ))}
           <span className="font-mono text-[11px] border border-emerald-500/40 px-3 py-1.5 rounded-full text-emerald-400 tracking-[0.05em]">
-            ● {hero.availability}
+            * {hero.availability}
           </span>
         </div>
       </div>

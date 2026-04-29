@@ -46,7 +46,7 @@ export default function Experience({ experience }) {
             </div>
             <div className="text-[19px] font-medium mb-1">{job.title}</div>
             <div className="font-mono text-[13px] text-[#5A6478] mb-4">
-              {job.company} · <span className="text-[#3A4255]">{job.location}</span>
+              {job.company} / <span className="text-[#3A4255]">{job.location}</span>
             </div>
 
             <ul className="text-[14px] text-[#5A6478] leading-[1.75] space-y-1.5 mb-5">

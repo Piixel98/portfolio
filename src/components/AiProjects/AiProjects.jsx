@@ -1,4 +1,4 @@
-import { externalLinkProps } from '../../config/site'
+import { safeExternalLinkProps } from '../../utils/links'
 
 export default function AiProjects({ aiProjects }) {
   return (
@@ -42,7 +42,7 @@ export default function AiProjects({ aiProjects }) {
                 {project.highlights.map((highlight) => (
                   <li key={highlight} className="flex gap-2">
                     <span className="text-emerald-400" aria-hidden="true">
-                      ✓
+                      *
                     </span>
                     <span>{highlight}</span>
                   </li>
@@ -59,10 +59,10 @@ export default function AiProjects({ aiProjects }) {
 
               <a
                 href={project.githubUrl}
-                {...externalLinkProps}
+                {...safeExternalLinkProps}
                 className="font-mono text-[11px] text-[#5A6478] hover:text-blue-400 transition-colors mt-auto rounded focus-visible"
               >
-                {project.github} <span aria-hidden="true">↗</span>
+                {project.github} <span aria-hidden="true">-&gt;</span>
               </a>
             </div>
           </article>

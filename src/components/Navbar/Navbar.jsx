@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { externalLinkProps } from '../../config/site'
+import { safeExternalLinkProps } from '../../utils/links'
 
 export default function Navbar({ nav, profile }) {
   const [scrolled, setScrolled] = useState(false)
@@ -60,10 +60,10 @@ export default function Navbar({ nav, profile }) {
 
       <a
         href={profile.githubUrl}
-        {...externalLinkProps}
+        {...safeExternalLinkProps}
         className="hidden rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
       >
-        {profile.githubLabel} <span aria-hidden="true">↗</span>
+        {profile.githubLabel} <span aria-hidden="true">-&gt;</span>
       </a>
 
       <button
@@ -112,10 +112,10 @@ export default function Navbar({ nav, profile }) {
         <a
           href={profile.githubUrl}
           onClick={closeMenu}
-          {...externalLinkProps}
+          {...safeExternalLinkProps}
           className="mt-4 inline-flex rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
         >
-          {profile.githubLabel} <span aria-hidden="true">↗</span>
+          {profile.githubLabel} <span aria-hidden="true">-&gt;</span>
         </a>
       </div>
     </nav>

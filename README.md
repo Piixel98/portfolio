@@ -74,6 +74,10 @@ Edit that file to change the hero, skills, experience, education, projects, AI p
 ## Project structure
 
 - `src/App.jsx` wires the sections together
-- `src/components/` contains the UI sections
-- `src/data/portfolio.json` contains the editable content
+- `src/components/` contains one folder per UI section, each with its component, optional tests and an `index.jsx` export
+- `src/components/index.js` is the component barrel used by `App.jsx`
+- `src/data/` contains the editable portfolio JSON and its Zod validation schema
+- `src/hooks/` contains reusable React hooks
+- `src/services/` contains integrations such as observability
+- `src/utils/` contains framework-agnostic helpers for browser APIs and link safety
 - `public/` contains static assets

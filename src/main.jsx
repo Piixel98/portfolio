@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { initObservability } from './observability'
+import { initObservability } from './services/observability'
 
 initObservability()
 

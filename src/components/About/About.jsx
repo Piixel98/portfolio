@@ -112,7 +112,10 @@ export default function About({ about }) {
             ))}
             <div className="text-emerald-400 mt-2">$ status</div>
             <div className="text-[#5A6478] mt-1">
-              <span className="text-emerald-400">●</span> {about.terminal.status}
+              <span className="text-emerald-400" aria-hidden="true">
+                *
+              </span>{' '}
+              {about.terminal.status}
             </div>
           </div>
         </div>

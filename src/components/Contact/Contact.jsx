@@ -1,33 +1,8 @@
 import { useRef, useState } from 'react'
-import { externalLinkProps } from '../../config/site'
+import { copyTextToClipboard } from '../../utils/clipboard'
+import { getLinkSecurityProps } from '../../utils/links'
 
-function isExternalHref(href) {
-  return /^https?:\/\//.test(href)
-}
-
-async function copyText(value) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(value)
-    return
-  }
-
-  const textarea = document.createElement('textarea')
-  textarea.value = value
-  textarea.setAttribute('readonly', '')
-  textarea.style.position = 'fixed'
-  textarea.style.top = '-9999px'
-  document.body.appendChild(textarea)
-  textarea.select()
-
-  const copied = document.execCommand('copy')
-  document.body.removeChild(textarea)
-
-  if (!copied) {
-    throw new Error('Clipboard API is unavailable')
-  }
-}
-
-export default function Contact({ contact, copyToClipboard = copyText }) {
+export default function Contact({ contact, copyToClipboard = copyTextToClipboard }) {
   const [copyState, setCopyState] = useState('idle')
   const timeoutRef = useRef(null)
   const copyItem = contact.items.find((item) => item.copyValue) || contact.items[0]
@@ -67,7 +42,7 @@ export default function Contact({ contact, copyToClipboard = copyText }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
         {contact.items.map((item) => {
-          const linkProps = item.href && isExternalHref(item.href) ? externalLinkProps : {}
+          const linkProps = item.href ? getLinkSecurityProps(item.href) : {}
 
           return item.href ? (
             <a
