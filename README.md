@@ -4,10 +4,11 @@ Portfolio personal built with React, Vite and Tailwind CSS.
 
 ## Stack
 
-- React 18
-- Vite
-- Tailwind CSS
-- Framer Motion
+- React 19
+- Vite 8
+- Tailwind CSS 4
+- Zod
+- Vitest + Testing Library
 
 ## Requirements
 
@@ -43,6 +44,24 @@ npm run build
 ```powershell
 npm run preview
 ```
+
+## Deployment
+
+Pushes to `main` run CI and then deploy the production build to Vercel.
+
+Configure these GitHub repository secrets before the first deploy:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+You can get the org and project IDs by linking the project locally once:
+
+```powershell
+npx vercel link
+```
+
+Then read `.vercel/project.json` and add the values as GitHub secrets. Do not commit the `.vercel` folder.
 
 ## Content editing
 
