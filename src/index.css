@@ -222,6 +222,26 @@
   .nav-link:hover {
     color: #e8eaf0;
   }
+
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 5%;
+    z-index: 10000;
+    border-radius: 0.25rem;
+    background: #10b981;
+    padding: 0.75rem 1rem;
+    color: #080c12;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    transform: translateY(-150%);
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
 }
 
 /* Cursor */

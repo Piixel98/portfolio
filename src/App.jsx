@@ -93,11 +93,11 @@ export default function App() {
           <div id="cursor-ring" ref={cursorRingRef} aria-hidden="true" />
         </>
       )}
-      <div id="scroll-progress" />
+      <div id="scroll-progress" aria-hidden="true" />
 
       <Navbar nav={portfolio.nav} profile={portfolio.profile} />
 
-      <main>
+      <main id="main-content" tabIndex="-1">
         <Hero hero={portfolio.hero} profile={portfolio.profile} />
         <About about={portfolio.about} />
         <Experience experience={portfolio.experience} />

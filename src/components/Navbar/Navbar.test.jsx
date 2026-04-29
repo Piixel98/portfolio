@@ -9,11 +9,12 @@ describe('Navbar', () => {
     const user = userEvent.setup()
     render(<Navbar nav={portfolio.nav} profile={portfolio.profile} />)
 
-    const button = screen.getByRole('button', { name: /toggle navigation menu/i })
+    const button = screen.getByRole('button', { name: /open navigation menu/i })
     expect(button).toHaveAttribute('aria-expanded', 'false')
 
     await user.click(button)
 
+    expect(button).toHaveAccessibleName(/close navigation menu/i)
     expect(button).toHaveAttribute('aria-expanded', 'true')
     expect(screen.getAllByRole('link', { name: /about/i })[1]).toHaveFocus()
 
