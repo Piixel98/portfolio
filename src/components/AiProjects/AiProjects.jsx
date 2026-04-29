@@ -1,4 +1,4 @@
-import { externalLinkProps } from '../config/site'
+import { externalLinkProps } from '../../config/site'
 
 export default function AiProjects({ aiProjects }) {
   return (

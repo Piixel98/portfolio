@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
 function AnimatedNumber({ target, suffix = '' }) {
   const prefersReducedMotion = usePrefersReducedMotion()

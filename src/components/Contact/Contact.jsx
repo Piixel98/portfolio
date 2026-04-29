@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { externalLinkProps } from '../config/site'
+import { externalLinkProps } from '../../config/site'
 
 function isExternalHref(href) {
   return /^https?:\/\//.test(href)

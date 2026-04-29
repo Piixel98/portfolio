@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
 export default function Experience({ experience }) {
   const prefersReducedMotion = usePrefersReducedMotion()

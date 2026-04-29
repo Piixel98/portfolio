@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { externalLinkProps } from '../config/site'
+import { externalLinkProps } from '../../config/site'
 
 export default function Navbar({ nav, profile }) {
   const [scrolled, setScrolled] = useState(false)

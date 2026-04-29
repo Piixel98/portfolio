@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
 export default function Hero({ hero, profile }) {
   const prefersReducedMotion = usePrefersReducedMotion()
