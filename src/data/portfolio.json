@@ -16,6 +16,7 @@
       { "label": "Education", "href": "#education" },
       { "label": "Languages", "href": "#languages" },
       { "label": "Projects", "href": "#projects" },
+      { "label": "AI Projects", "href": "#ai-projects" },
       { "label": "Contact", "href": "#contact" }
     ]
   },
@@ -24,6 +25,7 @@
     "phrases": [
       "Backend & Cloud-Native Systems",
       "Data Pipelines & Microservices",
+      "AI-Augmented Backend Systems",
       "Mission-Critical Platforms",
       "Python \u00b7 PostgreSQL \u00b7 Azure"
     ],
@@ -33,6 +35,7 @@
     "badges": [
       "Python \u00b7 Java \u00b7 Node.js",
       "Cloud-Native \u00b7 Microservices",
+      "RAG \u00b7 LLM APIs \u00b7 AI Agents",
       "Azure \u00b7 AWS \u00b7 Kubernetes"
     ],
     "availability": "Open to opportunities",
@@ -173,6 +176,46 @@
         "desc": "Design, development and evolution of back-office operational systems supporting core business workflows - incident management, operational monitoring and day-to-day business processes. Focus on observability, reliability and long-term maintainability.",
         "stack": ["Python", "PostgreSQL", "Azure", "GitLab", "Docker"],
         "badges": ["Reliability", "Observability", "Business-Critical"]
+      }
+    ]
+  },
+  "aiProjects": {
+    "tag": "// ai projects \u00b7 personal work",
+    "title": "AI side projects",
+    "intro": "Personal explorations around LLM-enabled backend systems, automation and data pipelines.",
+    "items": [
+      {
+        "context": "Personal Project \u00b7 2025",
+        "title": "RAG Document Assistant",
+        "desc": "Retrieval-Augmented Generation system that ingests technical documentation (PDFs, Markdown) and exposes a conversational API. Uses pgvector on PostgreSQL for vector storage - leveraging existing database expertise - and LangChain for orchestration. Designed with production concerns in mind: chunking strategies, hybrid search (semantic + keyword), and response streaming via FastAPI.",
+        "stack": ["Python", "FastAPI", "LangChain", "PostgreSQL", "pgvector", "OpenAI API", "Docker"],
+        "highlights": ["Semantic + keyword hybrid search", "Streaming responses", "Production-grade chunking", "REST API"],
+        "badge": "RAG \u00b7 Vector Search",
+        "github": "github.com/Piixel98",
+        "githubUrl": "https://github.com/Piixel98",
+        "icon": "BOT"
+      },
+      {
+        "context": "Personal Project \u00b7 2025",
+        "title": "Operational AI Agent",
+        "desc": "Autonomous agent built with LangChain tool-calling that automates multi-step operational workflows: reads from APIs, queries databases, generates structured reports and dispatches actions. Evolved naturally from prior RPA and process automation experience - replacing brittle Selenium scripts with LLM-driven reasoning. Includes a Redis-based memory layer for session persistence across interactions.",
+        "stack": ["Python", "LangChain", "Redis", "FastAPI", "PostgreSQL", "Anthropic API", "Docker"],
+        "highlights": ["Tool-calling & function execution", "Redis memory layer", "Multi-step reasoning", "API + DB integration"],
+        "badge": "AI Agents \u00b7 Automation",
+        "github": "github.com/Piixel98",
+        "githubUrl": "https://github.com/Piixel98",
+        "icon": "$_"
+      },
+      {
+        "context": "Personal Project \u00b7 2025",
+        "title": "Event Stream Processor + LLM Enrichment",
+        "desc": "Data pipeline that consumes events from Apache Kafka, applies LLM-based enrichment (entity extraction, classification, anomaly flagging) and persists enriched records to PostgreSQL. Orchestrated with Apache Airflow. Built to explore AI-augmented data pipelines as a natural evolution of existing backend pipeline experience. Includes a minimal Grafana dashboard for pipeline observability.",
+        "stack": ["Python", "Apache Kafka", "Apache Airflow", "PostgreSQL", "OpenAI API", "Grafana", "Docker", "FastAPI"],
+        "highlights": ["Real-time Kafka consumption", "LLM entity extraction", "Airflow orchestration", "Grafana observability"],
+        "badge": "MLOps \u00b7 Data Pipelines",
+        "github": "github.com/Piixel98",
+        "githubUrl": "https://github.com/Piixel98",
+        "icon": "LLM"
       }
     ]
   },

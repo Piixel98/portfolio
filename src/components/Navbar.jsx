@@ -27,6 +27,14 @@ export default function Navbar({ nav, profile }) {
             </a>
           </li>
         ))}
+        <li>
+          <a
+            href="#ai-projects"
+            className="nav-link after:absolute after:bottom-[-2px] after:left-1/2 after:right-1/2 after:h-px after:bg-blue-400 after:transition-all after:duration-300 hover:after:left-0 hover:after:right-0"
+          >
+            AI Projects
+          </a>
+        </li>
       </ul>
       <a
         href={profile.githubUrl}

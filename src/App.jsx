@@ -6,6 +6,7 @@ import Experience from './components/Experience'
 import Education from './components/Education'
 import Languages from './components/Languages'
 import Projects from './components/Projects'
+import AiProjects from './components/AiProjects'
 import Contact from './components/Contact'
 import portfolio from './data/portfolio.json'
 
@@ -72,6 +73,7 @@ export default function App() {
         <Education education={portfolio.education} />
         <Languages languages={portfolio.languages} />
         <Projects projects={portfolio.projects} />
+        <AiProjects aiProjects={portfolio.aiProjects} />
         <Contact contact={portfolio.contact} />
       </main>
 
