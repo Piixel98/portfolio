@@ -266,7 +266,7 @@
     "title": "Core stack constellation",
     "intro": "A compact map of the tools I use to design, build, ship and operate backend platforms, integrations and cloud-native systems.",
     "metrics": [
-      { "value": "18", "label": "Core tools" },
+      { "value": "24", "label": "Core tools" },
       { "value": "6", "label": "Domains" },
       { "value": "5+", "label": "Years" }
     ],
@@ -413,6 +413,54 @@
         "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
         "color": "#CC2927",
         "level": "76%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "C",
+        "category": "Systems",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+        "color": "#A8B9CC",
+        "level": "68%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "React",
+        "category": "Frontend",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+        "color": "#61DAFB",
+        "level": "78%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "RabbitMQ",
+        "category": "Messaging",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg",
+        "color": "#FF6600",
+        "level": "78%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "MongoDB",
+        "category": "Database",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+        "color": "#47A248",
+        "level": "72%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "Elastic Stack",
+        "category": "Observability",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg",
+        "color": "#005571",
+        "level": "84%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Zabbix",
+        "category": "Monitoring",
+        "logo": "https://assets.zabbix.com/img/logo/zabbix_logo_500x131.png",
+        "color": "#D40000",
+        "level": "70%",
         "levelLabel": "Solid"
       }
     ]
