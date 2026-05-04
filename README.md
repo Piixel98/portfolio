@@ -69,7 +69,17 @@ Most of the portfolio content is centralized in:
 
 - `src/data/portfolio.json`
 
-Edit that file to change the hero, skills, experience, education, projects, AI projects and contact details without touching component logic.
+Edit that file to change the hero, skills, experience, education, projects, technical skills and contact details without touching component logic.
+
+## Contact form
+
+The contact form is sent by the Vercel serverless function in `api/contact.js`.
+
+Required Vercel environment variables:
+
+- `RESEND_API_KEY`: API key from Resend.
+- `CONTACT_TO_EMAIL`: destination inbox. Defaults to `test@gmail.com`.
+- `CONTACT_FROM_EMAIL`: verified sender. Defaults to `Portfolio Contact <onboarding@resend.dev>`.
 
 ## Project structure
 

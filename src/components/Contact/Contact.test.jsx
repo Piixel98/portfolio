@@ -6,40 +6,48 @@ import Contact from './Contact'
 
 describe('Contact', () => {
   beforeEach(() => {
-    vi.useRealTimers()
-    Object.defineProperty(window, 'isSecureContext', {
-      configurable: true,
-      value: true,
-    })
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
   })
 
   afterEach(() => {
     cleanup()
+    vi.unstubAllGlobals()
     vi.restoreAllMocks()
   })
 
-  it('copies the configured email and shows success feedback', async () => {
-    const copyToClipboard = vi.fn().mockResolvedValue()
+  it('submits the contact form payload', async () => {
     const user = userEvent.setup()
 
-    render(<Contact contact={portfolio.contact} copyToClipboard={copyToClipboard} />)
+    render(<Contact contact={portfolio.contact} />)
 
-    await user.click(screen.getByRole('button', { name: /copy email address/i }))
-
-    expect(copyToClipboard).toHaveBeenCalledWith('jordisanchezmora98@gmail.com')
-    expect(await screen.findByRole('button', { name: /email copied/i })).toBeInTheDocument()
-  })
-
-  it('shows failure feedback when clipboard copy fails', async () => {
-    const copyToClipboard = vi.fn().mockRejectedValue(new Error('blocked'))
-    const user = userEvent.setup()
-
-    render(<Contact contact={portfolio.contact} copyToClipboard={copyToClipboard} />)
-
-    await user.click(screen.getByRole('button', { name: /copy email address/i }))
+    await user.type(screen.getByLabelText(/full name/i), 'Jordi Test')
+    await user.type(screen.getByLabelText(/^email$/i), 'jordi@example.com')
+    await user.type(screen.getByLabelText(/message/i), 'Hello from the portfolio form.')
+    await user.click(screen.getByRole('button', { name: /send message/i }))
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /copy failed/i })).toBeInTheDocument()
+      expect(fetch).toHaveBeenCalledWith(
+        '/api/contact',
+        expect.objectContaining({
+          body: expect.stringContaining('"fullName":"Jordi Test"'),
+          method: 'POST',
+        }),
+      )
     })
+    expect(await screen.findByText(/message sent successfully/i)).toBeInTheDocument()
+  })
+
+  it('rejects oversized pdf attachments before submit', async () => {
+    const user = userEvent.setup()
+    const file = new File([new Uint8Array(2 * 1024 * 1024 + 1)], 'cv.pdf', {
+      type: 'application/pdf',
+    })
+
+    render(<Contact contact={portfolio.contact} />)
+
+    await user.upload(screen.getByLabelText(/attach pdf/i), file)
+
+    expect(screen.getByText(/2MB or smaller/i)).toBeInTheDocument()
+    expect(fetch).not.toHaveBeenCalled()
   })
 })
