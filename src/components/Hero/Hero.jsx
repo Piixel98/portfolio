@@ -41,7 +41,7 @@ export default function Hero({ hero, profile }) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-28 px-[5%] overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 px-[5%] overflow-hidden"
     >
       <div className="grid-bg" />
 
@@ -49,7 +49,21 @@ export default function Hero({ hero, profile }) {
         {hero.codeBackground}
       </pre>
 
-      <div className="max-w-3xl relative z-10">
+      <div className="hero-character" aria-hidden="true">
+        <div className="hero-character__glow" />
+        <div className="hero-character__arm-blur" />
+        <img
+          src="/profile_character.png"
+          alt=""
+          className="hero-character__image"
+          width="785"
+          height="1102"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </div>
+
+      <div className="max-w-3xl lg:max-w-[58rem] xl:max-w-3xl relative z-10">
         <div className="flex items-center gap-2.5 font-mono text-[12px] text-emerald-400 tracking-[0.15em] mb-6">
           <span className="w-6 h-px bg-emerald-400 inline-block" />
           {hero.label}

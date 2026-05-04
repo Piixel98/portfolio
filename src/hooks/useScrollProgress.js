@@ -7,17 +7,32 @@ export default function useScrollProgress(elementId = 'scroll-progress') {
         document.documentElement.scrollHeight - window.innerHeight,
         0,
       )
-      const pct = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0
+      const pct = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0
       const progressElement = document.getElementById(elementId)
 
       if (progressElement) {
-        progressElement.style.width = `${Math.min(Math.max(pct, 0), 100)}%`
+        progressElement.style.transform = `scaleX(${Math.min(Math.max(pct, 0), 1)})`
       }
     }
 
-    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    let frameId = null
+    const scheduleUpdate = () => {
+      if (frameId !== null) return
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = null
+        updateScrollProgress()
+      })
+    }
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
     updateScrollProgress()
 
-    return () => window.removeEventListener('scroll', updateScrollProgress)
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate)
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId)
+      }
+    }
   }, [elementId])
 }
