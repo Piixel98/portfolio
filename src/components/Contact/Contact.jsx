@@ -27,7 +27,8 @@ export default function Contact({ contact }) {
   const validateAttachment = (file) => {
     if (!file || file.size === 0) return ''
     if (file.type !== 'application/pdf') return 'Only PDF files are accepted.'
-    if (file.size > MAX_ATTACHMENT_BYTES) return `The PDF must be ${MAX_ATTACHMENT_MB}MB or smaller.`
+    if (file.size > MAX_ATTACHMENT_BYTES)
+      return `The PDF must be ${MAX_ATTACHMENT_MB}MB or smaller.`
     return ''
   }
 
@@ -234,7 +235,9 @@ export default function Contact({ contact }) {
                 status === 'success' ? '!bg-emerald-500' : status === 'error' ? '!bg-red-500' : ''
               }`}
             >
-              {status === 'pending' && <span className="contact-submit__spinner" aria-hidden="true" />}
+              {status === 'pending' && (
+                <span className="contact-submit__spinner" aria-hidden="true" />
+              )}
               <span>{status === 'pending' ? contact.form.sending : contact.form.submit}</span>
             </button>
           </div>

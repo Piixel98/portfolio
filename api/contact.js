@@ -7,7 +7,9 @@ function json(res, status, payload) {
 }
 
 function sanitize(value, maxLength = 2000) {
-  return String(value || '').trim().slice(0, maxLength)
+  return String(value || '')
+    .trim()
+    .slice(0, maxLength)
 }
 
 function escapeHtml(value) {

@@ -1,6 +1,9 @@
 export default function Skills({ skills }) {
   return (
-    <section id="skills" className="relative overflow-hidden border-y border-white/[0.07] px-[5%] py-24">
+    <section
+      id="skills"
+      className="relative overflow-hidden border-y border-white/[0.07] px-[5%] py-24"
+    >
       <div
         className="absolute inset-0 opacity-70"
         aria-hidden="true"
@@ -52,8 +55,14 @@ export default function Skills({ skills }) {
                   {skill.category}
                 </p>
               </div>
-              <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]" aria-hidden="true">
-                <div className="h-full rounded-full bg-[var(--skill-color)]" style={{ width: skill.level }} />
+              <div
+                className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]"
+                aria-hidden="true"
+              >
+                <div
+                  className="h-full rounded-full bg-[var(--skill-color)]"
+                  style={{ width: skill.level }}
+                />
               </div>
               <span className="mt-3 block font-mono text-[10px] text-[var(--skill-color)]">
                 {skill.levelLabel}
