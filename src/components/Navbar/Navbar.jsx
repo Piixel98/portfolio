@@ -67,8 +67,16 @@ export default function Navbar({ nav, profile }) {
           href={profile.githubUrl}
           aria-label={`${profile.name} GitHub profile`}
           {...safeExternalLinkProps}
-          className="hidden rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
+          className="hidden items-center gap-2 rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
         >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="h-4 w-4 fill-current"
+            focusable="false"
+          >
+            <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.5v-1.9c-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.28 9.28 0 0 1 12 6.93c.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .28.18.6.69.5A10.17 10.17 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
+          </svg>
           {profile.githubLabel} <span aria-hidden="true">-&gt;</span>
         </a>
 
@@ -121,8 +129,16 @@ export default function Navbar({ nav, profile }) {
             aria-label={`${profile.name} GitHub profile`}
             onClick={closeMenu}
             {...safeExternalLinkProps}
-            className="mt-4 inline-flex rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
+            className="mt-4 inline-flex items-center gap-2 rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
           >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-4 w-4 fill-current"
+              focusable="false"
+            >
+              <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.36 6.84 9.72.5.1.68-.22.68-.5v-1.9c-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.28 9.28 0 0 1 12 6.93c.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .28.18.6.69.5A10.17 10.17 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
+            </svg>
             {profile.githubLabel} <span aria-hidden="true">-&gt;</span>
           </a>
         </div>
