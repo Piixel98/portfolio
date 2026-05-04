@@ -88,9 +88,15 @@ export default function Hero({ hero, profile }) {
 
         <div className="flex gap-4 flex-wrap mb-12">
           <a href={hero.primaryCta.href} className="btn-primary">
+            <span aria-hidden="true" className="font-mono">
+              &lt;/&gt;
+            </span>
             {hero.primaryCta.label}
           </a>
           <a href={hero.secondaryCta.href} className="btn-secondary">
+            <span aria-hidden="true" className="text-[15px] leading-none">
+              ✉
+            </span>
             {hero.secondaryCta.label}
           </a>
         </div>
