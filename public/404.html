@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <meta name="theme-color" content="#080C12" />
-    <title>Page not found | Jordi Sanchez</title>
+    <title>404 - Request Error | Jordi Sanchez</title>
     <style>
       :root {
         color-scheme: dark;
         --bg: #080c12;
         --panel: #0e1420;
+        --panel-2: #141b28;
         --text: #e8eaf0;
-        --muted: #8a94a8;
-        --accent: #3b82f6;
-        --accent2: #10b981;
+        --muted: #758096;
+        --line: rgba(255, 255, 255, 0.08);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.18);
+        --green: #10b981;
       }
 
       * {
@@ -25,11 +28,17 @@
         display: grid;
         min-height: 100vh;
         margin: 0;
-        place-items: center;
+        overflow-x: hidden;
         background:
-          linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px), var(--bg);
-        background-size: 60px 60px;
+          radial-gradient(circle at 75% 55%, rgba(59, 130, 246, 0.14), transparent 34rem),
+          linear-gradient(rgba(59, 130, 246, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.045) 1px, transparent 1px),
+          var(--bg);
+        background-size:
+          auto,
+          64px 64px,
+          64px 64px,
+          auto;
         color: var(--text);
         font-family:
           Inter,
@@ -39,62 +48,545 @@
           BlinkMacSystemFont,
           'Segoe UI',
           sans-serif;
-        padding: 2rem;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(115deg, rgba(8, 12, 18, 0.15), rgba(8, 12, 18, 0.74)),
+          radial-gradient(circle at 22% 20%, rgba(16, 185, 129, 0.08), transparent 18rem);
+        content: '';
       }
 
       main {
-        width: min(100%, 34rem);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-left: 3px solid var(--accent);
-        border-radius: 0.5rem;
-        background: color-mix(in srgb, var(--panel) 94%, transparent);
-        padding: clamp(1.5rem, 5vw, 2.5rem);
+        position: relative;
+        display: grid;
+        width: min(100%, 90rem);
+        min-height: 100svh;
+        margin: 0 auto;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.92fr);
+        align-items: center;
+        gap: clamp(1.5rem, 4vw, 4.5rem);
+        padding: clamp(1.25rem, 4vw, 4.5rem);
       }
 
-      p {
-        margin: 0 0 1.5rem;
-        color: var(--muted);
-        line-height: 1.6;
+      .content {
+        position: relative;
+        z-index: 2;
+        max-width: 43rem;
+        min-width: 0;
       }
 
-      .code {
-        margin-bottom: 0.75rem;
-        color: var(--accent2);
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.35rem;
+        color: var(--green);
         font-family: 'JetBrains Mono', Consolas, monospace;
-        font-size: 0.8rem;
-        letter-spacing: 0.08em;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 1.75rem;
+        height: 1px;
+        background: currentColor;
+        content: '';
       }
 
       h1 {
-        margin: 0 0 1rem;
+        margin: 0;
         font-family: 'JetBrains Mono', Consolas, monospace;
-        font-size: clamp(2rem, 8vw, 3.5rem);
-        line-height: 1.1;
+        font-weight: 700;
+        line-height: 0.98;
+      }
+
+      .error-code {
+        display: block;
+        width: fit-content;
+        margin-bottom: 0.55rem;
+        color: transparent;
+        background: linear-gradient(135deg, #e8eaf0 8%, #60a5fa 52%, #34d399 100%);
+        background-clip: text;
+        font-size: clamp(4.6rem, 13vw, 9.5rem);
+        letter-spacing: -0.08em;
+        text-shadow: 0 0 42px rgba(59, 130, 246, 0.24);
+        -webkit-background-clip: text;
+      }
+
+      .error-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #e8eaf0;
+        font-size: clamp(1.7rem, 4vw, 3rem);
+        letter-spacing: -0.045em;
+      }
+
+      .error-title::before {
+        width: clamp(1.75rem, 5vw, 4rem);
+        height: 2px;
+        background: linear-gradient(90deg, var(--blue), var(--green));
+        content: '';
+      }
+
+      .subtitle {
+        max-width: 34rem;
+        margin: 1.15rem 0 1.35rem;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        line-height: 1.7;
+      }
+
+      .terminal {
+        width: 100%;
+        max-width: 39rem;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 22%),
+          rgba(14, 20, 32, 0.88);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      }
+
+      .terminal-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .terminal-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .terminal-title {
+        color: #5a6478;
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 999px;
+        background: var(--muted);
+        opacity: 0.7;
+      }
+
+      .dot:nth-child(1) {
+        background: #ef4444;
+      }
+
+      .dot:nth-child(2) {
+        background: #f59e0b;
+      }
+
+      .dot:nth-child(3) {
+        background: var(--green);
+      }
+
+      .terminal-code {
+        display: grid;
+        gap: 0.35rem;
+        margin: 0;
+        overflow-x: auto;
+        padding: clamp(0.85rem, 3vw, 1.15rem);
+        color: #8a94a8;
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: clamp(0.72rem, 1.8vw, 0.9rem);
+        line-height: 1.65;
+      }
+
+      .terminal-line {
+        display: grid;
+        grid-template-columns: 4.6rem minmax(0, 1fr);
+        gap: 0.9rem;
+        align-items: start;
+        border-radius: 0.3rem;
+        padding: 0.18rem 0.35rem;
+        min-width: 0;
+      }
+
+      .terminal-line span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .terminal-line:not(.prompt) {
+        background: rgba(255, 255, 255, 0.018);
+      }
+
+      .terminal-time {
+        color: #4b5568;
+      }
+
+      .terminal-node {
+        color: #60a5fa;
+      }
+
+      .terminal-ok {
+        color: #34d399;
+      }
+
+      .terminal-warn {
+        color: #f59e0b;
+      }
+
+      .terminal-muted {
+        color: #5a6478;
+      }
+
+      .terminal-cursor {
+        display: inline-block;
+        width: 0.48rem;
+        height: 1em;
+        margin-left: 0.25rem;
+        background: rgba(96, 165, 250, 0.72);
+        vertical-align: -0.15em;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin: 0 0 1.5rem;
       }
 
       a {
         display: inline-flex;
-        border-radius: 0.25rem;
-        background: var(--accent);
-        color: white;
+        min-height: 2.9rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.3rem;
+        padding: 0.9rem 1.35rem;
         font-family: 'JetBrains Mono', Consolas, monospace;
-        font-size: 0.85rem;
-        padding: 0.875rem 1.25rem;
+        font-size: 0.82rem;
         text-decoration: none;
+        transition:
+          border-color 0.2s ease,
+          background-color 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      a:hover {
+        transform: translateY(-1px);
       }
 
       a:focus-visible {
-        outline: 2px solid var(--accent2);
+        outline: 2px solid var(--green);
         outline-offset: 4px;
+      }
+
+      .primary {
+        border: 1px solid rgba(96, 165, 250, 0.45);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent),
+          var(--blue);
+        color: #fff;
+        box-shadow: 0 14px 34px rgba(59, 130, 246, 0.22);
+      }
+
+      .secondary {
+        border: 1px solid var(--line);
+        color: var(--text);
+      }
+
+      .secondary:hover {
+        border-color: rgba(59, 130, 246, 0.45);
+        color: #93c5fd;
+      }
+
+      .visual {
+        position: relative;
+        min-height: clamp(24rem, 58vw, 38rem);
+        min-width: 0;
+      }
+
+      .glow {
+        position: absolute;
+        right: 4%;
+        bottom: 12%;
+        width: min(34rem, 80vw);
+        aspect-ratio: 1;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle, rgba(59, 130, 246, 0.34), transparent 62%),
+          radial-gradient(circle at 60% 38%, rgba(16, 185, 129, 0.12), transparent 58%);
+        filter: blur(42px);
+        opacity: 0.78;
+      }
+
+      .network {
+        position: absolute;
+        inset: 8% 0 6% 2%;
+        opacity: 0.74;
+      }
+
+      .developer {
+        position: absolute;
+        right: 4%;
+        bottom: 2%;
+        width: min(31rem, 86vw);
+        max-height: 88vh;
+        filter: drop-shadow(0 28px 70px rgba(0, 0, 0, 0.42));
+      }
+
+      .snippet {
+        position: absolute;
+        top: 11%;
+        right: 3%;
+        width: min(18rem, 70%);
+        border: 1px solid rgba(59, 130, 246, 0.18);
+        border-radius: 0.45rem;
+        background: rgba(14, 20, 32, 0.7);
+        padding: 0.9rem;
+        color: #5a6478;
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 0.7rem;
+        line-height: 1.65;
+      }
+
+      @media (max-width: 900px) {
+        main {
+          grid-template-columns: 1fr;
+          align-content: center;
+          padding-top: clamp(2rem, 6vw, 4rem);
+        }
+
+        .content {
+          max-width: 44rem;
+        }
+
+        .visual {
+          width: min(100%, 38rem);
+          min-height: clamp(18rem, 56vw, 28rem);
+          margin: 0 auto;
+          order: -1;
+        }
+
+        .developer {
+          right: 50%;
+          width: min(27rem, 82vw);
+          transform: translateX(54%);
+        }
+
+        .snippet {
+          width: min(18rem, 70vw);
+          right: 0;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .visual {
+          min-height: 17rem;
+          opacity: 0.72;
+        }
+
+        .network {
+          inset: 0;
+        }
+
+        .developer {
+          width: min(22rem, 80vw);
+        }
+
+        .snippet {
+          top: 3%;
+          width: min(15rem, 70vw);
+          font-size: 0.62rem;
+        }
+      }
+
+      @media (max-width: 560px) {
+        body {
+          background-size:
+            auto,
+            44px 44px,
+            44px 44px,
+            auto;
+        }
+
+        main {
+          min-height: auto;
+          padding: 1.1rem;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+
+        .eyebrow {
+          margin-bottom: 1rem;
+          font-size: 0.62rem;
+          letter-spacing: 0.1em;
+        }
+
+        .eyebrow::before {
+          width: 1rem;
+        }
+
+        .error-code {
+          font-size: clamp(3.7rem, 24vw, 6rem);
+          letter-spacing: -0.075em;
+        }
+
+        .error-title {
+          gap: 0.55rem;
+          font-size: clamp(1.35rem, 8vw, 2rem);
+        }
+
+        .subtitle {
+          margin-bottom: 1.35rem;
+        }
+
+        .terminal-bar {
+          padding: 0.65rem 0.75rem;
+        }
+
+        .terminal-title {
+          max-width: 11rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .actions a {
+          width: 100%;
+        }
+
+        .terminal-line {
+          grid-template-columns: 1fr;
+          gap: 0.05rem;
+        }
+
+        .visual {
+          min-height: 13.5rem;
+          opacity: 0.58;
+        }
+
+        .snippet {
+          display: none;
+        }
+
+        .developer {
+          right: 50%;
+          width: min(18rem, 92vw);
+          opacity: 0.86;
+          transform: translateX(58%);
+        }
+      }
+
+      @media (max-width: 380px) {
+        .terminal-controls {
+          display: none;
+        }
+
+        .terminal-title {
+          max-width: none;
+        }
+
+        .visual {
+          min-height: 11rem;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <div class="code">404 / not_found</div>
-      <h1>Page not found</h1>
-      <p>The page may have moved, or the URL may be incorrect.</p>
-      <a href="/">Back to portfolio</a>
+      <section class="content" aria-labelledby="page-title">
+        <div class="eyebrow">route resolution failed</div>
+        <h1 id="page-title" aria-label="404 Request Error">
+          <span class="error-code">404</span>
+          <span class="error-title">Request Error</span>
+        </h1>
+        <p class="subtitle">The requested route could not be resolved</p>
+
+        <nav class="actions" aria-label="Recovery actions">
+          <a class="primary" href="/">Return to portfolio</a>
+          <a class="secondary" href="/#projects">View projects</a>
+        </nav>
+
+        <div class="terminal" aria-label="Terminal error output">
+          <div class="terminal-bar" aria-hidden="true">
+            <span class="terminal-controls">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </span>
+            <span class="terminal-title">route-resolver.log</span>
+          </div>
+          <div class="terminal-code">
+            <div class="terminal-line prompt">
+              <span class="terminal-muted">$</span>
+              <span>resolve_route --target current_request<span class="terminal-cursor"></span></span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-time">00:00.012</span>
+              <span><span class="terminal-node">pipeline.router</span> status=<span class="terminal-ok">running</span></span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-time">00:00.028</span>
+              <span><span class="terminal-node">route.lookup</span> match=<span class="terminal-warn">null</span></span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-time">00:00.031</span>
+              <span><span class="terminal-node">fallback.handler</span> emitted=<span class="terminal-warn">404</span></span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-time">trace</span>
+              <span class="terminal-muted">/portfolio/routes/current_request could not be mapped</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="visual" aria-hidden="true">
+        <div class="glow"></div>
+        <svg class="network" viewBox="0 0 520 520" fill="none">
+          <path d="M72 260h118l72-92h126" stroke="rgba(59,130,246,.28)" stroke-width="2" />
+          <path d="M142 354h104l98 58h92" stroke="rgba(16,185,129,.24)" stroke-width="2" />
+          <path d="M250 184v144l118 72" stroke="rgba(59,130,246,.18)" stroke-width="2" />
+          <circle cx="72" cy="260" r="7" fill="#3b82f6" />
+          <circle cx="190" cy="260" r="5" fill="#10b981" />
+          <circle cx="262" cy="168" r="7" fill="#3b82f6" />
+          <circle cx="388" cy="168" r="5" fill="#10b981" />
+          <circle cx="142" cy="354" r="6" fill="#3b82f6" />
+          <circle cx="344" cy="412" r="7" fill="#10b981" />
+          <circle cx="436" cy="412" r="5" fill="#3b82f6" />
+        </svg>
+        <div class="snippet">async route(req) {
+  const node = graph.resolve(req.path)
+  if (!node) throw PipelineError(404)
+}</div>
+        <svg class="developer" viewBox="0 0 420 520" fill="none">
+          <path d="M127 477c16-78 34-130 78-156 40-24 104-10 127 30 17 31 22 76 33 126H127Z" fill="#101722" />
+          <path d="M147 477c11-55 26-96 58-120 38-29 95-20 122 13 19 23 28 63 35 107H147Z" fill="#141b28" />
+          <path d="M215 351c7 20 34 24 51 10l-6-53-51 8 6 35Z" fill="#b77955" />
+          <path d="M183 219c-12 52 4 104 46 111 39 6 70-34 73-78 4-55-19-94-61-99-35-4-49 27-58 66Z" fill="#c98a62" />
+          <path d="M169 202c16-63 69-82 118-54 28 16 42 46 41 80-31-13-56-19-94-16-26 2-47 0-65-10Z" fill="#111827" />
+          <path d="M177 246c-19-4-28 9-21 29 6 18 23 22 33 9" fill="#c98a62" />
+          <path d="M233 247c17-7 36-4 49 8" stroke="#111827" stroke-width="7" stroke-linecap="round" />
+          <path d="M281 288c-18 16-43 18-64 4" stroke="#7c3f2f" stroke-width="5" stroke-linecap="round" />
+          <path d="M191 370c44 32 96 33 138 2" stroke="#223044" stroke-width="12" stroke-linecap="round" />
+          <path d="M146 477c17-62 34-96 61-119" stroke="#223044" stroke-width="10" stroke-linecap="round" />
+          <path d="M360 477c-8-47-19-82-38-109" stroke="#223044" stroke-width="10" stroke-linecap="round" />
+          <rect x="84" y="357" width="148" height="92" rx="8" fill="#0e1420" stroke="rgba(59,130,246,.28)" />
+          <path d="M107 388h72M107 414h44M107 401h94" stroke="#3b82f6" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" />
+        </svg>
+      </aside>
     </main>
   </body>
 </html>
