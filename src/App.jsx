@@ -2,7 +2,6 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import {
   About,
-  AiProjects,
   Contact,
   Education,
   Experience,
@@ -10,6 +9,7 @@ import {
   Languages,
   Navbar,
   Projects,
+  Skills,
 } from './components'
 import useCustomCursor from './hooks/useCustomCursor'
 import useFadeInSections from './hooks/useFadeInSections'
@@ -43,7 +43,7 @@ export default function App() {
         <Education education={portfolio.education} />
         <Languages languages={portfolio.languages} />
         <Projects projects={portfolio.projects} />
-        <AiProjects aiProjects={portfolio.aiProjects} />
+        <Skills skills={portfolio.skillsSection} />
         <Contact contact={portfolio.contact} />
       </main>
 

@@ -16,7 +16,7 @@
       { "label": "Education", "href": "#education" },
       { "label": "Languages", "href": "#languages" },
       { "label": "Projects", "href": "#projects" },
-      { "label": "AI Projects", "href": "#ai-projects" },
+      { "label": "Skills", "href": "#skills" },
       { "label": "Contact", "href": "#contact" }
     ]
   },
@@ -220,6 +220,13 @@
         "flag": "EN",
         "bar": 80,
         "desc": "Professional proficiency \u00b7 B2/C1"
+      },
+      {
+        "name": "French",
+        "level": "Basic",
+        "flag": "FR",
+        "bar": 20,
+        "desc": "Basic level"
       }
     ]
   },
@@ -254,83 +261,159 @@
       }
     ]
   },
-  "aiProjects": {
-    "tag": "// ai projects \u00b7 personal work",
-    "title": "AI side projects",
-    "intro": "Personal explorations around LLM-enabled backend systems, automation and data pipelines.",
+  "skillsSection": {
+    "tag": "// technical skills",
+    "title": "Core stack constellation",
+    "intro": "A compact map of the tools I use to design, build, ship and operate backend platforms, integrations and cloud-native systems.",
+    "metrics": [
+      { "value": "18", "label": "Core tools" },
+      { "value": "6", "label": "Domains" },
+      { "value": "5+", "label": "Years" }
+    ],
     "items": [
       {
-        "context": "Personal Project \u00b7 2025",
-        "title": "RAG Document Assistant",
-        "desc": "Retrieval-Augmented Generation system that ingests technical documentation (PDFs, Markdown) and exposes a conversational API. Uses pgvector on PostgreSQL for vector storage - leveraging existing database expertise - and LangChain for orchestration. Designed with production concerns in mind: chunking strategies, hybrid search (semantic + keyword), and response streaming via FastAPI.",
-        "stack": [
-          "Python",
-          "FastAPI",
-          "LangChain",
-          "PostgreSQL",
-          "pgvector",
-          "OpenAI API",
-          "Docker"
-        ],
-        "highlights": [
-          "Semantic + keyword hybrid search",
-          "Streaming responses",
-          "Production-grade chunking",
-          "REST API"
-        ],
-        "badge": "RAG \u00b7 Vector Search",
-        "github": "github.com/Piixel98",
-        "githubUrl": "https://github.com/Piixel98",
-        "icon": "BOT"
+        "name": "Python",
+        "category": "Backend",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+        "color": "#3776AB",
+        "level": "96%",
+        "levelLabel": "Primary"
       },
       {
-        "context": "Personal Project \u00b7 2025",
-        "title": "Operational AI Agent",
-        "desc": "Autonomous agent built with LangChain tool-calling that automates multi-step operational workflows: reads from APIs, queries databases, generates structured reports and dispatches actions. Evolved naturally from prior RPA and process automation experience - replacing brittle Selenium scripts with LLM-driven reasoning. Includes a Redis-based memory layer for session persistence across interactions.",
-        "stack": [
-          "Python",
-          "LangChain",
-          "Redis",
-          "FastAPI",
-          "PostgreSQL",
-          "Anthropic API",
-          "Docker"
-        ],
-        "highlights": [
-          "Tool-calling & function execution",
-          "Redis memory layer",
-          "Multi-step reasoning",
-          "API + DB integration"
-        ],
-        "badge": "AI Agents \u00b7 Automation",
-        "github": "github.com/Piixel98",
-        "githubUrl": "https://github.com/Piixel98",
-        "icon": "$_"
+        "name": "FastAPI",
+        "category": "API",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+        "color": "#009688",
+        "level": "92%",
+        "levelLabel": "Advanced"
       },
       {
-        "context": "Personal Project \u00b7 2025",
-        "title": "Event Stream Processor + LLM Enrichment",
-        "desc": "Data pipeline that consumes events from Apache Kafka, applies LLM-based enrichment (entity extraction, classification, anomaly flagging) and persists enriched records to PostgreSQL. Orchestrated with Apache Airflow. Built to explore AI-augmented data pipelines as a natural evolution of existing backend pipeline experience. Includes a minimal Grafana dashboard for pipeline observability.",
-        "stack": [
-          "Python",
-          "Apache Kafka",
-          "Apache Airflow",
-          "PostgreSQL",
-          "OpenAI API",
-          "Grafana",
-          "Docker",
-          "FastAPI"
-        ],
-        "highlights": [
-          "Real-time Kafka consumption",
-          "LLM entity extraction",
-          "Airflow orchestration",
-          "Grafana observability"
-        ],
-        "badge": "MLOps \u00b7 Data Pipelines",
-        "github": "github.com/Piixel98",
-        "githubUrl": "https://github.com/Piixel98",
-        "icon": "LLM"
+        "name": "PostgreSQL",
+        "category": "Database",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+        "color": "#4169E1",
+        "level": "94%",
+        "levelLabel": "Advanced"
+      },
+      {
+        "name": "Redis",
+        "category": "Cache",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
+        "color": "#DC382D",
+        "level": "86%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Docker",
+        "category": "DevOps",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+        "color": "#2496ED",
+        "level": "90%",
+        "levelLabel": "Advanced"
+      },
+      {
+        "name": "Kubernetes",
+        "category": "Platform",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
+        "color": "#326CE5",
+        "level": "78%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "Azure",
+        "category": "Cloud",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg",
+        "color": "#0078D4",
+        "level": "84%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "AWS",
+        "category": "Cloud",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+        "color": "#FF9900",
+        "level": "76%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "Apache Kafka",
+        "category": "Streaming",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg",
+        "color": "#E8EAF0",
+        "level": "80%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "Node.js",
+        "category": "Backend",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+        "color": "#5FA04E",
+        "level": "82%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Java",
+        "category": "Backend",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+        "color": "#F89820",
+        "level": "74%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "GraphQL",
+        "category": "API",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+        "color": "#E10098",
+        "level": "72%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "GitLab",
+        "category": "CI/CD",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
+        "color": "#FC6D26",
+        "level": "86%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Terraform",
+        "category": "IaC",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg",
+        "color": "#844FBA",
+        "level": "70%",
+        "levelLabel": "Solid"
+      },
+      {
+        "name": "Linux",
+        "category": "Systems",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+        "color": "#FCC624",
+        "level": "88%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Grafana",
+        "category": "Observability",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg",
+        "color": "#F46800",
+        "level": "82%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "Selenium",
+        "category": "Automation",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg",
+        "color": "#43B02A",
+        "level": "84%",
+        "levelLabel": "Strong"
+      },
+      {
+        "name": "SQL Server",
+        "category": "Database",
+        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
+        "color": "#CC2927",
+        "level": "76%",
+        "levelLabel": "Solid"
       }
     ]
   },
@@ -338,8 +421,18 @@
     "tag": "// contact",
     "title": ["Let's build something", "reliable."],
     "intro": "Open to senior backend, platform engineering and cloud-native opportunities. Let's talk.",
-    "copyButton": "Copy email address",
-    "copiedButton": "\u2713 Email copied!",
+    "form": {
+      "fullName": "Full name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "message": "Message",
+      "attachment": "Attach PDF",
+      "attachmentHint": "Optional PDF, max. 2MB",
+      "submit": "Send message",
+      "sending": "Sending...",
+      "success": "Message sent successfully.",
+      "error": "Message could not be sent. Please try again."
+    },
     "items": [
       {
         "label": "EMAIL",
@@ -351,9 +444,7 @@
         "label": "LINKEDIN",
         "value": "in/jsanchezm98",
         "href": "https://www.linkedin.com/in/jsanchezm98/"
-      },
-      { "label": "GITHUB", "value": "github.com/Piixel98", "href": "https://github.com/Piixel98" },
-      { "label": "LOCATION", "value": "Badia del Valles, Barcelona \u00b7 ES", "href": null }
+      }
     ]
   }
 }

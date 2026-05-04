@@ -118,21 +118,24 @@ const portfolioSchema = z.object({
       }),
     ),
   }),
-  aiProjects: z.object({
+  skillsSection: z.object({
     tag: nonEmptyString,
     title: nonEmptyString,
     intro: nonEmptyString,
+    metrics: z.array(
+      z.object({
+        value: nonEmptyString,
+        label: nonEmptyString,
+      }),
+    ),
     items: z.array(
       z.object({
-        context: nonEmptyString,
-        title: nonEmptyString,
-        desc: nonEmptyString,
-        stack: z.array(nonEmptyString),
-        highlights: z.array(nonEmptyString),
-        badge: nonEmptyString,
-        github: nonEmptyString,
-        githubUrl: z.string().url(),
-        icon: nonEmptyString,
+        name: nonEmptyString,
+        category: nonEmptyString,
+        logo: nonEmptyString,
+        color: nonEmptyString,
+        level: nonEmptyString,
+        levelLabel: nonEmptyString,
       }),
     ),
   }),
@@ -140,8 +143,18 @@ const portfolioSchema = z.object({
     tag: nonEmptyString,
     title: z.array(nonEmptyString).min(1),
     intro: nonEmptyString,
-    copyButton: nonEmptyString,
-    copiedButton: nonEmptyString,
+    form: z.object({
+      fullName: nonEmptyString,
+      email: nonEmptyString,
+      phone: nonEmptyString,
+      message: nonEmptyString,
+      attachment: nonEmptyString,
+      attachmentHint: nonEmptyString,
+      submit: nonEmptyString,
+      sending: nonEmptyString,
+      success: nonEmptyString,
+      error: nonEmptyString,
+    }),
     items: z.array(
       z.object({
         label: nonEmptyString,
