@@ -14,7 +14,9 @@ function serveLocal404() {
     const acceptsHtml = req.headers.accept?.includes('text/html')
     const hasFileExtension = Boolean(path.extname(url.pathname))
 
-    return acceptsHtml && url.pathname !== '/' && !url.pathname.startsWith('/api/') && !hasFileExtension
+    return (
+      acceptsHtml && url.pathname !== '/' && !url.pathname.startsWith('/api/') && !hasFileExtension
+    )
   }
 
   const handler = (req, res, next) => {

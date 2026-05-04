@@ -32,8 +32,7 @@
         background:
           radial-gradient(circle at 75% 55%, rgba(59, 130, 246, 0.14), transparent 34rem),
           linear-gradient(rgba(59, 130, 246, 0.045) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(59, 130, 246, 0.045) 1px, transparent 1px),
-          var(--bg);
+          linear-gradient(90deg, rgba(59, 130, 246, 0.045) 1px, transparent 1px), var(--bg);
         background-size:
           auto,
           64px 64px,
@@ -293,9 +292,7 @@
 
       .primary {
         border: 1px solid rgba(96, 165, 250, 0.45);
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent),
-          var(--blue);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent), var(--blue);
         color: #fff;
         box-shadow: 0 14px 34px rgba(59, 130, 246, 0.22);
       }
@@ -530,27 +527,43 @@
           <div class="terminal-code">
             <div class="terminal-line prompt">
               <span class="terminal-muted">$</span>
-              <span>resolve_route --target current_request<span class="terminal-cursor"></span></span>
+              <span
+                >resolve_route --target current_request<span class="terminal-cursor"></span
+              ></span>
             </div>
             <div class="terminal-line">
               <span class="terminal-time">00:00.012</span>
-              <span><span class="terminal-node">pipeline.router</span> status=<span class="terminal-ok">running</span></span>
+              <span
+                ><span class="terminal-node">pipeline.router</span> status=<span class="terminal-ok"
+                  >running</span
+                ></span
+              >
             </div>
             <div class="terminal-line">
               <span class="terminal-time">00:00.028</span>
-              <span><span class="terminal-node">route.lookup</span> match=<span class="terminal-warn">null</span></span>
+              <span
+                ><span class="terminal-node">route.lookup</span> match=<span class="terminal-warn"
+                  >null</span
+                ></span
+              >
             </div>
             <div class="terminal-line">
               <span class="terminal-time">00:00.031</span>
-              <span><span class="terminal-node">fallback.handler</span> emitted=<span class="terminal-warn">404</span></span>
+              <span
+                ><span class="terminal-node">fallback.handler</span> emitted=<span
+                  class="terminal-warn"
+                  >404</span
+                ></span
+              >
             </div>
             <div class="terminal-line">
               <span class="terminal-time">trace</span>
-              <span class="terminal-muted">/portfolio/routes/current_request could not be mapped</span>
+              <span class="terminal-muted"
+                >/portfolio/routes/current_request could not be mapped</span
+              >
             </div>
           </div>
         </div>
-
       </section>
 
       <aside class="visual" aria-hidden="true">
@@ -567,24 +580,75 @@
           <circle cx="344" cy="412" r="7" fill="#10b981" />
           <circle cx="436" cy="412" r="5" fill="#3b82f6" />
         </svg>
-        <div class="snippet">async route(req) {
-  const node = graph.resolve(req.path)
-  if (!node) throw PipelineError(404)
-}</div>
+        <div class="snippet">
+          async route(req) { const node = graph.resolve(req.path) if (!node) throw
+          PipelineError(404) }
+        </div>
         <svg class="developer" viewBox="0 0 420 520" fill="none">
-          <path d="M127 477c16-78 34-130 78-156 40-24 104-10 127 30 17 31 22 76 33 126H127Z" fill="#101722" />
-          <path d="M147 477c11-55 26-96 58-120 38-29 95-20 122 13 19 23 28 63 35 107H147Z" fill="#141b28" />
+          <path
+            d="M127 477c16-78 34-130 78-156 40-24 104-10 127 30 17 31 22 76 33 126H127Z"
+            fill="#101722"
+          />
+          <path
+            d="M147 477c11-55 26-96 58-120 38-29 95-20 122 13 19 23 28 63 35 107H147Z"
+            fill="#141b28"
+          />
           <path d="M215 351c7 20 34 24 51 10l-6-53-51 8 6 35Z" fill="#b77955" />
-          <path d="M183 219c-12 52 4 104 46 111 39 6 70-34 73-78 4-55-19-94-61-99-35-4-49 27-58 66Z" fill="#c98a62" />
-          <path d="M169 202c16-63 69-82 118-54 28 16 42 46 41 80-31-13-56-19-94-16-26 2-47 0-65-10Z" fill="#111827" />
+          <path
+            d="M183 219c-12 52 4 104 46 111 39 6 70-34 73-78 4-55-19-94-61-99-35-4-49 27-58 66Z"
+            fill="#c98a62"
+          />
+          <path
+            d="M169 202c16-63 69-82 118-54 28 16 42 46 41 80-31-13-56-19-94-16-26 2-47 0-65-10Z"
+            fill="#111827"
+          />
           <path d="M177 246c-19-4-28 9-21 29 6 18 23 22 33 9" fill="#c98a62" />
-          <path d="M233 247c17-7 36-4 49 8" stroke="#111827" stroke-width="7" stroke-linecap="round" />
-          <path d="M281 288c-18 16-43 18-64 4" stroke="#7c3f2f" stroke-width="5" stroke-linecap="round" />
-          <path d="M191 370c44 32 96 33 138 2" stroke="#223044" stroke-width="12" stroke-linecap="round" />
-          <path d="M146 477c17-62 34-96 61-119" stroke="#223044" stroke-width="10" stroke-linecap="round" />
-          <path d="M360 477c-8-47-19-82-38-109" stroke="#223044" stroke-width="10" stroke-linecap="round" />
-          <rect x="84" y="357" width="148" height="92" rx="8" fill="#0e1420" stroke="rgba(59,130,246,.28)" />
-          <path d="M107 388h72M107 414h44M107 401h94" stroke="#3b82f6" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" />
+          <path
+            d="M233 247c17-7 36-4 49 8"
+            stroke="#111827"
+            stroke-width="7"
+            stroke-linecap="round"
+          />
+          <path
+            d="M281 288c-18 16-43 18-64 4"
+            stroke="#7c3f2f"
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M191 370c44 32 96 33 138 2"
+            stroke="#223044"
+            stroke-width="12"
+            stroke-linecap="round"
+          />
+          <path
+            d="M146 477c17-62 34-96 61-119"
+            stroke="#223044"
+            stroke-width="10"
+            stroke-linecap="round"
+          />
+          <path
+            d="M360 477c-8-47-19-82-38-109"
+            stroke="#223044"
+            stroke-width="10"
+            stroke-linecap="round"
+          />
+          <rect
+            x="84"
+            y="357"
+            width="148"
+            height="92"
+            rx="8"
+            fill="#0e1420"
+            stroke="rgba(59,130,246,.28)"
+          />
+          <path
+            d="M107 388h72M107 414h44M107 401h94"
+            stroke="#3b82f6"
+            stroke-opacity=".55"
+            stroke-width="4"
+            stroke-linecap="round"
+          />
         </svg>
       </aside>
     </main>
