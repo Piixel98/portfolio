@@ -27,7 +27,9 @@ export default function Projects({ projects, skills }) {
                 project={project}
                 index={index}
                 onOpen={(projectNum) =>
-                  setActiveProject(projects.items.find((project) => project.num === projectNum) ?? null)
+                  setActiveProject(
+                    projects.items.find((project) => project.num === projectNum) ?? null,
+                  )
                 }
               />
             ))}

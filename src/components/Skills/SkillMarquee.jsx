@@ -89,7 +89,7 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       motion.lastTs = timestamp
 
       if (!motion.paused && !dragRef.current.isDragging && motion.setWidth > 0) {
-        motion.offset += motion.direction * (speed * delta) / 1000
+        motion.offset += (motion.direction * (speed * delta)) / 1000
         normalizeOffset()
         applyTransform()
       }

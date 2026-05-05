@@ -4,7 +4,13 @@ import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 function WorkIcon({ current = false, systems = false }) {
   if (current) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        aria-hidden="true"
+      >
         <path d="M12 3v4" />
         <path d="M12 17v4" />
         <path d="M3 12h4" />
@@ -20,7 +26,13 @@ function WorkIcon({ current = false, systems = false }) {
 
   if (systems) {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        aria-hidden="true"
+      >
         <rect x="4" y="5" width="16" height="6" rx="1.5" />
         <rect x="4" y="13" width="16" height="6" rx="1.5" />
         <path d="M8 8h.01" />

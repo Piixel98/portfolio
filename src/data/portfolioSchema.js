@@ -138,13 +138,15 @@ const portfolioSchema = z.object({
         label: nonEmptyString,
       }),
     ),
-    groups: z.array(
-      z.object({
-        title: nonEmptyString,
-        description: nonEmptyString,
-        items: z.array(skillItemSchema).min(1),
-      }),
-    ).min(1),
+    groups: z
+      .array(
+        z.object({
+          title: nonEmptyString,
+          description: nonEmptyString,
+          items: z.array(skillItemSchema).min(1),
+        }),
+      )
+      .min(1),
   }),
   contact: z.object({
     tag: nonEmptyString,

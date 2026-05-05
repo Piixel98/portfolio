@@ -8,49 +8,49 @@ export default function Education({ education }) {
         </div>
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
-        {education.items.map((item, i) => (
-          <div
-            key={`${item.degree}-${item.dates}`}
-            className="js-fade bg-[#141B28] border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
-            style={{ transitionDelay: `${i * 0.1}s` }}
-          >
-            <div className="flex items-start justify-between mb-5">
-              <span className="font-mono text-[11px] text-emerald-400 tracking-[0.1em]">
-                {item.dates}
-              </span>
-              <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-blue-500/20 bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
-                {item.icon.startsWith('/') ? (
-                  <img
-                    src={item.icon}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="h-[22px] w-[22px] object-contain"
-                  />
-                ) : (
-                  <span className="font-mono text-[14px] font-bold">{item.icon}</span>
-                )}
+          {education.items.map((item, i) => (
+            <div
+              key={`${item.degree}-${item.dates}`}
+              className="js-fade bg-[#141B28] border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
+              <div className="flex items-start justify-between mb-5">
+                <span className="font-mono text-[11px] text-emerald-400 tracking-[0.1em]">
+                  {item.dates}
+                </span>
+                <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-blue-500/20 bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
+                  {item.icon.startsWith('/') ? (
+                    <img
+                      src={item.icon}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-[22px] w-[22px] object-contain"
+                    />
+                  ) : (
+                    <span className="font-mono text-[14px] font-bold">{item.icon}</span>
+                  )}
+                </div>
+              </div>
+
+              <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-[#E8EAF0]">
+                {item.degree}
+              </h3>
+              <div className="font-mono text-[12px] text-[#5A6478] mb-4">{item.institution}</div>
+              <p className="text-[13px] text-[#5A6478] leading-[1.7] mb-5">{item.description}</p>
+
+              <div className="flex flex-wrap gap-1.5">
+                {item.highlights.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-[#5A6478] px-2 py-1 rounded-sm"
+                  >
+                    {highlight}
+                  </span>
+                ))}
               </div>
             </div>
-
-            <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-[#E8EAF0]">
-              {item.degree}
-            </h3>
-            <div className="font-mono text-[12px] text-[#5A6478] mb-4">{item.institution}</div>
-            <p className="text-[13px] text-[#5A6478] leading-[1.7] mb-5">{item.description}</p>
-
-            <div className="flex flex-wrap gap-1.5">
-              {item.highlights.map((highlight) => (
-                <span
-                  key={highlight}
-                  className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-[#5A6478] px-2 py-1 rounded-sm"
-                >
-                  {highlight}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
     </section>

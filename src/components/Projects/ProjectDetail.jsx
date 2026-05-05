@@ -86,7 +86,8 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
                 <div className="project-modal__section-head">
                   <span className="project-modal__label">Related technologies</span>
                   <p className="project-modal__section-copy">
-                    Technologies explicitly used in this project, based on the project stack defined in the portfolio data.
+                    Technologies explicitly used in this project, based on the project stack defined
+                    in the portfolio data.
                   </p>
                 </div>
                 <div className="project-modal__related">
