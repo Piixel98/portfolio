@@ -97,14 +97,14 @@ export default function Hero({ hero, profile }) {
           <span className="text-blue-400">{profile.surname}</span>
         </h1>
 
-        <div className="font-mono text-[clamp(15px,2vw,20px)] text-[#5A6478] font-light mb-8 min-h-[30px]">
+        <div className="font-mono text-[clamp(15px,2vw,20px)] text-[#8E98AD] font-light mb-8 min-h-[30px]">
           <span className="text-emerald-400">{displayedText}</span>
           <span className="tw-cursor text-blue-400" aria-hidden="true">
             |
           </span>
         </div>
 
-        <p className="max-w-[540px] text-[#5A6478] text-[16px] leading-[1.75] mb-11">
+        <p className="max-w-[540px] text-[#8E98AD] text-[16px] leading-[1.75] mb-11">
           {hero.description}
         </p>
 
@@ -116,9 +116,20 @@ export default function Hero({ hero, profile }) {
             {hero.primaryCta.label}
           </a>
           <a href={hero.secondaryCta.href} className="btn-secondary">
-            <span aria-hidden="true" className="text-[15px] leading-none">
-              ✉
-            </span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-[15px] w-[15px]"
+              focusable="false"
+            >
+              <rect x="4" y="6" width="16" height="12" rx="2" />
+              <path d="m5 8 7 5 7-5" />
+            </svg>
             {hero.secondaryCta.label}
           </a>
         </div>
@@ -127,7 +138,7 @@ export default function Hero({ hero, profile }) {
           {hero.badges.map((badge) => (
             <span
               key={badge}
-              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-[#5A6478] tracking-[0.05em]"
+              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-[#8E98AD] tracking-[0.05em]"
             >
               {badge}
             </span>

@@ -134,7 +134,7 @@
         "dates": "2020 - 2024",
         "title": "Software Engineer",
         "company": "MAAS",
-        "location": "Barberà del Vallés",
+        "location": "Barber\u00e0 del Vall\u00e8s",
         "bullets": [
           "Backend development, system integrations and process automation as core focus areas",
           "Designed, developed and maintained Python-based REST and SOAP APIs using FastAPI",
@@ -158,7 +158,7 @@
         "dates": "2018 - 2020",
         "title": "IT Systems Administrator",
         "company": "MAAS",
-        "location": "Barberà del Vallés",
+        "location": "Barber\u00e0 del Vall\u00e8s",
         "bullets": [
           "Managed critical IT infrastructure: Active Directory, SQL Server, Office 365, backups and disaster recovery",
           "Implemented security best practices, audits and monitoring using Wazuh",
@@ -196,7 +196,7 @@
       {
         "dates": "2017 - 2019",
         "degree": "Higher Technician in Network Systems Administration",
-        "institution": "IES Badia del Valles",
+        "institution": "IES Badia del Vall\u00e8s",
         "description": "Vocational training focused on IT infrastructure, network administration, systems security and server management. Foundation for the systems administration career path.",
         "highlights": [
           "Network Administration",
