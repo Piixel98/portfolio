@@ -5,6 +5,7 @@ import {
   Contact,
   Education,
   Experience,
+  Footer,
   Hero,
   Languages,
   Navbar,
@@ -42,17 +43,12 @@ export default function App() {
         <Experience experience={portfolio.experience} />
         <Education education={portfolio.education} />
         <Languages languages={portfolio.languages} />
-        <Projects projects={portfolio.projects} />
+        <Projects projects={portfolio.projects} skills={portfolio.skillsSection} />
         <Skills skills={portfolio.skillsSection} />
         <Contact contact={portfolio.contact} />
       </main>
 
-      <footer className="border-t border-white/[0.07] px-[5%] py-8 flex justify-between items-center">
-        <p className="font-mono text-[11px] text-[#5A6478]">{portfolio.profile.footerText}</p>
-        <p className="font-mono text-[10px] text-blue-400 tracking-[0.1em]">
-          {portfolio.profile.githubLabel}
-        </p>
-      </footer>
+      <Footer profile={portfolio.profile} contact={portfolio.contact} />
 
       <SpeedInsights />
       <Analytics />

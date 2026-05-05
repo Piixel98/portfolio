@@ -1,10 +1,13 @@
 export default function Education({ education }) {
   return (
     <section id="education" className="bg-[#0E1420] px-[5%] py-24">
-      <span className="tag">{education.tag}</span>
-      <h2 className="section-title mb-14">{education.title}</h2>
+      <div className="section-shell">
+        <div className="section-heading">
+          <span className="tag">{education.tag}</span>
+          <h2 className="section-title mb-14">{education.title}</h2>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
         {education.items.map((item, i) => (
           <div
             key={`${item.degree}-${item.dates}`}
@@ -15,8 +18,18 @@ export default function Education({ education }) {
               <span className="font-mono text-[11px] text-emerald-400 tracking-[0.1em]">
                 {item.dates}
               </span>
-              <div className="w-8 h-8 rounded-md bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-[14px] font-mono font-bold group-hover:bg-blue-500/20 transition-colors">
-                {item.icon}
+              <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-blue-500/20 bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
+                {item.icon.startsWith('/') ? (
+                  <img
+                    src={item.icon}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-[22px] w-[22px] object-contain"
+                  />
+                ) : (
+                  <span className="font-mono text-[14px] font-bold">{item.icon}</span>
+                )}
               </div>
             </div>
 
@@ -38,6 +51,7 @@ export default function Education({ education }) {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   )

@@ -1,4 +1,18 @@
+import { useMemo } from 'react'
+import SkillMarquee from './SkillMarquee'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+
 export default function Skills({ skills }) {
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const marqueeItems = useMemo(
+    () =>
+      skills.groups.map((group) => ({
+        ...group,
+        renderItems: prefersReducedMotion ? group.items : [...group.items, ...group.items],
+      })),
+    [prefersReducedMotion, skills.groups],
+  )
+
   return (
     <section
       id="skills"
@@ -35,40 +49,72 @@ export default function Skills({ skills }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {skills.items.map((skill, index) => (
-            <article
-              key={skill.name}
-              className="skill-card js-fade"
-              style={{
-                '--skill-color': skill.color,
-                transitionDelay: `${Math.min(index * 0.045, 0.45)}s`,
-              }}
-            >
-              <div className="skill-card__scanline" aria-hidden="true" />
-              <div className="skill-card__logo">
-                <img src={skill.logo} alt="" loading="lazy" decoding="async" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="truncate text-[15px] font-medium text-[#E8EAF0]">{skill.name}</h3>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#5A6478]">
-                  {skill.category}
-                </p>
-              </div>
-              <div
-                className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]"
-                aria-hidden="true"
+        <div className="space-y-5">
+          {marqueeItems.map((group, groupIndex) => {
+            return (
+              <article
+                key={group.title}
+                className="skill-group js-fade"
+                style={{ transitionDelay: `${Math.min(groupIndex * 0.08, 0.5)}s` }}
               >
-                <div
-                  className="h-full rounded-full bg-[var(--skill-color)]"
-                  style={{ width: skill.level }}
-                />
-              </div>
-              <span className="mt-3 block font-mono text-[10px] text-[var(--skill-color)]">
-                {skill.levelLabel}
-              </span>
-            </article>
-          ))}
+                <div className="skill-group__header">
+                  <div>
+                    <div className="skill-group__eyebrow">
+                      <span>{String(groupIndex + 1).padStart(2, '0')}</span>
+                      <span>{group.title}</span>
+                    </div>
+                    <h3 className="skill-group__title">{group.title}</h3>
+                    <p className="skill-group__description">{group.description}</p>
+                  </div>
+                  <div className="skill-group__meta">
+                    <span>{group.items.length} tools</span>
+                  </div>
+                </div>
+
+                <SkillMarquee
+                  groupIndex={groupIndex}
+                  groupTitle={group.title}
+                  prefersReducedMotion={prefersReducedMotion}
+                >
+                  {group.renderItems.map((skill, skillIndex) => (
+                    <article
+                      key={`${skill.name}-${skillIndex}`}
+                      className="skill-card"
+                      aria-hidden={!prefersReducedMotion && skillIndex >= group.items.length}
+                      style={{
+                        '--skill-color': skill.color,
+                      }}
+                    >
+                      <div className="skill-card__scanline" aria-hidden="true" />
+                      <div className="skill-card__logo">
+                        <img src={skill.logo} alt="" loading="lazy" decoding="async" />
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="truncate text-[15px] font-medium text-[#E8EAF0]">
+                          {skill.name}
+                        </h4>
+                        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#5A6478]">
+                          {skill.category}
+                        </p>
+                      </div>
+                      <div
+                        className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]"
+                        aria-hidden="true"
+                      >
+                        <div
+                          className="h-full rounded-full bg-[var(--skill-color)]"
+                          style={{ width: skill.level }}
+                        />
+                      </div>
+                      <span className="mt-3 block font-mono text-[10px] text-[var(--skill-color)]">
+                        {skill.levelLabel}
+                      </span>
+                    </article>
+                  ))}
+                </SkillMarquee>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

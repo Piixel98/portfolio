@@ -1,6 +1,46 @@
 import { useEffect, useRef } from 'react'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
+function WorkIcon({ current = false, systems = false }) {
+  if (current) {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <path d="M12 3v4" />
+        <path d="M12 17v4" />
+        <path d="M3 12h4" />
+        <path d="M17 12h4" />
+        <path d="m5.6 5.6 2.8 2.8" />
+        <path d="m15.6 15.6 2.8 2.8" />
+        <path d="m15.6 8.4 2.8-2.8" />
+        <path d="m5.6 18.4 2.8-2.8" />
+        <circle cx="12" cy="12" r="3.25" />
+      </svg>
+    )
+  }
+
+  if (systems) {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <rect x="4" y="5" width="16" height="6" rx="1.5" />
+        <rect x="4" y="13" width="16" height="6" rx="1.5" />
+        <path d="M8 8h.01" />
+        <path d="M8 16h.01" />
+        <path d="M12 8h4" />
+        <path d="M12 16h4" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M9 6V4.75A1.75 1.75 0 0 1 10.75 3h2.5A1.75 1.75 0 0 1 15 4.75V6" />
+      <rect x="3" y="6" width="18" height="13" rx="2" />
+      <path d="M3 11.5h18" />
+      <path d="M10 11.5v1.5h4v-1.5" />
+    </svg>
+  )
+}
+
 export default function Experience({ experience }) {
   const prefersReducedMotion = usePrefersReducedMotion()
   const lineRef = useRef(null)
@@ -8,14 +48,14 @@ export default function Experience({ experience }) {
 
   useEffect(() => {
     if (prefersReducedMotion && lineRef.current && sectionRef.current) {
-      lineRef.current.style.height = `${sectionRef.current.offsetHeight}px`
+      lineRef.current.style.cssText += `height:${sectionRef.current.offsetHeight}px;transform:scaleY(1);`
       return undefined
     }
 
     const observer = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting && lineRef.current) {
-          lineRef.current.style.height = sectionRef.current.offsetHeight + 'px'
+          lineRef.current.style.cssText += `height:${sectionRef.current.offsetHeight}px;transform:scaleY(1);`
         }
       },
       { threshold: 0.1 },
@@ -26,49 +66,62 @@ export default function Experience({ experience }) {
 
   return (
     <section id="experience" className="px-[5%] py-24">
-      <span className="tag">{experience.tag}</span>
-      <h2 className="section-title mb-14">{experience.title}</h2>
+      <div className="section-shell">
+        <div className="section-heading">
+          <span className="tag">{experience.tag}</span>
+          <h2 className="section-title mb-14">{experience.title}</h2>
+        </div>
 
-      <div ref={sectionRef} className="relative pl-8 max-w-3xl">
-        <div className="absolute left-0 top-2 bottom-0 w-px bg-white/[0.07]" />
-        <div ref={lineRef} className="tl-progress" style={{ transition: 'height 1.4s ease' }} />
+        <div ref={sectionRef} className="experience-timeline">
+          <div className="experience-timeline__rail" aria-hidden="true" />
+          <div ref={lineRef} className="tl-progress" />
 
-        {experience.jobs.map((job, i) => (
-          <div
-            key={`${job.company}-${job.dates}`}
-            className="js-fade relative mb-14 group"
-            style={{ transitionDelay: `${i * 0.15}s` }}
-          >
-            <div className="absolute -left-[38px] top-1.5 w-3 h-3 rounded-full border-2 border-blue-400 bg-[#080C12] transition-all duration-200 group-hover:bg-blue-400" />
-
-            <div className="font-mono text-[11px] text-emerald-400 tracking-[0.1em] mb-1.5">
-              {job.dates}
-            </div>
-            <div className="text-[19px] font-medium mb-1">{job.title}</div>
-            <div className="font-mono text-[13px] text-[#5A6478] mb-4">
-              {job.company} / <span className="text-[#3A4255]">{job.location}</span>
-            </div>
-
-            <ul className="text-[14px] text-[#5A6478] leading-[1.75] space-y-1.5 mb-5">
-              {job.bullets.map((bullet) => (
-                <li
-                  key={bullet}
-                  className="pl-4 relative before:content-['-'] before:absolute before:left-0 before:text-blue-400"
-                >
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-1.5">
-              {job.stack.map((tag) => (
-                <span key={tag} className="tl-tag">
-                  {tag}
+          {experience.jobs.map((job, i) => (
+            <article
+              key={`${job.company}-${job.dates}`}
+              className={`experience-entry js-fade group ${job.dates.includes('Present') ? 'experience-entry--current' : ''}`}
+              style={{ transitionDelay: `${i * 0.15}s` }}
+            >
+              <div className="experience-entry__marker" aria-hidden="true">
+                <span className="experience-entry__marker-icon">
+                  <WorkIcon
+                    current={job.dates.includes('Present')}
+                    systems={job.title.toLowerCase().includes('administrator')}
+                  />
                 </span>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+
+              <div className="experience-entry__time">
+                <span className="experience-entry__dates">{job.dates}</span>
+              </div>
+
+              <div className="experience-entry__card">
+                <div className="experience-entry__header">
+                  <div>
+                    <h3 className="experience-entry__title">{job.title}</h3>
+                    <div className="experience-entry__company">
+                      {job.company} / <span>{job.location}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="experience-entry__bullets">
+                  {job.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+
+                <div className="experience-entry__stack">
+                  {job.stack.map((tag) => (
+                    <span key={tag} className="tl-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -191,7 +191,7 @@
           "Databases & Data Structures",
           "Computer Networks"
         ],
-        "icon": "UOC"
+        "icon": "/education/uoc.svg"
       },
       {
         "dates": "2017 - 2019",
@@ -204,7 +204,7 @@
           "Server Management",
           "IT Infrastructure"
         ],
-        "icon": "IB"
+        "icon": "/education/institut-badia.svg"
       }
     ]
   },
@@ -237,25 +237,97 @@
     "items": [
       {
         "num": "01",
-        "context": "SEGULA TECHNOLOGIES \u00b7 2024 - Present",
+        "context": "SEGULA TECHNOLOGIES \u00b7 2026 - Present",
+        "title": "ATP Automatic Testing Platform",
+        "desc": "Automated DUT testing platform for deterministic, traceable test execution across single-rack and multi-rack environments, with decoupled hardware orchestration and real-time monitoring.",
+        "details": [
+          "Worked on a React + FastAPI platform designed for sequential and fully traceable test case execution, including ingestion of .xlsx and .json test definitions.",
+          "Contributed to a distributed runtime model with MASTER and SLAVE racks, Redis-backed coordination, PostgreSQL persistence, RabbitMQ messaging and real-time WebSocket monitoring.",
+          "Supported clean-architecture backend workflows and HAL-driven hardware orchestration for HMI, CAN, instrumentation, DUT communication and remote activator services, with strong focus on persistence, logging, traceability and operational runbooks."
+        ],
+        "stack": [
+          "Python",
+          "FastAPI",
+          "React",
+          "PostgreSQL",
+          "Redis",
+          "RabbitMQ",
+          "WebSockets",
+          "Docker"
+        ],
+        "badges": ["Test Automation", "Hardware Orchestration", "Traceability"]
+      },
+      {
+        "num": "02",
+        "context": "SEGULA TECHNOLOGIES \u00b7 2024 - 2026",
         "title": "Free-Flow Tolling Platform",
-        "desc": "Backend platform for barrier-free tolling systems deployed internationally. Handles millions of transactional events with high availability, strict performance SLAs and real-time data processing pipelines. Hybrid cloud and on-prem architecture decisions.",
+        "desc": "Backend platform for barrier-free tolling deployed across international environments, built for high event volume, strict SLA compliance and real-time operational visibility.",
+        "details": [
+          "Designed services for tolling workflows where latency, uptime and traceability directly affect production operations.",
+          "Worked on event-heavy processing paths, operational resilience and hybrid cloud/on-prem deployment decisions.",
+          "Prioritized observability and maintainable service boundaries in a mission-critical backend landscape."
+        ],
         "stack": ["Python", "PostgreSQL", "Redis", "Azure/AWS", "ELK Stack", "Grafana", "Node.js"],
         "badges": ["Mission-Critical", "International Scale", "High-Volume Data"]
       },
       {
-        "num": "02",
+        "num": "03",
         "context": "MAAS \u00b7 2020 - 2024",
         "title": "System Integration & Automation Platform",
-        "desc": "Suite of integrations between heterogeneous internal and external platforms. REST and SOAP APIs, RPA solutions with Selenium for legacy system automation, and end-to-end data flow orchestration - improving operational efficiency and reliability at scale.",
+        "desc": "Integration and automation platform connecting internal systems, third-party services and legacy tooling through APIs, orchestration flows and browser-based automation.",
+        "details": [
+          "Built and evolved integrations across systems with very different technical constraints and data contracts.",
+          "Delivered automation flows for repetitive back-office processes using APIs, Selenium and controlled orchestration.",
+          "Improved reliability of data exchange pipelines and reduced day-to-day operational friction."
+        ],
         "stack": ["Python", "FastAPI", "Selenium", "Docker", "Kubernetes", "CI/CD", "Azure"],
         "badges": ["Process Automation", "RPA", "Data Pipelines"]
       },
       {
-        "num": "03",
+        "num": "04",
+        "context": "PERSONAL PROJECT \u00b7 2025 - 2026",
+        "title": "Dance Studio Platform",
+        "desc": "Production-oriented platform for a dance venue, designed as a modular monolith with dedicated backend, mobile app, admin panel and infrastructure layer inside a single monorepo.",
+        "details": [
+          "Structured the system as a pragmatic monorepo with Spring Boot 3 + Java 21 backend, Flutter mobile app, React + TypeScript admin panel and Docker/Nginx infrastructure.",
+          "Applied a modular monolith architecture with explicit domain boundaries, internal contracts and OpenAPI-first conventions to keep the platform operationally simple while preserving future service extraction paths.",
+          "Defined production-facing platform concerns including JWT + refresh-token security, PostgreSQL financial consistency with BigDecimal/NUMERIC(19,4), auditability for payments and QR validations, and shared documentation around ADRs, contracts and roadmap."
+        ],
+        "stack": [
+          "Java 21",
+          "Spring Boot 3",
+          "PostgreSQL",
+          "Flyway",
+          "Flutter",
+          "React",
+          "TypeScript",
+          "Docker"
+        ],
+        "badges": ["Personal Platform", "Modular Monolith", "Production-Ready"]
+      },
+      {
+        "num": "05",
+        "context": "MAAS \u00b7 2022 - 2023",
+        "title": "Python RPA Customer Data Extraction",
+        "desc": "Custom Python-based RPA workflow for extracting customer-related information, processing the collected data and storing it in downstream database systems.",
+        "details": [
+          "Automated tailored information extraction processes around customer data using Python and Selenium-based browser automation.",
+          "Implemented a GGR automation flow to navigate web-based sources, collect structured information and normalize the extracted content.",
+          "Processed and prepared the resulting dataset for insertion into database systems through DSS-driven persistence flows."
+        ],
+        "stack": ["Python", "Selenium", "RPA", "Web Scraping", "Data Processing", "Databases"],
+        "badges": ["Custom Automation", "Customer Data", "Process Extraction"]
+      },
+      {
+        "num": "06",
         "context": "MAAS \u00b7 2020 - 2024",
         "title": "Operational Back-Office Systems",
-        "desc": "Design, development and evolution of back-office operational systems supporting core business workflows - incident management, operational monitoring and day-to-day business processes. Focus on observability, reliability and long-term maintainability.",
+        "desc": "Internal back-office systems supporting incident handling, operational monitoring and core business workflows with a strong focus on reliability and long-term maintainability.",
+        "details": [
+          "Developed internal systems used to support visibility, issue handling and routine operational work.",
+          "Improved maintainability of backend code while keeping delivery aligned with production support needs.",
+          "Placed strong emphasis on observability, robustness and systems that remain operable over time."
+        ],
         "stack": ["Python", "PostgreSQL", "Azure", "GitLab", "Docker"],
         "badges": ["Reliability", "Observability", "Business-Critical"]
       }
@@ -266,202 +338,464 @@
     "title": "Core stack constellation",
     "intro": "A compact map of the tools I use to design, build, ship and operate backend platforms, integrations and cloud-native systems.",
     "metrics": [
-      { "value": "24", "label": "Core tools" },
-      { "value": "6", "label": "Domains" },
+      { "value": "50", "label": "Core tools" },
+      { "value": "9", "label": "Domains" },
       { "value": "5+", "label": "Years" }
     ],
-    "items": [
+    "groups": [
       {
-        "name": "Python",
-        "category": "Backend",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-        "color": "#3776AB",
-        "level": "96%",
-        "levelLabel": "Primary"
+        "title": "Core backend",
+        "description": "The languages and frameworks I default to for business logic, APIs and service design.",
+        "items": [
+          {
+            "name": "Python",
+            "category": "Backend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+            "color": "#3776AB",
+            "level": "96%",
+            "levelLabel": "Primary"
+          },
+          {
+            "name": "FastAPI",
+            "category": "API",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+            "color": "#009688",
+            "level": "92%",
+            "levelLabel": "Advanced"
+          },
+          {
+            "name": "Node.js",
+            "category": "Backend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+            "color": "#5FA04E",
+            "level": "82%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Java",
+            "category": "Backend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+            "color": "#F89820",
+            "level": "74%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Spring Boot",
+            "category": "Backend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
+            "color": "#6DB33F",
+            "level": "78%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Go",
+            "category": "Backend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+            "color": "#00ADD8",
+            "level": "64%",
+            "levelLabel": "Basic"
+          }
+        ]
       },
       {
-        "name": "FastAPI",
-        "category": "API",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
-        "color": "#009688",
-        "level": "92%",
-        "levelLabel": "Advanced"
+        "title": "API and integration",
+        "description": "Protocols, event pipelines and messaging patterns for systems that need to talk reliably.",
+        "items": [
+          {
+            "name": "REST",
+            "category": "API",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/openapi/openapi-original.svg",
+            "color": "#6BA539",
+            "level": "90%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "gRPC",
+            "category": "RPC",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grpc/grpc-original.svg",
+            "color": "#244C5A",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "WebSockets",
+            "category": "Realtime",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg",
+            "color": "#E8EAF0",
+            "level": "86%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "GraphQL",
+            "category": "API",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+            "color": "#E10098",
+            "level": "72%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Apache Kafka",
+            "category": "Streaming",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg",
+            "color": "#E8EAF0",
+            "level": "80%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "RabbitMQ",
+            "category": "Messaging",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg",
+            "color": "#FF6600",
+            "level": "78%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Amazon SQS",
+            "category": "Messaging",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+            "color": "#FF9900",
+            "level": "76%",
+            "levelLabel": "Solid"
+          }
+        ]
       },
       {
-        "name": "PostgreSQL",
-        "category": "Database",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-        "color": "#4169E1",
-        "level": "94%",
-        "levelLabel": "Advanced"
+        "title": "Data and persistence",
+        "description": "Operational stores, cache layers and persistence strategies for high-traffic backend workloads.",
+        "items": [
+          {
+            "name": "PostgreSQL",
+            "category": "Database",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+            "color": "#4169E1",
+            "level": "94%",
+            "levelLabel": "Advanced"
+          },
+          {
+            "name": "Redis",
+            "category": "Cache",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
+            "color": "#DC382D",
+            "level": "86%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "SQL Server",
+            "category": "Database",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
+            "color": "#CC2927",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "MongoDB",
+            "category": "Database",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+            "color": "#47A248",
+            "level": "72%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "MySQL",
+            "category": "Database",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+            "color": "#4479A1",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Alembic",
+            "category": "Migrations",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlalchemy/sqlalchemy-original.svg",
+            "color": "#C21F39",
+            "level": "76%",
+            "levelLabel": "Solid"
+          }
+        ]
       },
       {
-        "name": "Redis",
-        "category": "Cache",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-        "color": "#DC382D",
-        "level": "86%",
-        "levelLabel": "Strong"
+        "title": "Platform and delivery",
+        "description": "Tooling to containerize, orchestrate and ship systems with controlled rollout and repeatability.",
+        "items": [
+          {
+            "name": "Docker",
+            "category": "DevOps",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+            "color": "#2496ED",
+            "level": "90%",
+            "levelLabel": "Advanced"
+          },
+          {
+            "name": "Kubernetes",
+            "category": "Platform",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
+            "color": "#326CE5",
+            "level": "78%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "GitLab",
+            "category": "CI/CD",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
+            "color": "#FC6D26",
+            "level": "86%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Terraform",
+            "category": "IaC",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg",
+            "color": "#844FBA",
+            "level": "70%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "GitHub Actions",
+            "category": "CI/CD",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
+            "color": "#2088FF",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Jenkins",
+            "category": "CI/CD",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg",
+            "color": "#D24939",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "ArgoCD",
+            "category": "GitOps",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg",
+            "color": "#EF7B4D",
+            "level": "64%",
+            "levelLabel": "Basic"
+          }
+        ]
       },
       {
-        "name": "Docker",
-        "category": "DevOps",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-        "color": "#2496ED",
-        "level": "90%",
-        "levelLabel": "Advanced"
+        "title": "Cloud and infrastructure",
+        "description": "Execution environments and operating systems behind resilient services and internal platforms.",
+        "items": [
+          {
+            "name": "Azure",
+            "category": "Cloud",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg",
+            "color": "#0078D4",
+            "level": "84%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "AWS",
+            "category": "Cloud",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+            "color": "#FF9900",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Linux",
+            "category": "Systems",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
+            "color": "#FCC624",
+            "level": "88%",
+            "levelLabel": "Strong"
+          }
+        ]
       },
       {
-        "name": "Kubernetes",
-        "category": "Platform",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
-        "color": "#326CE5",
-        "level": "78%",
-        "levelLabel": "Solid"
+        "title": "Observability and reliability",
+        "description": "The monitoring and diagnostics layer I use to keep critical workflows visible and stable.",
+        "items": [
+          {
+            "name": "Grafana",
+            "category": "Observability",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg",
+            "color": "#F46800",
+            "level": "82%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Elastic Stack",
+            "category": "Observability",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg",
+            "color": "#005571",
+            "level": "84%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Zabbix",
+            "category": "Monitoring",
+            "logo": "https://assets.zabbix.com/img/logo/zabbix_logo_500x131.png",
+            "color": "#D40000",
+            "level": "70%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Prometheus",
+            "category": "Observability",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg",
+            "color": "#E6522C",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Kibana",
+            "category": "Observability",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kibana/kibana-original.svg",
+            "color": "#005571",
+            "level": "86%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Logstash",
+            "category": "Observability",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/logstash/logstash-original.svg",
+            "color": "#F2C94C",
+            "level": "86%",
+            "levelLabel": "Strong"
+          }
+        ]
       },
       {
-        "name": "Azure",
-        "category": "Cloud",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg",
-        "color": "#0078D4",
-        "level": "84%",
-        "levelLabel": "Strong"
+        "title": "Architecture and workflow",
+        "description": "The delivery patterns and design approaches I rely on to keep complex systems maintainable as they scale.",
+        "items": [
+          {
+            "name": "Microservices",
+            "category": "Architecture",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+            "color": "#2496ED",
+            "level": "90%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Event-driven architecture",
+            "category": "Architecture",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg",
+            "color": "#E8EAF0",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "DDD",
+            "category": "Design",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+            "color": "#3776AB",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Clean Architecture",
+            "category": "Design",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+            "color": "#009688",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "CI/CD",
+            "category": "Workflow",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
+            "color": "#FC6D26",
+            "level": "90%",
+            "levelLabel": "Strong"
+          }
+        ]
       },
       {
-        "name": "AWS",
-        "category": "Cloud",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-        "color": "#FF9900",
-        "level": "76%",
-        "levelLabel": "Solid"
+        "title": "Security and quality",
+        "description": "Authentication, secret management and quality gates that reduce risk in production-facing systems.",
+        "items": [
+          {
+            "name": "OAuth2",
+            "category": "Auth",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
+            "color": "#4285F4",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "JWT",
+            "category": "Auth",
+            "logo": "https://jwt.io/img/pic_logo.svg",
+            "color": "#F59E0B",
+            "level": "88%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "Vault",
+            "category": "Secrets",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vault/vault-original.svg",
+            "color": "#FFEC6E",
+            "level": "86%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "SonarQube",
+            "category": "Quality",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-original.svg",
+            "color": "#4E9BCD",
+            "level": "76%",
+            "levelLabel": "Solid"
+          }
+        ]
       },
       {
-        "name": "Apache Kafka",
-        "category": "Streaming",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg",
-        "color": "#E8EAF0",
-        "level": "80%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "Node.js",
-        "category": "Backend",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-        "color": "#5FA04E",
-        "level": "82%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "Java",
-        "category": "Backend",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
-        "color": "#F89820",
-        "level": "74%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "GraphQL",
-        "category": "API",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
-        "color": "#E10098",
-        "level": "72%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "GitLab",
-        "category": "CI/CD",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg",
-        "color": "#FC6D26",
-        "level": "86%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "Terraform",
-        "category": "IaC",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg",
-        "color": "#844FBA",
-        "level": "70%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "Linux",
-        "category": "Systems",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-        "color": "#FCC624",
-        "level": "88%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "Grafana",
-        "category": "Observability",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg",
-        "color": "#F46800",
-        "level": "82%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "Selenium",
-        "category": "Automation",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg",
-        "color": "#43B02A",
-        "level": "84%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "SQL Server",
-        "category": "Database",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
-        "color": "#CC2927",
-        "level": "76%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "C",
-        "category": "Systems",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
-        "color": "#A8B9CC",
-        "level": "68%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "React",
-        "category": "Frontend",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-        "color": "#61DAFB",
-        "level": "78%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "RabbitMQ",
-        "category": "Messaging",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rabbitmq/rabbitmq-original.svg",
-        "color": "#FF6600",
-        "level": "78%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "MongoDB",
-        "category": "Database",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-        "color": "#47A248",
-        "level": "72%",
-        "levelLabel": "Solid"
-      },
-      {
-        "name": "Elastic Stack",
-        "category": "Observability",
-        "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg",
-        "color": "#005571",
-        "level": "84%",
-        "levelLabel": "Strong"
-      },
-      {
-        "name": "Zabbix",
-        "category": "Monitoring",
-        "logo": "https://assets.zabbix.com/img/logo/zabbix_logo_500x131.png",
-        "color": "#D40000",
-        "level": "70%",
-        "levelLabel": "Solid"
+        "title": "Interface and automation",
+        "description": "Supporting tools for front-end delivery, browser automation and lower-level systems work.",
+        "items": [
+          {
+            "name": "React",
+            "category": "Frontend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+            "color": "#61DAFB",
+            "level": "78%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Selenium",
+            "category": "Automation",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg",
+            "color": "#43B02A",
+            "level": "84%",
+            "levelLabel": "Strong"
+          },
+          {
+            "name": "C",
+            "category": "Systems",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+            "color": "#A8B9CC",
+            "level": "68%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "TypeScript",
+            "category": "Frontend",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+            "color": "#3178C6",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Tailwind",
+            "category": "Styling",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+            "color": "#06B6D4",
+            "level": "76%",
+            "levelLabel": "Solid"
+          },
+          {
+            "name": "Bash",
+            "category": "Automation",
+            "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg",
+            "color": "#89E051",
+            "level": "76%",
+            "levelLabel": "Solid"
+          }
+        ]
       }
     ]
   },

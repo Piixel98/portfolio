@@ -13,6 +13,15 @@ const ctaSchema = z.object({
   href: nonEmptyString,
 })
 
+const skillItemSchema = z.object({
+  name: nonEmptyString,
+  category: nonEmptyString,
+  logo: nonEmptyString,
+  color: nonEmptyString,
+  level: nonEmptyString,
+  levelLabel: nonEmptyString,
+})
+
 const profileSchema = z.object({
   name: nonEmptyString,
   surname: nonEmptyString,
@@ -113,6 +122,7 @@ const portfolioSchema = z.object({
         context: nonEmptyString,
         title: nonEmptyString,
         desc: nonEmptyString,
+        details: z.array(nonEmptyString).min(1),
         stack: z.array(nonEmptyString),
         badges: z.array(nonEmptyString),
       }),
@@ -128,16 +138,13 @@ const portfolioSchema = z.object({
         label: nonEmptyString,
       }),
     ),
-    items: z.array(
+    groups: z.array(
       z.object({
-        name: nonEmptyString,
-        category: nonEmptyString,
-        logo: nonEmptyString,
-        color: nonEmptyString,
-        level: nonEmptyString,
-        levelLabel: nonEmptyString,
+        title: nonEmptyString,
+        description: nonEmptyString,
+        items: z.array(skillItemSchema).min(1),
       }),
-    ),
+    ).min(1),
   }),
   contact: z.object({
     tag: nonEmptyString,
@@ -176,5 +183,3 @@ export function parsePortfolio(rawPortfolio) {
 
   return result.data
 }
-
-export default portfolioSchema

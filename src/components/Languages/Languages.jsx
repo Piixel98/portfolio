@@ -14,10 +14,13 @@ const FLAGS = {
 export default function Languages({ languages }) {
   return (
     <section id="languages" className="px-[5%] py-24">
-      <span className="tag">{languages.tag}</span>
-      <h2 className="section-title mb-14">{languages.title}</h2>
+      <div className="section-shell">
+        <div className="section-heading">
+          <span className="tag">{languages.tag}</span>
+          <h2 className="section-title mb-14">{languages.title}</h2>
+        </div>
 
-      <div className="languages-shell">
+        <div className="languages-shell">
         {/* Required so Safari keyboard users can focus and scroll the horizontal language list. */}
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div className="languages-row" role="region" tabIndex="0" aria-label="Languages list">
@@ -58,6 +61,7 @@ export default function Languages({ languages }) {
               </div>
             )
           })}
+        </div>
         </div>
       </div>
     </section>
