@@ -59,9 +59,11 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     }
 
     syncLoopMetrics()
+
     const resizeObserver = new ResizeObserver(() => {
       syncLoopMetrics()
     })
+
     resizeObserver.observe(track)
 
     if (containerRef.current) {
@@ -117,11 +119,13 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     }
 
     const container = event.currentTarget
+
     dragRef.current = {
       isDragging: true,
       startX: event.clientX,
       pointerId: event.pointerId,
     }
+
     container.classList.add('skill-marquee--dragging')
     container.setPointerCapture(event.pointerId)
     setPaused(true)
@@ -166,6 +170,7 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       startX: 0,
       pointerId: null,
     }
+
     container.classList.remove('skill-marquee--dragging')
     setPaused(false)
 
@@ -178,12 +183,10 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     <div
       ref={containerRef}
       className="skill-marquee"
-      tabIndex={0}
+      role="region"
       aria-label={`Scrollable technologies for ${groupTitle}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}
@@ -191,7 +194,9 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     >
       <div
         ref={trackRef}
-        className={`skill-marquee__track ${prefersReducedMotion ? 'skill-marquee__track--static' : 'skill-marquee__track--loop'}`}
+        className={`skill-marquee__track ${
+          prefersReducedMotion ? 'skill-marquee__track--static' : 'skill-marquee__track--loop'
+        }`}
       >
         {children}
       </div>

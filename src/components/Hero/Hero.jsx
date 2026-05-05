@@ -58,7 +58,7 @@ export default function Hero({ hero, profile }) {
 
     timeoutRef.current = setTimeout(() => dispatch(action), delay)
     return () => clearTimeout(timeoutRef.current)
-  }, [charIdx, deleting, phraseIdx, phrases, prefersReducedMotion])
+  }, [charIdx, deleting, phrase.length, phrases.length, prefersReducedMotion])
 
   return (
     <section
