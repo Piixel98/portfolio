@@ -1,40 +1,62 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+
+const initialTypeState = {
+  phraseIdx: 0,
+  charIdx: 0,
+  deleting: false,
+}
+
+function typeReducer(state, action) {
+  switch (action.type) {
+    case 'type/forward':
+      return { ...state, charIdx: state.charIdx + 1 }
+    case 'type/backward':
+      return { ...state, charIdx: Math.max(state.charIdx - 1, 0) }
+    case 'type/startDeleting':
+      return { ...state, deleting: true }
+    case 'type/nextPhrase':
+      return {
+        phraseIdx: (state.phraseIdx + 1) % action.totalPhrases,
+        charIdx: 0,
+        deleting: false,
+      }
+    default:
+      return state
+  }
+}
 
 export default function Hero({ hero, profile }) {
   const prefersReducedMotion = usePrefersReducedMotion()
-  const [text, setText] = useState('')
-  const [phraseIdx, setPhraseIdx] = useState(0)
-  const [charIdx, setCharIdx] = useState(0)
-  const [deleting, setDeleting] = useState(false)
+  const [{ phraseIdx, charIdx, deleting }, dispatch] = useReducer(typeReducer, initialTypeState)
   const timeoutRef = useRef(null)
   const phrases = hero.phrases
-  const displayedText = prefersReducedMotion ? phrases[0] : text
+  const phrase = phrases[phraseIdx] || ''
+  const displayedText = prefersReducedMotion ? phrases[0] : phrase.slice(0, charIdx)
 
   useEffect(() => {
     if (prefersReducedMotion) return undefined
 
-    const phrase = phrases[phraseIdx]
+    let action
+    let delay
+
     if (!deleting) {
       if (charIdx < phrase.length) {
-        timeoutRef.current = setTimeout(() => {
-          setText(phrase.slice(0, charIdx + 1))
-          setCharIdx((c) => c + 1)
-        }, 75)
+        action = { type: 'type/forward' }
+        delay = 75
       } else {
-        timeoutRef.current = setTimeout(() => setDeleting(true), 1800)
+        action = { type: 'type/startDeleting' }
+        delay = 1800
       }
     } else if (charIdx > 0) {
-      timeoutRef.current = setTimeout(() => {
-        setText(phrase.slice(0, charIdx - 1))
-        setCharIdx((c) => c - 1)
-      }, 38)
+      action = { type: 'type/backward' }
+      delay = 38
     } else {
-      timeoutRef.current = setTimeout(() => {
-        setDeleting(false)
-        setPhraseIdx((i) => (i + 1) % phrases.length)
-      }, 0)
+      action = { type: 'type/nextPhrase', totalPhrases: phrases.length }
+      delay = 0
     }
+
+    timeoutRef.current = setTimeout(() => dispatch(action), delay)
     return () => clearTimeout(timeoutRef.current)
   }, [charIdx, deleting, phraseIdx, phrases, prefersReducedMotion])
 

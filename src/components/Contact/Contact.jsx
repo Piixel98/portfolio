@@ -1,9 +1,47 @@
-import { useId, useState } from 'react'
+import { useId, useReducer } from 'react'
 import { getLinkSecurityProps } from '../../utils/links'
 
 const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024
 const MAX_ATTACHMENT_MB = MAX_ATTACHMENT_BYTES / 1024 / 1024
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const initialFormState = {
+  status: 'idle',
+  feedback: '',
+  attachmentName: '',
+}
+
+function formReducer(state, action) {
+  switch (action.type) {
+    case 'attachment/validated':
+      return {
+        ...state,
+        attachmentName: action.attachmentName,
+        feedback: action.feedback,
+        status: action.status,
+      }
+    case 'attachment/cleared':
+      return {
+        ...state,
+        attachmentName: '',
+      }
+    case 'submit/pending':
+      return {
+        ...state,
+        status: 'pending',
+        feedback: '',
+      }
+    case 'submit/result':
+      return {
+        ...state,
+        status: action.status,
+        feedback: action.feedback,
+        attachmentName: action.attachmentName ?? state.attachmentName,
+      }
+    default:
+      return state
+  }
+}
 
 function readFileAsBase64(file) {
   return new Promise((resolve, reject) => {
@@ -20,9 +58,8 @@ function readFileAsBase64(file) {
 
 export default function Contact({ contact }) {
   const formId = useId()
-  const [status, setStatus] = useState('idle')
-  const [feedback, setFeedback] = useState('')
-  const [attachmentName, setAttachmentName] = useState('')
+  const [formState, dispatch] = useReducer(formReducer, initialFormState)
+  const { attachmentName, feedback, status } = formState
 
   const validateAttachment = (file) => {
     if (!file || file.size === 0) return ''
@@ -36,20 +73,22 @@ export default function Contact({ contact }) {
     const file = event.currentTarget.files?.[0]
     const error = validateAttachment(file)
 
-    setAttachmentName(file?.name || '')
-    setFeedback(error)
-    setStatus(error ? 'error' : 'idle')
+    dispatch({
+      type: 'attachment/validated',
+      attachmentName: file?.name || '',
+      feedback: error,
+      status: error ? 'error' : 'idle',
+    })
 
     if (error) {
       event.currentTarget.value = ''
-      setAttachmentName('')
+      dispatch({ type: 'attachment/cleared' })
     }
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setStatus('pending')
-    setFeedback('')
+    dispatch({ type: 'submit/pending' })
 
     const form = event.currentTarget
     const formData = new FormData(form)
@@ -61,29 +100,41 @@ export default function Contact({ contact }) {
     const file = formData.get('attachment')
 
     if (company) {
-      setStatus('success')
-      setFeedback(contact.form.success)
+      dispatch({
+        type: 'submit/result',
+        status: 'success',
+        feedback: contact.form.success,
+        attachmentName: '',
+      })
       form.reset()
-      setAttachmentName('')
       return
     }
 
     if (!fullName || !email || !message) {
-      setStatus('error')
-      setFeedback('Please complete all required fields.')
+      dispatch({
+        type: 'submit/result',
+        status: 'error',
+        feedback: 'Please complete all required fields.',
+      })
       return
     }
 
     if (!EMAIL_RE.test(email)) {
-      setStatus('error')
-      setFeedback('Please enter a valid email address.')
+      dispatch({
+        type: 'submit/result',
+        status: 'error',
+        feedback: 'Please enter a valid email address.',
+      })
       return
     }
 
     const attachmentError = validateAttachment(file)
     if (attachmentError) {
-      setStatus('error')
-      setFeedback(attachmentError)
+      dispatch({
+        type: 'submit/result',
+        status: 'error',
+        feedback: attachmentError,
+      })
       return
     }
 
@@ -109,13 +160,19 @@ export default function Contact({ contact }) {
         throw new Error(error?.message || 'Unable to send message.')
       }
 
-      setStatus('success')
-      setFeedback(contact.form.success)
+      dispatch({
+        type: 'submit/result',
+        status: 'success',
+        feedback: contact.form.success,
+        attachmentName: '',
+      })
       form.reset()
-      setAttachmentName('')
     } catch {
-      setStatus('error')
-      setFeedback(contact.form.error)
+      dispatch({
+        type: 'submit/result',
+        status: 'error',
+        feedback: contact.form.error,
+      })
     }
   }
 

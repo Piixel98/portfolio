@@ -1,12 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+
+function numberReducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return Math.min(state + action.step, action.target)
+    case 'complete':
+      return action.target
+    default:
+      return state
+  }
+}
 
 function AnimatedNumber({ target, suffix = '' }) {
   const prefersReducedMotion = usePrefersReducedMotion()
-  const [val, setVal] = useState(0)
+  const [value, dispatch] = useReducer(numberReducer, 0)
   const ref = useRef(null)
   const started = useRef(false)
-  const displayedValue = prefersReducedMotion ? target : val
 
   useEffect(() => {
     let animationFrameId
@@ -19,12 +29,13 @@ function AnimatedNumber({ target, suffix = '' }) {
           started.current = true
           let start = 0
           const step = () => {
-            start += Math.ceil(target / 40)
+            const increment = Math.ceil(target / 40)
+            start += increment
             if (start >= target) {
-              setVal(target)
+              dispatch({ type: 'complete', target })
               return
             }
-            setVal(start)
+            dispatch({ type: 'increment', step: increment, target })
             animationFrameId = requestAnimationFrame(step)
           }
           animationFrameId = requestAnimationFrame(step)
@@ -41,7 +52,7 @@ function AnimatedNumber({ target, suffix = '' }) {
 
   return (
     <span ref={ref}>
-      {displayedValue}
+      {prefersReducedMotion ? target : value}
       {suffix}
     </span>
   )
