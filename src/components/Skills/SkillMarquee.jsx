@@ -179,14 +179,49 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     }
   }
 
+  function handleKeyDown(event) {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+      return
+    }
+
+    const motion = motionRef.current
+
+    if (motion.setWidth <= 0 || !trackRef.current) {
+      return
+    }
+
+    event.preventDefault()
+    setPaused(true)
+
+    if (event.key === 'Home') {
+      motion.offset = 0
+    } else if (event.key === 'End') {
+      motion.offset = motion.setWidth - 1
+    } else {
+      motion.offset += event.key === 'ArrowRight' ? 48 : -48
+      motion.offset %= motion.setWidth
+
+      if (motion.offset < 0) {
+        motion.offset += motion.setWidth
+      }
+    }
+
+    trackRef.current.style.transform = `translate3d(${-motion.offset}px, 0, 0)`
+  }
+
+  // The marquee is intentionally focusable so keyboard users can pan hidden items.
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       ref={containerRef}
       className="skill-marquee"
       role="region"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex="0"
       aria-label={`Scrollable technologies for ${groupTitle}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onKeyDown={handleKeyDown}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}

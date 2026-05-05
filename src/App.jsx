@@ -18,6 +18,8 @@ import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 import useScrollProgress from './hooks/useScrollProgress'
 import portfolio from './data/portfolio'
 
+const isProduction = import.meta.env.PROD
+
 export default function App() {
   const prefersReducedMotion = usePrefersReducedMotion()
   const { cursorRef, cursorRingRef } = useCustomCursor(!prefersReducedMotion)
@@ -50,8 +52,12 @@ export default function App() {
 
       <Footer profile={portfolio.profile} contact={portfolio.contact} />
 
-      <SpeedInsights />
-      <Analytics />
+      {isProduction && (
+        <>
+          <SpeedInsights />
+          <Analytics />
+        </>
+      )}
     </>
   )
 }

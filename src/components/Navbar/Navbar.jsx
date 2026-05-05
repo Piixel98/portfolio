@@ -29,7 +29,13 @@ export default function Navbar({ nav, profile }) {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+
+    setMenuOpen(false)
+  }
 
   return (
     <>
@@ -67,7 +73,7 @@ export default function Navbar({ nav, profile }) {
           href={profile.githubUrl}
           aria-label={`${profile.name} GitHub profile`}
           {...safeExternalLinkProps}
-          className="hidden items-center gap-2 rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
+          className="hidden items-center gap-2 rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#8E98AD] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
         >
           <svg
             aria-hidden="true"
@@ -129,7 +135,7 @@ export default function Navbar({ nav, profile }) {
             aria-label={`${profile.name} GitHub profile`}
             onClick={closeMenu}
             {...safeExternalLinkProps}
-            className="mt-4 inline-flex items-center gap-2 rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#5A6478] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
+            className="mt-4 inline-flex items-center gap-2 rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#8E98AD] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
           >
             <svg
               aria-hidden="true"

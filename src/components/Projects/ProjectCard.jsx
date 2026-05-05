@@ -3,6 +3,7 @@ export default function ProjectCard({ project, index, onOpen }) {
     <button
       type="button"
       className="project-card project-card--interactive js-fade text-left"
+      aria-label={`Open project details for ${project.title}`}
       style={{ transitionDelay: `${index * 0.12}s` }}
       onClick={() => onOpen(project.num)}
     >

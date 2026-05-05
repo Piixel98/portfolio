@@ -48,7 +48,6 @@ test('has no serious automated accessibility violations', async ({ page }) => {
   await page.goto('/')
 
   const results = await new AxeBuilder({ page })
-    .disableRules(['color-contrast'])
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze()
 

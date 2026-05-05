@@ -1,14 +1,50 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',')
 
 export default function ProjectDetail({ project, projectTechnologies, onClose }) {
+  const closeButtonRef = useRef(null)
+  const panelRef = useRef(null)
+
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') {
+        onClose()
+        return
+      }
+
+      if (event.key !== 'Tab' || !panelRef.current) return
+
+      const focusableElements = Array.from(panelRef.current.querySelectorAll(FOCUSABLE_SELECTOR))
+      if (focusableElements.length === 0) {
+        event.preventDefault()
+        panelRef.current.focus()
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
+      }
     }
 
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
+    closeButtonRef.current?.focus()
 
     return () => {
       document.body.style.overflow = previousOverflow
@@ -30,8 +66,9 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
         onClick={onClose}
       />
 
-      <div className="project-modal__panel">
+      <div ref={panelRef} className="project-modal__panel" tabIndex="-1">
         <button
+          ref={closeButtonRef}
           type="button"
           className="project-modal__close"
           aria-label="Close project details"

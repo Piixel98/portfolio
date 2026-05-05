@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectDetail from './ProjectDetail'
 import { resolveProjectTechnologies } from './projectTech'
 
 export default function Projects({ projects, skills }) {
   const [activeProject, setActiveProject] = useState(null)
+  const openerRef = useRef(null)
   const projectTechnologies = useMemo(
     () => (activeProject ? resolveProjectTechnologies(activeProject, skills) : []),
     [activeProject, skills],
@@ -17,7 +18,7 @@ export default function Projects({ projects, skills }) {
           <span className="tag">{projects.tag}</span>
           <div className="mb-14">
             <h2 className="section-title mb-3">{projects.title}</h2>
-            <p className="max-w-2xl text-[15px] leading-7 text-[#5A6478]">{projects.intro}</p>
+            <p className="max-w-2xl text-[15px] leading-7 text-[#8E98AD]">{projects.intro}</p>
           </div>
 
           <div className="grid gap-5 xl:grid-cols-3">
@@ -26,11 +27,12 @@ export default function Projects({ projects, skills }) {
                 key={project.num}
                 project={project}
                 index={index}
-                onOpen={(projectNum) =>
+                onOpen={(projectNum) => {
+                  openerRef.current = document.activeElement
                   setActiveProject(
                     projects.items.find((project) => project.num === projectNum) ?? null,
                   )
-                }
+                }}
               />
             ))}
           </div>
@@ -41,7 +43,10 @@ export default function Projects({ projects, skills }) {
         <ProjectDetail
           project={activeProject}
           projectTechnologies={projectTechnologies}
-          onClose={() => setActiveProject(null)}
+          onClose={() => {
+            setActiveProject(null)
+            window.requestAnimationFrame(() => openerRef.current?.focus())
+          }}
         />
       )}
     </>
