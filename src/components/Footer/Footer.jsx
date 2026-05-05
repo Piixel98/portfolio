@@ -3,7 +3,7 @@ export default function Footer({ profile, contact }) {
 
   return (
     <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.07] px-[5%] py-8">
-      <p className="font-mono text-[11px] text-[#5A6478]">{profile.footerText}</p>
+      <p className="font-mono text-[11px] text-[#8E98AD]">{profile.footerText}</p>
       <div className="flex items-center gap-3">
         <a
           href={profile.githubUrl}

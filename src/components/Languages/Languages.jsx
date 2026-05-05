@@ -52,14 +52,17 @@ export default function Languages({ languages }) {
                   <div className="font-mono text-[17px] font-medium text-[#E8EAF0] mb-1">
                     {lang.name}
                   </div>
-                  <div className="text-[12px] text-[#5A6478] mb-5 min-h-8 leading-5">
+                  <div className="text-[12px] text-[#8E98AD] mb-5 min-h-8 leading-5">
                     {lang.desc}
                   </div>
 
                   <div className="language-progress" aria-hidden="true">
-                    <div className="language-progress__bar" style={{ width: `${lang.bar}%` }} />
+                    <div
+                      className="language-progress__bar"
+                      style={{ transform: `scaleX(${lang.bar / 100})` }}
+                    />
                   </div>
-                  <div className="mt-3 font-mono text-[10px] text-[#5A6478]">{lang.bar}%</div>
+                  <div className="mt-3 font-mono text-[10px] text-[#8E98AD]">{lang.bar}%</div>
                 </div>
               )
             })}

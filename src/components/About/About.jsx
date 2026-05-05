@@ -74,7 +74,7 @@ export default function About({ about }) {
           </h2>
 
           {about.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-[#5A6478] mb-5 leading-[1.75]">
+            <p key={paragraph} className="text-[#8E98AD] mb-5 leading-[1.75]">
               {paragraph}
             </p>
           ))}
@@ -103,7 +103,7 @@ export default function About({ about }) {
               <div className="font-mono text-[44px] font-light leading-none mb-1.5 text-[#E8EAF0]">
                 <AnimatedNumber target={stat.num} suffix={stat.suffix} />
               </div>
-              <div className="text-[13px] text-[#5A6478]">{stat.label}</div>
+              <div className="text-[13px] text-[#8E98AD]">{stat.label}</div>
             </div>
           ))}
 
@@ -114,7 +114,7 @@ export default function About({ about }) {
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
             </div>
             <div className="text-emerald-400">$ whoami</div>
-            <div className="text-[#5A6478] mt-1">{about.terminal.whoami}</div>
+            <div className="text-[#8E98AD] mt-1">{about.terminal.whoami}</div>
             <div className="text-emerald-400 mt-2">$ skills --list</div>
             {about.terminal.skills.map((skill) => (
               <div key={skill} className="text-blue-400 mt-1">
@@ -122,7 +122,7 @@ export default function About({ about }) {
               </div>
             ))}
             <div className="text-emerald-400 mt-2">$ status</div>
-            <div className="text-[#5A6478] mt-1">
+            <div className="text-[#8E98AD] mt-1">
               <span className="text-emerald-400" aria-hidden="true">
                 *
               </span>{' '}

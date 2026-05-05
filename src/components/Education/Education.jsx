@@ -36,14 +36,14 @@ export default function Education({ education }) {
               <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-[#E8EAF0]">
                 {item.degree}
               </h3>
-              <div className="font-mono text-[12px] text-[#5A6478] mb-4">{item.institution}</div>
-              <p className="text-[13px] text-[#5A6478] leading-[1.7] mb-5">{item.description}</p>
+              <div className="font-mono text-[12px] text-[#8E98AD] mb-4">{item.institution}</div>
+              <p className="text-[13px] text-[#8E98AD] leading-[1.7] mb-5">{item.description}</p>
 
               <div className="flex flex-wrap gap-1.5">
                 {item.highlights.map((highlight) => (
                   <span
                     key={highlight}
-                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-[#5A6478] px-2 py-1 rounded-sm"
+                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-[#8E98AD] px-2 py-1 rounded-sm"
                   >
                     {highlight}
                   </span>
