@@ -50,4 +50,14 @@ describe('Contact', () => {
     expect(screen.getByText(/2MB or smaller/i)).toBeInTheDocument()
     expect(fetch).not.toHaveBeenCalled()
   })
+
+  it('exposes accessible labels and live feedback', () => {
+    render(<Contact contact={portfolio.contact} />)
+
+    expect(screen.getByLabelText(/full name/i)).toBeRequired()
+    expect(screen.getByLabelText(/^email$/i)).toHaveAttribute('autocomplete', 'email')
+    expect(screen.getByLabelText(/message/i)).toBeRequired()
+    expect(screen.getByLabelText(/attach pdf/i)).toHaveAttribute('accept', 'application/pdf,.pdf')
+    expect(screen.getByText('', { selector: '[aria-live="polite"]' })).toBeInTheDocument()
+  })
 })

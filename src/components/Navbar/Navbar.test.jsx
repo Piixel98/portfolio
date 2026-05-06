@@ -23,4 +23,18 @@ describe('Navbar', () => {
     expect(button).toHaveAttribute('aria-expanded', 'false')
     expect(button).toHaveFocus()
   })
+
+  it('has labelled navigation landmarks and controls', () => {
+    render(<Navbar nav={portfolio.nav} profile={portfolio.profile} />)
+
+    expect(screen.getByRole('navigation', { name: /primary navigation/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /skip to content/i })).toHaveAttribute(
+      'href',
+      '#main-content',
+    )
+    expect(screen.getByRole('button', { name: /open navigation menu/i })).toHaveAttribute(
+      'aria-controls',
+      'mobile-navigation',
+    )
+  })
 })
