@@ -606,6 +606,14 @@
     text-transform: uppercase;
   }
 
+  .skill-logo-fallback {
+    color: var(--skill-color, var(--color-accent-soft));
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .project-modal__related-name {
     color: var(--color-text);
     font-size: 15px;

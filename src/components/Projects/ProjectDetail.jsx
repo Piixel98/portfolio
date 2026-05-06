@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef } from 'react'
+import SkillLogo from '../SkillLogo'
 
 const FOCUSABLE_SELECTOR = [
   'a[href]',
@@ -140,18 +141,12 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
                 <div className="project-modal__related">
                   {projectTechnologies.map((item) => (
                     <div key={item.name} className="project-modal__related-card">
-                      <div
+                      <SkillLogo
                         className="project-modal__related-logo"
+                        logo={item.logo}
+                        name={item.name}
                         style={{ '--skill-color': item.color }}
-                      >
-                        {item.logo ? (
-                          <img src={item.logo} alt="" loading="lazy" decoding="async" />
-                        ) : (
-                          <span className="project-modal__related-fallback" aria-hidden="true">
-                            {item.name.slice(0, 2).toUpperCase()}
-                          </span>
-                        )}
-                      </div>
+                      />
                       <div>
                         <div className="project-modal__related-name">{item.name}</div>
                         <div className="project-modal__related-meta">

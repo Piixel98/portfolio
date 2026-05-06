@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import FadeIn from '../FadeIn'
+import SkillLogo from '../SkillLogo'
 import SkillMarquee from './SkillMarquee'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
@@ -88,9 +89,7 @@ export default function Skills({ skills }) {
                       }}
                     >
                       <div className="skill-card__scanline" aria-hidden="true" />
-                      <div className="skill-card__logo">
-                        <img src={skill.logo} alt="" loading="lazy" decoding="async" />
-                      </div>
+                      <SkillLogo className="skill-card__logo" logo={skill.logo} name={skill.name} />
                       <div className="min-w-0">
                         <h4 className="truncate text-[15px] font-medium text-text">{skill.name}</h4>
                         <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
