@@ -803,6 +803,12 @@
     animation: contact-spin 0.75s linear infinite;
   }
 
+  .contact-turnstile {
+    display: grid;
+    min-height: 4rem;
+    align-items: center;
+  }
+
   @keyframes contact-spin {
     to {
       transform: rotate(360deg);

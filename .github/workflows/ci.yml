@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_APP_VERSION: ${{ github.sha }}
+      VITE_ENABLE_ANALYTICS: 'false'
+      VITE_ENABLE_SENTRY: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,6 +41,8 @@ jobs:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VITE_APP_VERSION: ${{ github.sha }}
+      VITE_ENABLE_ANALYTICS: 'true'
+      VITE_ENABLE_SENTRY: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -62,6 +66,8 @@ jobs:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VITE_APP_VERSION: ${{ github.sha }}
+      VITE_ENABLE_ANALYTICS: 'false'
+      VITE_ENABLE_SENTRY: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

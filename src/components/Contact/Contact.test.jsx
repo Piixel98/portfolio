@@ -6,6 +6,8 @@ import Contact from './Contact'
 
 describe('Contact', () => {
   beforeEach(() => {
+    import.meta.env.VITE_TURNSTILE_SITE_KEY = ''
+    delete window.turnstile
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
   })
 
@@ -13,6 +15,8 @@ describe('Contact', () => {
     cleanup()
     vi.unstubAllGlobals()
     vi.restoreAllMocks()
+    import.meta.env.VITE_TURNSTILE_SITE_KEY = ''
+    delete window.turnstile
   })
 
   it('submits the contact form payload', async () => {
@@ -59,5 +63,35 @@ describe('Contact', () => {
     expect(screen.getByLabelText(/message/i)).toBeRequired()
     expect(screen.getByLabelText(/attach pdf/i)).toHaveAttribute('accept', 'application/pdf,.pdf')
     expect(screen.getByText('', { selector: '[aria-live="polite"]' })).toBeInTheDocument()
+  })
+
+  it('includes the Turnstile token when the widget is configured', async () => {
+    import.meta.env.VITE_TURNSTILE_SITE_KEY = 'test-site-key'
+    window.turnstile = {
+      render: vi.fn((_element, options) => {
+        options.callback('turnstile-test-token')
+        return 'widget-id'
+      }),
+      remove: vi.fn(),
+    }
+    const user = userEvent.setup()
+
+    render(<Contact contact={portfolio.contact} />)
+
+    await user.type(screen.getByLabelText(/full name/i), 'Jordi Test')
+    await user.type(screen.getByLabelText(/^email$/i), 'jordi@example.com')
+    await user.type(screen.getByLabelText(/message/i), 'Hello from the Turnstile test.')
+    await user.click(screen.getByRole('button', { name: /send message/i }))
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith(
+        '/api/contact',
+        expect.objectContaining({
+          body: expect.stringContaining('"turnstileToken":"turnstile-test-token"'),
+        }),
+      )
+    })
+
+    delete window.turnstile
   })
 })

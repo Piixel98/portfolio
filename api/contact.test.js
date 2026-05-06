@@ -164,4 +164,27 @@ describe('api/contact', () => {
     expect(res.statusCode).toBe(200)
     expect(fetch).toHaveBeenCalledTimes(2)
   })
+
+  it('rejects Turnstile tokens from unexpected hostnames', async () => {
+    process.env.TURNSTILE_SECRET_KEY = 'turnstile-secret'
+    process.env.TURNSTILE_EXPECTED_HOSTNAME = 'portfolio.example.com'
+    fetch.mockResolvedValue({
+      json: () => Promise.resolve({ hostname: 'attacker.example.com', success: true }),
+      ok: true,
+    })
+    const res = createResponse()
+
+    await handler(
+      createRequest({
+        body: {
+          ...validBody,
+          turnstileToken: 'token',
+        },
+      }),
+      res,
+    )
+
+    expect(res.statusCode).toBe(400)
+    expect(res.payload.message).toMatch(/spam protection failed/i)
+  })
 })

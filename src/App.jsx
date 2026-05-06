@@ -17,7 +17,7 @@ import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 import useScrollProgress from './hooks/useScrollProgress'
 import portfolio from './data/portfolio'
 
-const isProduction = import.meta.env.PROD
+const shouldLoadAnalytics = import.meta.env.PROD && import.meta.env.VITE_ENABLE_ANALYTICS === 'true'
 
 export default function App() {
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -50,7 +50,7 @@ export default function App() {
 
       <Footer profile={portfolio.profile} contact={portfolio.contact} />
 
-      {isProduction && (
+      {shouldLoadAnalytics && (
         <>
           <SpeedInsights />
           <Analytics />

@@ -6,7 +6,6 @@ Personal portfolio, built with React, Vite and Tailwind CSS. Content is managed 
 
 Production URL: https://portfolio-iota-sandy-c1tlxc4d2t.vercel.app/
 
-
 ## Stack
 
 - React 19
@@ -74,8 +73,12 @@ RESEND_API_KEY=replace_with_resend_api_key
 CONTACT_TO_EMAIL=replace_with_contact_email
 CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
 TURNSTILE_SECRET_KEY=
+TURNSTILE_EXPECTED_HOSTNAME=
+VITE_TURNSTILE_SITE_KEY=
 VITE_SENTRY_DSN=replace_with_sentry_dsn
 VITE_APP_VERSION=1.0.0
+VITE_ENABLE_ANALYTICS=false
+VITE_ENABLE_SENTRY=false
 ```
 
 Required in production:
@@ -87,8 +90,12 @@ Required in production:
 Optional:
 
 - `TURNSTILE_SECRET_KEY`: enables server-side Turnstile verification. Leave empty until the client widget and token submission are wired.
+- `TURNSTILE_EXPECTED_HOSTNAME`: optional hostname check for successful Turnstile validations, for example `example.com`.
+- `VITE_TURNSTILE_SITE_KEY`: public Turnstile site key used by the contact form widget. Required when `TURNSTILE_SECRET_KEY` is set.
 - `VITE_SENTRY_DSN`: enables Sentry in the frontend.
 - `VITE_APP_VERSION`: release identifier for Sentry. CI sets this to the Git SHA.
+- `VITE_ENABLE_ANALYTICS`: set to `true` only in the production deployment environment.
+- `VITE_ENABLE_SENTRY`: set to `true` only where Sentry events should be sent.
 
 ## Content Editing
 
@@ -121,6 +128,8 @@ Current validations:
 - Best-effort per-IP rate limiting in the serverless function
 - Honeypot field support
 - Optional server-side Turnstile verification when `TURNSTILE_SECRET_KEY` is configured
+- Optional Turnstile hostname validation when `TURNSTILE_EXPECTED_HOSTNAME` is configured
+- Client-side Turnstile widget when `VITE_TURNSTILE_SITE_KEY` is configured
 - Basic sanitization before building the email
 
 ## Quality Gates

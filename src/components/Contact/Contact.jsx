@@ -1,4 +1,5 @@
-import { useId, useReducer } from 'react'
+import { useCallback, useId, useReducer } from 'react'
+import TurnstileField from './TurnstileField'
 import { getLinkSecurityProps } from '../../utils/links'
 
 const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024
@@ -9,6 +10,8 @@ const initialFormState = {
   status: 'idle',
   feedback: '',
   attachmentName: '',
+  turnstileToken: '',
+  turnstileResetSignal: 0,
 }
 
 function formReducer(state, action) {
@@ -25,6 +28,11 @@ function formReducer(state, action) {
         ...state,
         attachmentName: '',
       }
+    case 'turnstile/changed':
+      return {
+        ...state,
+        turnstileToken: action.token,
+      }
     case 'submit/pending':
       return {
         ...state,
@@ -37,6 +45,10 @@ function formReducer(state, action) {
         status: action.status,
         feedback: action.feedback,
         attachmentName: action.attachmentName ?? state.attachmentName,
+        turnstileToken: action.resetTurnstile ? '' : state.turnstileToken,
+        turnstileResetSignal: action.resetTurnstile
+          ? state.turnstileResetSignal + 1
+          : state.turnstileResetSignal,
       }
     default:
       return state
@@ -57,6 +69,7 @@ function readFileAsBase64(file) {
 }
 
 export default function Contact({ contact }) {
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
   const formId = useId()
   const fullNameId = `${formId}-fullName`
   const emailId = `${formId}-email`
@@ -64,7 +77,11 @@ export default function Contact({ contact }) {
   const messageId = `${formId}-message`
   const attachmentId = `${formId}-attachment`
   const [formState, dispatch] = useReducer(formReducer, initialFormState)
-  const { attachmentName, feedback, status } = formState
+  const { attachmentName, feedback, status, turnstileResetSignal, turnstileToken } = formState
+
+  const handleTurnstileTokenChange = useCallback((token) => {
+    dispatch({ type: 'turnstile/changed', token })
+  }, [])
 
   const validateAttachment = (file) => {
     if (!file || file.size === 0) return ''
@@ -133,6 +150,15 @@ export default function Contact({ contact }) {
       return
     }
 
+    if (turnstileSiteKey && !turnstileToken) {
+      dispatch({
+        type: 'submit/result',
+        status: 'error',
+        feedback: 'Please complete spam protection.',
+      })
+      return
+    }
+
     const attachmentError = validateAttachment(file)
     if (attachmentError) {
       dispatch({
@@ -157,7 +183,14 @@ export default function Contact({ contact }) {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ attachment, email, fullName, message, phone }),
+        body: JSON.stringify({
+          attachment,
+          email,
+          fullName,
+          message,
+          phone,
+          turnstileToken,
+        }),
       })
 
       if (!response.ok) {
@@ -170,6 +203,7 @@ export default function Contact({ contact }) {
         status: 'success',
         feedback: contact.form.success,
         attachmentName: '',
+        resetTurnstile: Boolean(turnstileSiteKey),
       })
       form.reset()
     } catch {
@@ -177,6 +211,7 @@ export default function Contact({ contact }) {
         type: 'submit/result',
         status: 'error',
         feedback: contact.form.error,
+        resetTurnstile: Boolean(turnstileSiteKey),
       })
     }
   }
@@ -283,6 +318,12 @@ export default function Contact({ contact }) {
                 onChange={handleAttachmentChange}
               />
             </label>
+
+            <TurnstileField
+              siteKey={turnstileSiteKey}
+              resetSignal={turnstileResetSignal}
+              onTokenChange={handleTurnstileTokenChange}
+            />
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-4">

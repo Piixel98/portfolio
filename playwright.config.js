@@ -12,6 +12,10 @@ export default defineConfig({
   },
   webServer: {
     command: 'npm run build && npm run preview -- --host 127.0.0.1 --port 4173',
+    env: {
+      TURNSTILE_SECRET_KEY: '',
+      VITE_TURNSTILE_SITE_KEY: '',
+    },
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !isCI,
     timeout: 120_000,

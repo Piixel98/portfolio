@@ -2,6 +2,7 @@ const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const RESEND_API_URL = 'https://api.resend.com/emails'
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+const TURNSTILE_TOKEN_MAX_LENGTH = 2048
 const RATE_LIMIT_MAX_REQUESTS = 5
 const RATE_LIMIT_WINDOW_MS = 60 * 1000
 const rateLimitStore = globalThis.__portfolioContactRateLimit || new Map()
@@ -32,6 +33,9 @@ function logContactError(reason, error) {
 }
 
 function getClientKey(req) {
+  const cloudflareIp = sanitize(req.headers?.['cf-connecting-ip'], 120)
+  if (cloudflareIp) return cloudflareIp
+
   const forwardedFor = sanitize(req.headers?.['x-forwarded-for'], 300)
   if (forwardedFor) return forwardedFor.split(',')[0].trim()
   return sanitize(req.headers?.['x-real-ip'] || req.socket?.remoteAddress || 'unknown', 120)
@@ -62,6 +66,7 @@ function getAttachmentByteLength(content) {
 
 async function verifyTurnstile(token, remoteIp) {
   const secret = process.env.TURNSTILE_SECRET_KEY
+  const expectedHostname = sanitize(process.env.TURNSTILE_EXPECTED_HOSTNAME, 253).toLowerCase()
   if (!secret) return true
   if (!token) return false
 
@@ -79,7 +84,17 @@ async function verifyTurnstile(token, remoteIp) {
   if (!response.ok) return false
 
   const result = await response.json().catch(() => null)
-  return Boolean(result?.success)
+  if (!result?.success) {
+    logContactError('turnstile_rejected_token', new Error(result?.['error-codes']?.join(', ')))
+    return false
+  }
+
+  if (expectedHostname && sanitize(result.hostname, 253).toLowerCase() !== expectedHostname) {
+    logContactError('turnstile_hostname_mismatch', new Error('hostname mismatch'))
+    return false
+  }
+
+  return true
 }
 
 export default async function handler(req, res) {
@@ -107,7 +122,7 @@ export default async function handler(req, res) {
   const message = sanitize(req.body?.message, 5000)
   const attachment = req.body?.attachment || null
   const company = sanitize(req.body?.company, 120)
-  const turnstileToken = sanitize(req.body?.turnstileToken, 4096)
+  const turnstileToken = sanitize(req.body?.turnstileToken, TURNSTILE_TOKEN_MAX_LENGTH)
 
   if (company) {
     return json(res, 200, { ok: true })

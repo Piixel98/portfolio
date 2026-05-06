@@ -2,8 +2,9 @@ import * as Sentry from '@sentry/react'
 
 export function initObservability() {
   const dsn = import.meta.env.VITE_SENTRY_DSN
+  const shouldEnableSentry = import.meta.env.PROD && import.meta.env.VITE_ENABLE_SENTRY === 'true'
 
-  if (!dsn) return
+  if (!dsn || !shouldEnableSentry) return
 
   Sentry.init({
     dsn,
