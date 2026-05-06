@@ -1,6 +1,12 @@
 const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const RESEND_API_URL = 'https://api.resend.com/emails'
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+const RATE_LIMIT_MAX_REQUESTS = 5
+const RATE_LIMIT_WINDOW_MS = 60 * 1000
+const rateLimitStore = globalThis.__portfolioContactRateLimit || new Map()
+
+globalThis.__portfolioContactRateLimit = rateLimitStore
 
 function json(res, status, payload) {
   res.status(status).json(payload)
@@ -20,17 +26,78 @@ function escapeHtml(value) {
     .replaceAll('"', '&quot;')
 }
 
+function logContactError(reason, error) {
+  const message = error instanceof Error ? error.message : String(error || 'unknown error')
+  console.error('contact endpoint error', { message, reason })
+}
+
+function getClientKey(req) {
+  const forwardedFor = sanitize(req.headers?.['x-forwarded-for'], 300)
+  if (forwardedFor) return forwardedFor.split(',')[0].trim()
+  return sanitize(req.headers?.['x-real-ip'] || req.socket?.remoteAddress || 'unknown', 120)
+}
+
+function isRateLimited(key, now = Date.now()) {
+  for (const [storedKey, bucket] of rateLimitStore.entries()) {
+    if (now - bucket.windowStart > RATE_LIMIT_WINDOW_MS) {
+      rateLimitStore.delete(storedKey)
+    }
+  }
+
+  const bucket = rateLimitStore.get(key)
+  if (!bucket || now - bucket.windowStart > RATE_LIMIT_WINDOW_MS) {
+    rateLimitStore.set(key, { count: 1, windowStart: now })
+    return false
+  }
+
+  bucket.count += 1
+  return bucket.count > RATE_LIMIT_MAX_REQUESTS
+}
+
+function getAttachmentByteLength(content) {
+  const normalized = sanitize(content, 4_000_000).replace(/\s/g, '')
+  if (!normalized || !/^[A-Za-z0-9+/]*={0,2}$/.test(normalized)) return 0
+  return Buffer.byteLength(normalized, 'base64')
+}
+
+async function verifyTurnstile(token, remoteIp) {
+  const secret = process.env.TURNSTILE_SECRET_KEY
+  if (!secret) return true
+  if (!token) return false
+
+  const formData = new URLSearchParams({
+    remoteip: remoteIp,
+    response: token,
+    secret,
+  })
+
+  const response = await fetch(TURNSTILE_VERIFY_URL, {
+    body: formData,
+    method: 'POST',
+  })
+
+  if (!response.ok) return false
+
+  const result = await response.json().catch(() => null)
+  return Boolean(result?.success)
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return json(res, 405, { message: 'Method not allowed.' })
   }
 
-  const apiKey = process.env.RESEND_API_KEY
-  const toEmail = process.env.CONTACT_TO_EMAIL || 'test@gmail.com'
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>'
+  const clientKey = getClientKey(req)
+  if (isRateLimited(clientKey)) {
+    return json(res, 429, { message: 'Too many requests. Please try again later.' })
+  }
 
-  if (!apiKey) {
+  const apiKey = process.env.RESEND_API_KEY
+  const toEmail = process.env.CONTACT_TO_EMAIL
+  const fromEmail = process.env.CONTACT_FROM_EMAIL
+
+  if (!apiKey || !toEmail || !fromEmail) {
     return json(res, 500, { message: 'Email service is not configured.' })
   }
 
@@ -39,6 +106,12 @@ export default async function handler(req, res) {
   const phone = sanitize(req.body?.phone, 50)
   const message = sanitize(req.body?.message, 5000)
   const attachment = req.body?.attachment || null
+  const company = sanitize(req.body?.company, 120)
+  const turnstileToken = sanitize(req.body?.turnstileToken, 4096)
+
+  if (company) {
+    return json(res, 200, { ok: true })
+  }
 
   if (!fullName || !email || !message) {
     return json(res, 400, { message: 'Missing required fields.' })
@@ -48,18 +121,28 @@ export default async function handler(req, res) {
     return json(res, 400, { message: 'Invalid email address.' })
   }
 
+  try {
+    const turnstileOk = await verifyTurnstile(turnstileToken, clientKey)
+    if (!turnstileOk) {
+      return json(res, 400, { message: 'Spam protection failed.' })
+    }
+  } catch (error) {
+    logContactError('turnstile_verification_failed', error)
+    return json(res, 502, { message: 'Spam protection is temporarily unavailable.' })
+  }
+
   const attachments = []
   if (attachment) {
     const filename = sanitize(attachment.filename, 180)
     const content = sanitize(attachment.content, 4_000_000)
-    const size = Number(attachment.size || 0)
     const type = sanitize(attachment.type, 80)
+    const byteLength = getAttachmentByteLength(content)
 
     if (!filename.toLowerCase().endsWith('.pdf') || type !== 'application/pdf') {
       return json(res, 400, { message: 'Only PDF attachments are accepted.' })
     }
 
-    if (!content || size > MAX_ATTACHMENT_BYTES) {
+    if (!content || byteLength === 0 || byteLength > MAX_ATTACHMENT_BYTES) {
       return json(res, 400, { message: 'The PDF must be 2MB or smaller.' })
     }
 
@@ -75,24 +158,31 @@ export default async function handler(req, res) {
     <p>${escapeHtml(message).replaceAll('\n', '<br>')}</p>
   `
 
-  const resendResponse = await fetch(RESEND_API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      attachments,
-      from: fromEmail,
-      html,
-      reply_to: email,
-      subject: `Portfolio contact - ${fullName}`,
-      text: `Name: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\n${message}`,
-      to: [toEmail],
-    }),
-  })
+  let resendResponse
+  try {
+    resendResponse = await fetch(RESEND_API_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        attachments,
+        from: fromEmail,
+        html,
+        reply_to: email,
+        subject: `Portfolio contact - ${fullName}`,
+        text: `Name: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\n${message}`,
+        to: [toEmail],
+      }),
+    })
+  } catch (error) {
+    logContactError('resend_request_failed', error)
+    return json(res, 502, { message: 'Email provider is temporarily unavailable.' })
+  }
 
   if (!resendResponse.ok) {
+    logContactError('resend_rejected_request', new Error(`status ${resendResponse.status}`))
     return json(res, 502, { message: 'Email provider rejected the request.' })
   }
 
