@@ -1,3 +1,5 @@
+import FadeIn from '../FadeIn'
+
 export default function Education({ education }) {
   return (
     <section id="education" className="bg-bg-2 px-[5%] py-24">
@@ -9,9 +11,10 @@ export default function Education({ education }) {
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
           {education.items.map((item, i) => (
-            <div
+            <FadeIn
+              as="article"
               key={`${item.degree}-${item.dates}`}
-              className="js-fade bg-bg-3 border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
+              className="bg-bg-3 border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <div className="flex items-start justify-between mb-5">
@@ -49,7 +52,7 @@ export default function Education({ education }) {
                   </span>
                 ))}
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </div>

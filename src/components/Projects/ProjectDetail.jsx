@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 const FOCUSABLE_SELECTOR = [
   'a[href]',
@@ -9,7 +9,13 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
 
+function isFocusable(element) {
+  return !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true'
+}
+
 export default function ProjectDetail({ project, projectTechnologies, onClose }) {
+  const titleId = useId()
+  const descriptionId = useId()
   const closeButtonRef = useRef(null)
   const panelRef = useRef(null)
 
@@ -22,7 +28,9 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
 
       if (event.key !== 'Tab' || !panelRef.current) return
 
-      const focusableElements = Array.from(panelRef.current.querySelectorAll(FOCUSABLE_SELECTOR))
+      const focusableElements = Array.from(
+        panelRef.current.querySelectorAll(FOCUSABLE_SELECTOR),
+      ).filter(isFocusable)
       if (focusableElements.length === 0) {
         event.preventDefault()
         panelRef.current.focus()
@@ -57,7 +65,8 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
       className="project-modal"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="project-modal-title"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
     >
       <button
         type="button"
@@ -83,10 +92,12 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
         <div className="project-modal__hero">
           <div className="project-modal__hero-copy">
             <span className="project-modal__context">{project.context}</span>
-            <h3 id="project-modal-title" className="project-modal__title">
+            <h3 id={titleId} className="project-modal__title">
               {project.title}
             </h3>
-            <p className="project-modal__lead">{project.desc}</p>
+            <p id={descriptionId} className="project-modal__lead">
+              {project.desc}
+            </p>
           </div>
 
           <div className="project-modal__hero-side">
@@ -123,8 +134,7 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
                 <div className="project-modal__section-head">
                   <span className="project-modal__label">Related technologies</span>
                   <p className="project-modal__section-copy">
-                    Technologies explicitly used in this project, based on the project stack defined
-                    in the portfolio data.
+                    Technologies explicitly used in this project:
                   </p>
                 </div>
                 <div className="project-modal__related">

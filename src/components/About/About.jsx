@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useRef } from 'react'
+import FadeIn from '../FadeIn'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
 function numberReducer(state, action) {
@@ -62,7 +63,7 @@ export default function About({ about }) {
   return (
     <section id="about" className="bg-bg-2 px-[5%] py-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
-        <div className="js-fade">
+        <FadeIn>
           <span className="tag">{about.tag}</span>
           <h2 className="section-title mb-7">
             {about.title.map((line) => (
@@ -81,10 +82,10 @@ export default function About({ about }) {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-9">
             {about.skills.map((group) => (
-              <div key={group.label} className="js-fade">
-                <label className="font-mono text-[10px] tracking-[0.15em] text-blue-400 uppercase block mb-2.5">
+              <FadeIn key={group.label}>
+                <span className="font-mono text-[10px] tracking-[0.15em] text-blue-400 uppercase block mb-2.5">
                   {group.label}
-                </label>
+                </span>
                 <div className="flex flex-wrap gap-1.5">
                   {group.pills.map((pill) => (
                     <span key={pill} className="pill">
@@ -92,12 +93,12 @@ export default function About({ about }) {
                     </span>
                   ))}
                 </div>
-              </div>
+              </FadeIn>
             ))}
           </div>
-        </div>
+        </FadeIn>
 
-        <div className="flex flex-col gap-5 js-fade">
+        <FadeIn className="flex flex-col gap-5">
           {about.stats.map((stat) => (
             <div key={stat.label} className="stat-card">
               <div className="font-mono text-[44px] font-light leading-none mb-1.5 text-text">
@@ -129,7 +130,7 @@ export default function About({ about }) {
               {about.terminal.status}
             </div>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   )

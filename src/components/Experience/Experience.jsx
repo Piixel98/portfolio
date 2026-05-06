@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import FadeIn from '../FadeIn'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
 function WorkIcon({ current = false, systems = false }) {
@@ -59,15 +60,22 @@ export default function Experience({ experience }) {
   const sectionRef = useRef(null)
 
   useEffect(() => {
+    const revealLine = () => {
+      if (!lineRef.current || !sectionRef.current) return
+      lineRef.current.style.height = `${sectionRef.current.offsetHeight}px`
+      lineRef.current.style.transform = 'scaleY(1)'
+    }
+
     if (prefersReducedMotion && lineRef.current && sectionRef.current) {
-      lineRef.current.style.cssText += `height:${sectionRef.current.offsetHeight}px;transform:scaleY(1);`
+      revealLine()
       return undefined
     }
 
     const observer = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting && lineRef.current) {
-          lineRef.current.style.cssText += `height:${sectionRef.current.offsetHeight}px;transform:scaleY(1);`
+          revealLine()
+          observer.disconnect()
         }
       },
       { threshold: 0.1 },
@@ -89,9 +97,10 @@ export default function Experience({ experience }) {
           <div ref={lineRef} className="tl-progress" />
 
           {experience.jobs.map((job, i) => (
-            <article
+            <FadeIn
+              as="article"
               key={`${job.company}-${job.dates}`}
-              className={`experience-entry js-fade group ${job.dates.includes('Present') ? 'experience-entry--current' : ''}`}
+              className={`experience-entry group ${job.dates.includes('Present') ? 'experience-entry--current' : ''}`}
               style={{ transitionDelay: `${i * 0.15}s` }}
             >
               <div className="experience-entry__marker" aria-hidden="true">
@@ -131,7 +140,7 @@ export default function Experience({ experience }) {
                   ))}
                 </div>
               </div>
-            </article>
+            </FadeIn>
           ))}
         </div>
       </div>

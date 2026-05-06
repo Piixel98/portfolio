@@ -58,6 +58,11 @@ function readFileAsBase64(file) {
 
 export default function Contact({ contact }) {
   const formId = useId()
+  const fullNameId = `${formId}-fullName`
+  const emailId = `${formId}-email`
+  const phoneId = `${formId}-phone`
+  const messageId = `${formId}-message`
+  const attachmentId = `${formId}-attachment`
   const [formState, dispatch] = useReducer(formReducer, initialFormState)
   const { attachmentName, feedback, status } = formState
 
@@ -232,27 +237,33 @@ export default function Contact({ contact }) {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
-            <label className="contact-field">
+            <label className="contact-field" htmlFor={fullNameId}>
               <span>{contact.form.fullName}</span>
-              <input name="fullName" type="text" autoComplete="name" required />
+              <input id={fullNameId} name="fullName" type="text" autoComplete="name" required />
             </label>
 
-            <label className="contact-field">
+            <label className="contact-field" htmlFor={emailId}>
               <span>{contact.form.email}</span>
-              <input name="email" type="email" autoComplete="email" required />
+              <input id={emailId} name="email" type="email" autoComplete="email" required />
             </label>
 
-            <label className="contact-field sm:col-span-2">
+            <label className="contact-field sm:col-span-2" htmlFor={phoneId}>
               <span>{contact.form.phone}</span>
-              <input name="phone" type="tel" autoComplete="tel" placeholder="Optional" />
+              <input
+                id={phoneId}
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                placeholder="Optional"
+              />
             </label>
 
-            <label className="contact-field sm:col-span-2">
+            <label className="contact-field sm:col-span-2" htmlFor={messageId}>
               <span>{contact.form.message}</span>
-              <textarea name="message" rows="6" required />
+              <textarea id={messageId} name="message" rows="6" required />
             </label>
 
-            <label className="contact-upload sm:col-span-2">
+            <label className="contact-upload sm:col-span-2" htmlFor={attachmentId}>
               <span className="contact-upload__icon" aria-hidden="true">
                 PDF
               </span>
@@ -265,6 +276,7 @@ export default function Contact({ contact }) {
                 </span>
               </span>
               <input
+                id={attachmentId}
                 name="attachment"
                 type="file"
                 accept="application/pdf,.pdf"

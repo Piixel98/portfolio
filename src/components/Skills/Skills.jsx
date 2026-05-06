@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import FadeIn from '../FadeIn'
 import SkillMarquee from './SkillMarquee'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 
@@ -52,9 +53,10 @@ export default function Skills({ skills }) {
         <div className="space-y-5">
           {marqueeItems.map((group, groupIndex) => {
             return (
-              <article
+              <FadeIn
+                as="article"
                 key={group.title}
-                className="skill-group js-fade"
+                className="skill-group"
                 style={{ transitionDelay: `${Math.min(groupIndex * 0.08, 0.5)}s` }}
               >
                 <div className="skill-group__header">
@@ -110,7 +112,7 @@ export default function Skills({ skills }) {
                     </article>
                   ))}
                 </SkillMarquee>
-              </article>
+              </FadeIn>
             )
           })}
         </div>

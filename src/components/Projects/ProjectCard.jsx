@@ -1,8 +1,11 @@
+import FadeIn from '../FadeIn'
+
 export default function ProjectCard({ project, index, onOpen }) {
   return (
-    <button
+    <FadeIn
+      as="button"
       type="button"
-      className="project-card project-card--interactive js-fade text-left"
+      className="project-card project-card--interactive text-left"
       aria-label={`Open project details for ${project.title}`}
       style={{ transitionDelay: `${index * 0.12}s` }}
       onClick={() => onOpen(project.num)}
@@ -46,6 +49,6 @@ export default function ProjectCard({ project, index, onOpen }) {
           </div>
         </div>
       </div>
-    </button>
+    </FadeIn>
   )
 }

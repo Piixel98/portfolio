@@ -13,7 +13,6 @@ import {
   Skills,
 } from './components'
 import useCustomCursor from './hooks/useCustomCursor'
-import useFadeInSections from './hooks/useFadeInSections'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 import useScrollProgress from './hooks/useScrollProgress'
 import portfolio from './data/portfolio'
@@ -25,7 +24,6 @@ export default function App() {
   const { cursorRef, cursorRingRef } = useCustomCursor(!prefersReducedMotion)
 
   useScrollProgress()
-  useFadeInSections(!prefersReducedMotion)
 
   return (
     <>
