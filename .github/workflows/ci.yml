@@ -12,6 +12,7 @@ jobs:
       VITE_APP_VERSION: ${{ github.sha }}
       VITE_ENABLE_ANALYTICS: 'false'
       VITE_ENABLE_SENTRY: 'false'
+      VITE_ENABLE_TURNSTILE: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,6 +44,7 @@ jobs:
       VITE_APP_VERSION: ${{ github.sha }}
       VITE_ENABLE_ANALYTICS: 'true'
       VITE_ENABLE_SENTRY: 'true'
+      VITE_ENABLE_TURNSTILE: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -68,6 +70,7 @@ jobs:
       VITE_APP_VERSION: ${{ github.sha }}
       VITE_ENABLE_ANALYTICS: 'false'
       VITE_ENABLE_SENTRY: 'false'
+      VITE_ENABLE_TURNSTILE: 'false'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

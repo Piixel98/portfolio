@@ -7,6 +7,7 @@ import Contact from './Contact'
 describe('Contact', () => {
   beforeEach(() => {
     import.meta.env.VITE_TURNSTILE_SITE_KEY = ''
+    import.meta.env.VITE_ENABLE_TURNSTILE = 'false'
     delete window.turnstile
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }))
   })
@@ -16,6 +17,7 @@ describe('Contact', () => {
     vi.unstubAllGlobals()
     vi.restoreAllMocks()
     import.meta.env.VITE_TURNSTILE_SITE_KEY = ''
+    import.meta.env.VITE_ENABLE_TURNSTILE = 'false'
     delete window.turnstile
   })
 
@@ -67,6 +69,7 @@ describe('Contact', () => {
 
   it('includes the Turnstile token when the widget is configured', async () => {
     import.meta.env.VITE_TURNSTILE_SITE_KEY = 'test-site-key'
+    import.meta.env.VITE_ENABLE_TURNSTILE = 'true'
     window.turnstile = {
       render: vi.fn((_element, options) => {
         options.callback('turnstile-test-token')

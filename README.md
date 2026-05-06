@@ -72,9 +72,11 @@ Copy `.env.example` to `.env` for local development and configure the required v
 RESEND_API_KEY=replace_with_resend_api_key
 CONTACT_TO_EMAIL=replace_with_contact_email
 CONTACT_FROM_EMAIL=Portfolio Contact <onboarding@resend.dev>
+TURNSTILE_ENABLED=false
 TURNSTILE_SECRET_KEY=
 TURNSTILE_EXPECTED_HOSTNAME=
 VITE_TURNSTILE_SITE_KEY=
+VITE_ENABLE_TURNSTILE=false
 VITE_SENTRY_DSN=replace_with_sentry_dsn
 VITE_APP_VERSION=1.0.0
 VITE_ENABLE_ANALYTICS=false
@@ -89,9 +91,11 @@ Required in production:
 
 Optional:
 
+- `TURNSTILE_ENABLED`: set to `true` only where the server should require Turnstile verification.
 - `TURNSTILE_SECRET_KEY`: enables server-side Turnstile verification. Leave empty until the client widget and token submission are wired.
 - `TURNSTILE_EXPECTED_HOSTNAME`: optional hostname check for successful Turnstile validations, for example `example.com`.
 - `VITE_TURNSTILE_SITE_KEY`: public Turnstile site key used by the contact form widget. Required when `TURNSTILE_SECRET_KEY` is set.
+- `VITE_ENABLE_TURNSTILE`: set to `true` only in the production deployment environment. Leave it `false` in local development and previews even if keys are present.
 - `VITE_SENTRY_DSN`: enables Sentry in the frontend.
 - `VITE_APP_VERSION`: release identifier for Sentry. CI sets this to the Git SHA.
 - `VITE_ENABLE_ANALYTICS`: set to `true` only in the production deployment environment.

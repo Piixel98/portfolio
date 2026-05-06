@@ -69,7 +69,8 @@ function readFileAsBase64(file) {
 }
 
 export default function Contact({ contact }) {
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
+  const turnstileSiteKey =
+    import.meta.env.VITE_ENABLE_TURNSTILE === 'true' ? import.meta.env.VITE_TURNSTILE_SITE_KEY : ''
   const formId = useId()
   const fullNameId = `${formId}-fullName`
   const emailId = `${formId}-email`

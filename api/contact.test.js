@@ -42,6 +42,7 @@ describe('api/contact', () => {
     process.env.RESEND_API_KEY = 'test-resend-key'
     process.env.CONTACT_TO_EMAIL = 'owner@example.com'
     process.env.CONTACT_FROM_EMAIL = 'Portfolio <portfolio@example.com>'
+    process.env.TURNSTILE_ENABLED = 'false'
     delete process.env.TURNSTILE_SECRET_KEY
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, status: 200 }))
   })
@@ -52,6 +53,7 @@ describe('api/contact', () => {
     delete process.env.RESEND_API_KEY
     delete process.env.CONTACT_TO_EMAIL
     delete process.env.CONTACT_FROM_EMAIL
+    delete process.env.TURNSTILE_ENABLED
     delete process.env.TURNSTILE_SECRET_KEY
   })
 
@@ -142,6 +144,7 @@ describe('api/contact', () => {
   })
 
   it('verifies Turnstile when the secret is configured', async () => {
+    process.env.TURNSTILE_ENABLED = 'true'
     process.env.TURNSTILE_SECRET_KEY = 'turnstile-secret'
     fetch.mockImplementation((url) => {
       if (String(url).includes('turnstile')) {
@@ -166,6 +169,7 @@ describe('api/contact', () => {
   })
 
   it('rejects Turnstile tokens from unexpected hostnames', async () => {
+    process.env.TURNSTILE_ENABLED = 'true'
     process.env.TURNSTILE_SECRET_KEY = 'turnstile-secret'
     process.env.TURNSTILE_EXPECTED_HOSTNAME = 'portfolio.example.com'
     fetch.mockResolvedValue({

@@ -65,8 +65,10 @@ function getAttachmentByteLength(content) {
 }
 
 async function verifyTurnstile(token, remoteIp) {
+  const isTurnstileEnabled = process.env.TURNSTILE_ENABLED === 'true'
   const secret = process.env.TURNSTILE_SECRET_KEY
   const expectedHostname = sanitize(process.env.TURNSTILE_EXPECTED_HOSTNAME, 253).toLowerCase()
+  if (!isTurnstileEnabled) return true
   if (!secret) return true
   if (!token) return false
 
