@@ -1,10 +1,11 @@
 # Jordi Sanchez Portfolio
 
-Personal portfolio for Jordi Sanchez, built with React, Vite and Tailwind CSS. Content is managed from a Zod-validated JSON file, with unit, accessibility, end-to-end, link and Lighthouse checks in CI.
+Personal portfolio, built with React, Vite and Tailwind CSS. Content is managed from a Zod-validated JSON file, with unit, accessibility, end-to-end, link and Lighthouse checks in CI.
 
-Production URL: https://piixel98.github.io/portfolio/
+![Portfolio](./portfolio.gif)
 
-Production screenshot: TODO: add a current production screenshot after the next verified deploy.
+Production URL: https://portfolio-iota-sandy-c1tlxc4d2t.vercel.app/
+
 
 ## Stack
 
