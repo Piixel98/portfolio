@@ -41,10 +41,13 @@ jobs:
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
+      VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
       VITE_APP_VERSION: ${{ github.sha }}
       VITE_ENABLE_ANALYTICS: 'true'
       VITE_ENABLE_SENTRY: 'true'
       VITE_ENABLE_TURNSTILE: 'true'
+      TURNSTILE_ENABLED: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
