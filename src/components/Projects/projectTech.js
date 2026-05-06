@@ -48,7 +48,7 @@ export function resolveProjectTechnologies(project, skills) {
     return {
       name: stackItem,
       category: 'Project stack',
-      color: '#60A5FA',
+      color: 'var(--color-accent-soft)',
       levelLabel: 'Declared',
       logo: null,
     }

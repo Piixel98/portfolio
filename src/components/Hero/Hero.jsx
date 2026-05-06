@@ -97,14 +97,14 @@ export default function Hero({ hero, profile }) {
           <span className="text-blue-400">{profile.surname}</span>
         </h1>
 
-        <div className="font-mono text-[clamp(15px,2vw,20px)] text-[#8E98AD] font-light mb-8 min-h-[30px]">
+        <div className="font-mono text-[clamp(15px,2vw,20px)] text-text-muted font-light mb-8 min-h-[30px]">
           <span className="text-emerald-400">{displayedText}</span>
           <span className="tw-cursor text-blue-400" aria-hidden="true">
             |
           </span>
         </div>
 
-        <p className="max-w-[540px] text-[#8E98AD] text-[16px] leading-[1.75] mb-11">
+        <p className="max-w-[540px] text-text-muted text-[16px] leading-[1.75] mb-11">
           {hero.description}
         </p>
 
@@ -138,7 +138,7 @@ export default function Hero({ hero, profile }) {
           {hero.badges.map((badge) => (
             <span
               key={badge}
-              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-[#8E98AD] tracking-[0.05em]"
+              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-text-muted tracking-[0.05em]"
             >
               {badge}
             </span>

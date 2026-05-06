@@ -187,7 +187,7 @@ export default function Contact({ contact }) {
             <br />
             <span className="text-blue-400">{contact.title[1]}</span>
           </h2>
-          <p className="text-[#8E98AD] max-w-md mb-10 text-[15px] leading-7">{contact.intro}</p>
+          <p className="text-text-muted max-w-md mb-10 text-[15px] leading-7">{contact.intro}</p>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {contact.items.map((item) => {
@@ -203,14 +203,16 @@ export default function Contact({ contact }) {
                   <span className="font-mono text-[10px] text-blue-400 tracking-[0.1em] block mb-1.5">
                     {item.label}
                   </span>
-                  <div className="font-mono text-[12px] text-[#8E98AD] break-all">{item.value}</div>
+                  <div className="font-mono text-[12px] text-text-muted break-all">
+                    {item.value}
+                  </div>
                 </a>
               ) : (
                 <div key={item.label} className="contact-item text-left">
                   <span className="font-mono text-[10px] text-blue-400 tracking-[0.1em] block mb-1.5">
                     {item.label}
                   </span>
-                  <div className="font-mono text-[12px] text-[#8E98AD]">{item.value}</div>
+                  <div className="font-mono text-[12px] text-text-muted">{item.value}</div>
                 </div>
               )
             })}
@@ -258,7 +260,7 @@ export default function Contact({ contact }) {
                 <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-blue-400">
                   {contact.form.attachment}
                 </span>
-                <span className="mt-2 block truncate text-[13px] text-[#8E98AD]">
+                <span className="mt-2 block truncate text-[13px] text-text-muted">
                   {attachmentName || contact.form.attachmentHint}
                 </span>
               </span>
@@ -278,7 +280,7 @@ export default function Contact({ contact }) {
                   ? 'text-emerald-400'
                   : status === 'error'
                     ? 'text-red-300'
-                    : 'text-[#8E98AD]'
+                    : 'text-text-muted'
               }`}
               aria-live="polite"
             >

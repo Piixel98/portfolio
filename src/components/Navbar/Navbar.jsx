@@ -45,7 +45,7 @@ export default function Navbar({ nav, profile }) {
       <nav
         aria-label="Primary navigation"
         className={`fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between px-[5%] transition-all duration-300 ${
-          scrolled ? 'bg-[#080C12]/85 backdrop-blur-md border-b border-white/[0.07]' : ''
+          scrolled ? 'bg-bg/85 backdrop-blur-md border-b border-white/[0.07]' : ''
         }`}
       >
         <a
@@ -73,7 +73,7 @@ export default function Navbar({ nav, profile }) {
           href={profile.githubUrl}
           aria-label={`${profile.name} GitHub profile`}
           {...safeExternalLinkProps}
-          className="hidden items-center gap-2 rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-[#8E98AD] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
+          className="hidden items-center gap-2 rounded border border-white/[0.07] px-3.5 py-1.5 font-mono text-[12px] text-text-muted transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible sm:inline-flex"
         >
           <svg
             aria-hidden="true"
@@ -93,7 +93,7 @@ export default function Navbar({ nav, profile }) {
           aria-controls="mobile-navigation"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded border border-white/[0.07] text-[#E8EAF0] transition-colors hover:border-blue-500 hover:text-blue-400 focus-visible md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded border border-white/[0.07] text-text transition-colors hover:border-blue-500 hover:text-blue-400 focus-visible md:hidden"
         >
           <span className="sr-only">Menu</span>
           <span aria-hidden="true" className="flex flex-col gap-1.5">
@@ -112,7 +112,7 @@ export default function Navbar({ nav, profile }) {
         <div
           id="mobile-navigation"
           aria-hidden={!menuOpen}
-          className={`absolute left-0 right-0 top-16 border-y border-white/[0.07] bg-[#080C12]/95 px-[5%] py-5 backdrop-blur-md md:hidden ${
+          className={`absolute left-0 right-0 top-16 border-y border-white/[0.07] bg-bg/95 px-[5%] py-5 backdrop-blur-md md:hidden ${
             menuOpen ? 'block' : 'hidden'
           }`}
         >
@@ -135,7 +135,7 @@ export default function Navbar({ nav, profile }) {
             aria-label={`${profile.name} GitHub profile`}
             onClick={closeMenu}
             {...safeExternalLinkProps}
-            className="mt-4 inline-flex items-center gap-2 rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-[#8E98AD] transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
+            className="mt-4 inline-flex items-center gap-2 rounded border border-white/[0.07] px-3.5 py-2 font-mono text-[12px] text-text-muted transition-all duration-200 hover:border-blue-500 hover:text-blue-400 focus-visible"
           >
             <svg
               aria-hidden="true"

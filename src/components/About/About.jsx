@@ -60,7 +60,7 @@ function AnimatedNumber({ target, suffix = '' }) {
 
 export default function About({ about }) {
   return (
-    <section id="about" className="bg-[#0E1420] px-[5%] py-24">
+    <section id="about" className="bg-bg-2 px-[5%] py-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
         <div className="js-fade">
           <span className="tag">{about.tag}</span>
@@ -74,7 +74,7 @@ export default function About({ about }) {
           </h2>
 
           {about.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-[#8E98AD] mb-5 leading-[1.75]">
+            <p key={paragraph} className="text-text-muted mb-5 leading-[1.75]">
               {paragraph}
             </p>
           ))}
@@ -100,21 +100,21 @@ export default function About({ about }) {
         <div className="flex flex-col gap-5 js-fade">
           {about.stats.map((stat) => (
             <div key={stat.label} className="stat-card">
-              <div className="font-mono text-[44px] font-light leading-none mb-1.5 text-[#E8EAF0]">
+              <div className="font-mono text-[44px] font-light leading-none mb-1.5 text-text">
                 <AnimatedNumber target={stat.num} suffix={stat.suffix} />
               </div>
-              <div className="text-[13px] text-[#8E98AD]">{stat.label}</div>
+              <div className="text-[13px] text-text-muted">{stat.label}</div>
             </div>
           ))}
 
-          <div className="bg-[#0A0E18] border border-white/[0.07] rounded-lg p-5 font-mono text-[12px]">
+          <div className="rounded-lg border border-white/[0.07] bg-[var(--color-bg-5)] p-5 font-mono text-[12px]">
             <div className="flex gap-1.5 mb-3">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
             </div>
             <div className="text-emerald-400">$ whoami</div>
-            <div className="text-[#8E98AD] mt-1">{about.terminal.whoami}</div>
+            <div className="text-text-muted mt-1">{about.terminal.whoami}</div>
             <div className="text-emerald-400 mt-2">$ skills --list</div>
             {about.terminal.skills.map((skill) => (
               <div key={skill} className="text-blue-400 mt-1">
@@ -122,7 +122,7 @@ export default function About({ about }) {
               </div>
             ))}
             <div className="text-emerald-400 mt-2">$ status</div>
-            <div className="text-[#8E98AD] mt-1">
+            <div className="text-text-muted mt-1">
               <span className="text-emerald-400" aria-hidden="true">
                 *
               </span>{' '}

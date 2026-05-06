@@ -4,20 +4,27 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"JetBrains Mono"', 'monospace'],
-        sans: ['"DM Sans"', 'sans-serif'],
+        mono: ['var(--font-mono)'],
+        sans: ['var(--font-sans)'],
       },
       colors: {
         bg: {
-          DEFAULT: '#080C12',
-          2: '#0E1420',
-          3: '#141B28',
+          DEFAULT: 'var(--color-bg)',
+          2: 'var(--color-bg-2)',
+          3: 'var(--color-bg-3)',
+          4: 'var(--color-bg-4)',
         },
         accent: {
-          DEFAULT: '#3B82F6',
-          2: '#10B981',
+          DEFAULT: 'var(--color-accent)',
+          2: 'var(--color-success)',
+          soft: 'var(--color-accent-soft)',
         },
-        border: 'rgba(255,255,255,0.07)',
+        text: {
+          DEFAULT: 'var(--color-text)',
+          muted: 'var(--color-muted)',
+          strong: 'var(--color-text-strong)',
+        },
+        border: 'var(--color-border)',
       },
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',

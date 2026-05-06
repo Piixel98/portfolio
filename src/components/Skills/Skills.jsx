@@ -34,14 +34,14 @@ export default function Skills({ skills }) {
           <div>
             <span className="tag">{skills.tag}</span>
             <h2 className="section-title mb-4">{skills.title}</h2>
-            <p className="max-w-2xl text-[15px] leading-7 text-[#8E98AD]">{skills.intro}</p>
+            <p className="max-w-2xl text-[15px] leading-7 text-text-muted">{skills.intro}</p>
           </div>
 
-          <div className="grid grid-cols-3 overflow-hidden rounded-lg border border-white/[0.07] bg-[#0E1420]/80">
+          <div className="grid grid-cols-3 overflow-hidden rounded-lg border border-white/[0.07] bg-bg-2/80">
             {skills.metrics.map((metric) => (
               <div key={metric.label} className="border-r border-white/[0.07] p-5 last:border-r-0">
-                <span className="block font-mono text-[26px] text-[#E8EAF0]">{metric.value}</span>
-                <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] text-[#8E98AD]">
+                <span className="block font-mono text-[26px] text-text">{metric.value}</span>
+                <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
                   {metric.label}
                 </span>
               </div>
@@ -90,10 +90,8 @@ export default function Skills({ skills }) {
                         <img src={skill.logo} alt="" loading="lazy" decoding="async" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="truncate text-[15px] font-medium text-[#E8EAF0]">
-                          {skill.name}
-                        </h4>
-                        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#8E98AD]">
+                        <h4 className="truncate text-[15px] font-medium text-text">{skill.name}</h4>
+                        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
                           {skill.category}
                         </p>
                       </div>

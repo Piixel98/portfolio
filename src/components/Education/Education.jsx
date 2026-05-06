@@ -1,6 +1,6 @@
 export default function Education({ education }) {
   return (
-    <section id="education" className="bg-[#0E1420] px-[5%] py-24">
+    <section id="education" className="bg-bg-2 px-[5%] py-24">
       <div className="section-shell">
         <div className="section-heading">
           <span className="tag">{education.tag}</span>
@@ -11,7 +11,7 @@ export default function Education({ education }) {
           {education.items.map((item, i) => (
             <div
               key={`${item.degree}-${item.dates}`}
-              className="js-fade bg-[#141B28] border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
+              className="js-fade bg-bg-3 border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <div className="flex items-start justify-between mb-5">
@@ -33,17 +33,17 @@ export default function Education({ education }) {
                 </div>
               </div>
 
-              <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-[#E8EAF0]">
+              <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-text">
                 {item.degree}
               </h3>
-              <div className="font-mono text-[12px] text-[#8E98AD] mb-4">{item.institution}</div>
-              <p className="text-[13px] text-[#8E98AD] leading-[1.7] mb-5">{item.description}</p>
+              <div className="font-mono text-[12px] text-text-muted mb-4">{item.institution}</div>
+              <p className="text-[13px] text-text-muted leading-[1.7] mb-5">{item.description}</p>
 
               <div className="flex flex-wrap gap-1.5">
                 {item.highlights.map((highlight) => (
                   <span
                     key={highlight}
-                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-[#8E98AD] px-2 py-1 rounded-sm"
+                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-text-muted px-2 py-1 rounded-sm"
                   >
                     {highlight}
                   </span>

@@ -49,10 +49,10 @@ export default function Languages({ languages }) {
                     </div>
                   </div>
 
-                  <div className="font-mono text-[17px] font-medium text-[#E8EAF0] mb-1">
+                  <div className="font-mono text-[17px] font-medium text-text mb-1">
                     {lang.name}
                   </div>
-                  <div className="text-[12px] text-[#8E98AD] mb-5 min-h-8 leading-5">
+                  <div className="text-[12px] text-text-muted mb-5 min-h-8 leading-5">
                     {lang.desc}
                   </div>
 
@@ -62,7 +62,7 @@ export default function Languages({ languages }) {
                       style={{ transform: `scaleX(${lang.bar / 100})` }}
                     />
                   </div>
-                  <div className="mt-3 font-mono text-[10px] text-[#8E98AD]">{lang.bar}%</div>
+                  <div className="mt-3 font-mono text-[10px] text-text-muted">{lang.bar}%</div>
                 </div>
               )
             })}
