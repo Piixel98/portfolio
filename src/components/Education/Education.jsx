@@ -1,58 +1,137 @@
-import FadeIn from '../FadeIn'
+import { useEffect, useRef, useState } from 'react'
+import './Education.css'
+
+function DotGrid() {
+  return (
+    <svg className="edu-dotgrid" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="edu-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#edu-dots)" />
+    </svg>
+  )
+}
+
+function Corner({ pos = 'tl' }) {
+  const rotations = {
+    tl: 'translate(0,0)',
+    tr: 'rotate(90 12 12)',
+    br: 'rotate(180 12 12)',
+    bl: 'rotate(270 12 12)',
+  }
+
+  return (
+    <svg
+      className={`edu-corner edu-corner--${pos}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+    >
+      <g transform={rotations[pos]}>
+        <path d="M2 10 L2 2 L10 2" />
+      </g>
+    </svg>
+  )
+}
+
+function EduCard({ item, index, seen }) {
+  const year = item.dates?.match(/\d{4}/g)?.pop() ?? ''
+
+  return (
+    <article
+      className={['edu-card', seen ? 'edu-card--visible' : ''].filter(Boolean).join(' ')}
+      style={{ '--i': index }}
+    >
+      <span className="edu-card__year" aria-hidden="true">
+        {year}
+      </span>
+
+      <Corner pos="tl" />
+      <Corner pos="tr" />
+      <Corner pos="br" />
+      <Corner pos="bl" />
+
+      <div className="edu-card__glow" aria-hidden="true" />
+
+      <div className="edu-card__head">
+        <span className="edu-card__dates">{item.dates}</span>
+
+        <div className="edu-card__icon-wrap">
+          {item.icon?.startsWith('/') ? (
+            <img src={item.icon} alt="" loading="lazy" decoding="async" className="edu-card__img" />
+          ) : (
+            <span className="edu-card__icon-text">{item.icon}</span>
+          )}
+        </div>
+      </div>
+
+      <div className="edu-card__body">
+        <h3 className="edu-card__degree">{item.degree}</h3>
+        <p className="edu-card__institution">
+          <span className="edu-card__inst-line" aria-hidden="true" />
+          {item.institution}
+        </p>
+        <p className="edu-card__desc">{item.description}</p>
+      </div>
+
+      <footer className="edu-card__footer">
+        <div className="edu-card__divider" aria-hidden="true" />
+        <div className="edu-card__highlights">
+          {item.highlights.map((highlight, highlightIndex) => (
+            <span key={highlight} className="edu-highlight" style={{ '--hi': highlightIndex }}>
+              {highlight}
+            </span>
+          ))}
+        </div>
+      </footer>
+    </article>
+  )
+}
 
 export default function Education({ education }) {
+  const cardRefs = useRef([])
+  const [seenSet, setSeenSet] = useState(new Set())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.idx)
+            setSeenSet((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+    )
+
+    cardRefs.current.forEach((element) => element && observer.observe(element))
+    return () => observer.disconnect()
+  }, [education.items])
+
   return (
-    <section id="education" className="bg-bg-2 px-[5%] py-24">
-      <div className="section-shell">
-        <div className="section-heading">
+    <section id="education" className="edu-section">
+      <DotGrid />
+
+      <div className="edu-shell">
+        <header className="section-heading section-heading--centered edu-heading">
           <span className="tag">{education.tag}</span>
-          <h2 className="section-title mb-14">{education.title}</h2>
-        </div>
+          <h2 className="section-title">{education.title}</h2>
+        </header>
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
-          {education.items.map((item, i) => (
-            <FadeIn
-              as="article"
+        <div className="edu-grid">
+          {education.items.map((item, index) => (
+            <div
               key={`${item.degree}-${item.dates}`}
-              className="bg-bg-3 border border-white/[0.07] rounded-xl p-8 hover:border-blue-500/30 transition-all duration-200 group"
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              ref={(element) => (cardRefs.current[index] = element)}
+              data-idx={index}
             >
-              <div className="flex items-start justify-between mb-5">
-                <span className="font-mono text-[11px] text-emerald-400 tracking-[0.1em]">
-                  {item.dates}
-                </span>
-                <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md border border-blue-500/20 bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20">
-                  {item.icon.startsWith('/') ? (
-                    <img
-                      src={item.icon}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      className="h-[22px] w-[22px] object-contain"
-                    />
-                  ) : (
-                    <span className="font-mono text-[14px] font-bold">{item.icon}</span>
-                  )}
-                </div>
-              </div>
-
-              <h3 className="font-mono text-[16px] font-medium leading-snug mb-1.5 text-text">
-                {item.degree}
-              </h3>
-              <div className="font-mono text-[12px] text-text-muted mb-4">{item.institution}</div>
-              <p className="text-[13px] text-text-muted leading-[1.7] mb-5">{item.description}</p>
-
-              <div className="flex flex-wrap gap-1.5">
-                {item.highlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="font-mono text-[10px] bg-white/[0.04] border border-white/[0.07] text-text-muted px-2 py-1 rounded-sm"
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-            </FadeIn>
+              <EduCard item={item} index={index} seen={seenSet.has(index)} />
+            </div>
           ))}
         </div>
       </div>
