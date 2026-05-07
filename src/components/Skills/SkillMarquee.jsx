@@ -1,5 +1,30 @@
 import { useEffect, useRef } from 'react'
 
+const AUTO_SCROLL_SPEED = 36
+const INERTIA_DECAY_MS = 520
+const MIN_INERTIA_SPEED = 6
+
+function normalizeMotionOffset(motion) {
+  const { setWidth } = motion
+
+  if (setWidth <= 0) {
+    motion.offset = 0
+    return
+  }
+
+  motion.offset %= setWidth
+
+  if (motion.offset < 0) {
+    motion.offset += setWidth
+  }
+}
+
+function applyTrackTransform(track, offset) {
+  if (track) {
+    track.style.transform = `translate3d(${-offset}px, 0, 0)`
+  }
+}
+
 export default function SkillMarquee({ children, groupIndex, groupTitle, prefersReducedMotion }) {
   const containerRef = useRef(null)
   const trackRef = useRef(null)
@@ -7,6 +32,7 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     isDragging: false,
     startX: 0,
     pointerId: null,
+    lastMoveTs: 0,
   })
   const motionRef = useRef({
     offset: 0,
@@ -15,6 +41,7 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     rafId: 0,
     lastTs: 0,
     paused: false,
+    inertiaVelocity: 0,
   })
 
   useEffect(() => {
@@ -27,35 +54,17 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
     const motion = motionRef.current
     motion.direction = groupIndex % 2 === 0 ? 1 : -1
 
-    function normalizeOffset() {
-      const { setWidth } = motion
-
-      if (setWidth <= 0) {
-        motion.offset = 0
-        return
-      }
-
-      motion.offset %= setWidth
-
-      if (motion.offset < 0) {
-        motion.offset += setWidth
-      }
-    }
-
-    function applyTransform() {
-      track.style.transform = `translate3d(${-motion.offset}px, 0, 0)`
-    }
-
     function syncLoopMetrics() {
       motion.setWidth = prefersReducedMotion ? 0 : track.scrollWidth / 2
 
       if (prefersReducedMotion) {
         motion.offset = 0
+        motion.inertiaVelocity = 0
       } else {
-        normalizeOffset()
+        normalizeMotionOffset(motion)
       }
 
-      applyTransform()
+      applyTrackTransform(track, motion.offset)
     }
 
     syncLoopMetrics()
@@ -76,8 +85,6 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       }
     }
 
-    const speed = 36
-
     function step(timestamp) {
       if (!track.isConnected) {
         return
@@ -90,10 +97,23 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       const delta = timestamp - motion.lastTs
       motion.lastTs = timestamp
 
-      if (!motion.paused && !dragRef.current.isDragging && motion.setWidth > 0) {
-        motion.offset += (motion.direction * (speed * delta)) / 1000
-        normalizeOffset()
-        applyTransform()
+      if (!dragRef.current.isDragging && motion.setWidth > 0) {
+        if (Math.abs(motion.inertiaVelocity) > 0) {
+          motion.offset += (motion.inertiaVelocity * delta) / 1000
+          motion.inertiaVelocity *= Math.exp(-delta / INERTIA_DECAY_MS)
+
+          if (Math.abs(motion.inertiaVelocity) < MIN_INERTIA_SPEED) {
+            motion.inertiaVelocity = 0
+            motion.paused = false
+          }
+
+          normalizeMotionOffset(motion)
+          applyTrackTransform(track, motion.offset)
+        } else if (!motion.paused) {
+          motion.offset += (motion.direction * (AUTO_SCROLL_SPEED * delta)) / 1000
+          normalizeMotionOffset(motion)
+          applyTrackTransform(track, motion.offset)
+        }
       }
 
       motion.rafId = window.requestAnimationFrame(step)
@@ -124,8 +144,10 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       isDragging: true,
       startX: event.clientX,
       pointerId: event.pointerId,
+      lastMoveTs: event.timeStamp,
     }
 
+    motionRef.current.inertiaVelocity = 0
     container.classList.add('skill-marquee--dragging')
     container.setPointerCapture(event.pointerId)
     setPaused(true)
@@ -140,21 +162,17 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
 
     const motion = motionRef.current
     const deltaX = event.clientX - dragState.startX
+    const deltaTs = Math.max(1, event.timeStamp - dragState.lastMoveTs)
 
     event.preventDefault()
     dragRef.current.startX = event.clientX
+    dragRef.current.lastMoveTs = event.timeStamp
 
     if (motion.setWidth > 0) {
       motion.offset -= deltaX
-      motion.offset %= motion.setWidth
-
-      if (motion.offset < 0) {
-        motion.offset += motion.setWidth
-      }
-
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translate3d(${-motion.offset}px, 0, 0)`
-      }
+      motion.inertiaVelocity = (-deltaX / deltaTs) * 1000
+      normalizeMotionOffset(motion)
+      applyTrackTransform(trackRef.current, motion.offset)
     }
   }
 
@@ -169,10 +187,15 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
       isDragging: false,
       startX: 0,
       pointerId: null,
+      lastMoveTs: 0,
     }
 
     container.classList.remove('skill-marquee--dragging')
-    setPaused(false)
+
+    if (Math.abs(motionRef.current.inertiaVelocity) < MIN_INERTIA_SPEED) {
+      motionRef.current.inertiaVelocity = 0
+      setPaused(false)
+    }
 
     if (container.hasPointerCapture(event.pointerId)) {
       container.releasePointerCapture(event.pointerId)
@@ -195,18 +218,17 @@ export default function SkillMarquee({ children, groupIndex, groupTitle, prefers
 
     if (event.key === 'Home') {
       motion.offset = 0
+      motion.inertiaVelocity = 0
     } else if (event.key === 'End') {
       motion.offset = motion.setWidth - 1
+      motion.inertiaVelocity = 0
     } else {
       motion.offset += event.key === 'ArrowRight' ? 48 : -48
-      motion.offset %= motion.setWidth
-
-      if (motion.offset < 0) {
-        motion.offset += motion.setWidth
-      }
+      motion.inertiaVelocity = 0
+      normalizeMotionOffset(motion)
     }
 
-    trackRef.current.style.transform = `translate3d(${-motion.offset}px, 0, 0)`
+    applyTrackTransform(trackRef.current, motion.offset)
   }
 
   // The marquee is intentionally focusable so keyboard users can pan hidden items.
