@@ -233,7 +233,6 @@
   "projects": {
     "tag": "// selected work",
     "title": "What I've built",
-    "intro": "End-to-end ownership across backend systems, data pipelines and integrations in production environments.",
     "items": [
       {
         "num": "01",
@@ -336,7 +335,6 @@
   "skillsSection": {
     "tag": "// technical skills",
     "title": "Core stack constellation",
-    "intro": "A compact map of the tools I use to design, build, ship and operate backend platforms, integrations and cloud-native systems.",
     "metrics": [
       { "value": "50", "label": "Core tools" },
       { "value": "9", "label": "Domains" },

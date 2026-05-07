@@ -1,6 +1,12 @@
 import FadeIn from '../FadeIn'
 
 export default function ProjectCard({ project, index, onOpen }) {
+  function handlePointerMove(event) {
+    const rect = event.currentTarget.getBoundingClientRect()
+    event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - rect.left}px`)
+    event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`)
+  }
+
   return (
     <FadeIn
       as="button"
@@ -9,8 +15,11 @@ export default function ProjectCard({ project, index, onOpen }) {
       aria-label={`Open project details for ${project.title}`}
       style={{ transitionDelay: `${index * 0.12}s` }}
       onClick={() => onOpen(project.num)}
+      onPointerMove={handlePointerMove}
     >
       <div className="project-card__glow" aria-hidden="true" />
+      <div className="project-card__spotlight" aria-hidden="true" />
+      <div className="project-card__scan" aria-hidden="true" />
       <div className="project-card__number" aria-hidden="true">
         {project.num}
       </div>
@@ -22,6 +31,12 @@ export default function ProjectCard({ project, index, onOpen }) {
       </div>
 
       <div className="project-card__content">
+        <div className="project-card__topline" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+
         <div className="project-card__header">
           <span className="project-card__context">{project.context}</span>
           <h3 className="project-card__title">{project.title}</h3>
@@ -39,6 +54,12 @@ export default function ProjectCard({ project, index, onOpen }) {
               </span>
             ))}
           </div>
+        </div>
+
+        <div className="project-card__stackPreview" aria-label="Project stack">
+          {project.stack.slice(0, 5).map((technology) => (
+            <span key={technology}>{technology}</span>
+          ))}
         </div>
 
         <div className="project-card__footer">

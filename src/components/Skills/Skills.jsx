@@ -16,12 +16,9 @@ export default function Skills({ skills }) {
   )
 
   return (
-    <section
-      id="skills"
-      className="relative overflow-hidden border-y border-white/[0.07] px-[5%] py-24"
-    >
+    <section id="skills" className="section-backdrop px-[5%] py-24">
       <div
-        className="absolute inset-0 opacity-70"
+        className="section-backdrop__ambient absolute inset-0 opacity-70"
         aria-hidden="true"
         style={{
           backgroundImage:
@@ -32,14 +29,11 @@ export default function Skills({ skills }) {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="mb-12 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end">
-          <div>
-            <span className="tag">{skills.tag}</span>
-            <h2 className="section-title mb-4">{skills.title}</h2>
-            <p className="max-w-2xl text-[15px] leading-7 text-text-muted">{skills.intro}</p>
-          </div>
+        <header className="section-heading section-heading--centered">
+          <span className="tag">{skills.tag}</span>
+          <h2 className="section-title">{skills.title}</h2>
 
-          <div className="grid grid-cols-3 overflow-hidden rounded-lg border border-white/[0.07] bg-bg-2/80">
+          <div className="mx-auto mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-lg border border-white/[0.07] bg-bg-2/80">
             {skills.metrics.map((metric) => (
               <div key={metric.label} className="border-r border-white/[0.07] p-5 last:border-r-0">
                 <span className="block font-mono text-[26px] text-text">{metric.value}</span>
@@ -49,7 +43,7 @@ export default function Skills({ skills }) {
               </div>
             ))}
           </div>
-        </div>
+        </header>
 
         <div className="space-y-5">
           {marqueeItems.map((group, groupIndex) => {

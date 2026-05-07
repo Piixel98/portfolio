@@ -39,7 +39,7 @@ export default function App() {
 
       <Navbar nav={portfolio.nav} profile={portfolio.profile} />
 
-      <main id="main-content" tabIndex="-1">
+      <main id="main-content" className="site-main" tabIndex="-1">
         <Hero hero={portfolio.hero} profile={portfolio.profile} />
         <About about={portfolio.about} />
         <Experience experience={portfolio.experience} />

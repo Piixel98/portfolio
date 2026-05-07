@@ -1,6 +1,6 @@
 const LEVEL_COLOR = {
   Advanced: 'text-blue-400 border-blue-500/30',
-  Basic: 'text-amber-300 border-amber-400/30',
+  Basic: 'text-blue-300 border-blue-400/25',
   Native: 'text-emerald-400 border-emerald-500/30',
 }
 
@@ -13,17 +13,15 @@ const FLAGS = {
 
 export default function Languages({ languages }) {
   return (
-    <section id="languages" className="px-[5%] py-24">
+    <section id="languages" className="section-backdrop px-[5%] py-24">
       <div className="section-shell">
-        <div className="section-heading">
+        <header className="section-heading section-heading--centered">
           <span className="tag">{languages.tag}</span>
-          <h2 className="section-title mb-14">{languages.title}</h2>
-        </div>
+          <h2 className="section-title">{languages.title}</h2>
+        </header>
 
         <div className="languages-shell">
-          {/* Required so Safari keyboard users can focus and scroll the horizontal language list. */}
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-          <div className="languages-row" role="region" tabIndex="0" aria-label="Languages list">
+          <div className="languages-row" aria-label="Languages list">
             {languages.items.map((lang) => {
               const flag = FLAGS[lang.flag]
 

@@ -218,17 +218,18 @@ export default function Contact({ contact }) {
   }
 
   return (
-    <section id="contact" className="px-[5%] py-24">
+    <section id="contact" className="section-backdrop px-[5%] py-24">
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
-          <span className="tag">{contact.tag}</span>
-
-          <h2 className="font-mono text-[clamp(28px,5vw,52px)] font-medium tracking-tight mb-4">
-            {contact.title[0]}
-            <br />
-            <span className="text-blue-400">{contact.title[1]}</span>
-          </h2>
-          <p className="text-text-muted max-w-md mb-10 text-[15px] leading-7">{contact.intro}</p>
+          <header className="section-heading section-heading--centered">
+            <span className="tag">{contact.tag}</span>
+            <h2 className="section-title mb-4">
+              {contact.title[0]}
+              <br />
+              <span className="text-blue-400">{contact.title[1]}</span>
+            </h2>
+            <p className="section-heading__copy mx-auto">{contact.intro}</p>
+          </header>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {contact.items.map((item) => {

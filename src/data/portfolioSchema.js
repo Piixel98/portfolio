@@ -115,7 +115,6 @@ const portfolioSchema = z.object({
   projects: z.object({
     tag: nonEmptyString,
     title: nonEmptyString,
-    intro: nonEmptyString,
     items: z.array(
       z.object({
         num: nonEmptyString,
@@ -131,7 +130,6 @@ const portfolioSchema = z.object({
   skillsSection: z.object({
     tag: nonEmptyString,
     title: nonEmptyString,
-    intro: nonEmptyString,
     metrics: z.array(
       z.object({
         value: nonEmptyString,

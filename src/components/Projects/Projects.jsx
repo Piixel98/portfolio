@@ -13,13 +13,12 @@ export default function Projects({ projects, skills }) {
 
   return (
     <>
-      <section id="projects" className="bg-bg-2 px-[5%] py-24">
+      <section id="projects" className="section-backdrop px-[5%] py-24">
         <div className="mx-auto max-w-7xl">
-          <span className="tag">{projects.tag}</span>
-          <div className="mb-14">
-            <h2 className="section-title mb-3">{projects.title}</h2>
-            <p className="max-w-2xl text-[15px] leading-7 text-text-muted">{projects.intro}</p>
-          </div>
+          <header className="section-heading section-heading--centered">
+            <span className="tag">{projects.tag}</span>
+            <h2 className="section-title">{projects.title}</h2>
+          </header>
 
           <div className="grid gap-5 xl:grid-cols-3">
             {projects.items.map((project, index) => (
