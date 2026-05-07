@@ -28,6 +28,20 @@ test('renders the portfolio and navigates to key sections', async ({ page, isMob
   await expect(page.getByRole('button', { name: /send message/i })).toBeVisible()
 })
 
+test('hero contact button lands at the start of contact on first load', async ({ page }) => {
+  await page.goto('/')
+
+  await page.getByRole('link', { name: 'Contact Me' }).click()
+  await expect(page.locator('#contact')).toBeInViewport()
+  await expect(page.getByLabel(/full name/i)).toBeVisible()
+
+  await expect
+    .poll(() =>
+      page.locator('#contact').evaluate((element) => Math.round(element.getBoundingClientRect().top)),
+    )
+    .toBeLessThanOrEqual(80)
+})
+
 test('opens and closes the mobile navigation', async ({ page, isMobile }) => {
   test.skip(!isMobile, 'Mobile navigation is only visible in the mobile project')
 
