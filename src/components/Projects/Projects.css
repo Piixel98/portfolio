@@ -183,7 +183,12 @@
   position: absolute;
   left: 0;
   color: var(--color-accent-soft);
-  content: '�';
+  content: '';
+  top: 0.75em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: currentColor;
 }
 
 .project-card__stack {
