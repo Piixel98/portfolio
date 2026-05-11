@@ -11,7 +11,7 @@ export default function ProjectCard({ project, index, onOpen }) {
     <FadeIn
       as="button"
       type="button"
-      className="project-card project-card--interactive text-left"
+      className="project-card project-card--interactive"
       aria-label={`Open project details for ${project.title}`}
       style={{ transitionDelay: `${index * 0.12}s` }}
       onClick={() => onOpen(project.num)}
@@ -24,10 +24,7 @@ export default function ProjectCard({ project, index, onOpen }) {
         {project.num}
       </div>
       <div className="project-card__arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M7 17 17 7" />
-          <path d="M9 7h8v8" />
-        </svg>
+        <img src="/icons/arrow-up-right.svg" alt="" loading="lazy" />
       </div>
 
       <div className="project-card__content">

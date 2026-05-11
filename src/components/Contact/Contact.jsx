@@ -219,20 +219,20 @@ export default function Contact({ contact }) {
   }
 
   return (
-    <section id="contact" className="section-backdrop px-[5%] py-24">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <section id="contact" className="contact-section section-backdrop">
+      <div className="contact-layout">
         <div>
           <header className="section-heading section-heading--centered">
             <span className="tag">{contact.tag}</span>
-            <h2 className="section-title mb-4">
+            <h2 className="section-title contact-title">
               {contact.title[0]}
               <br />
-              <span className="text-blue-400">{contact.title[1]}</span>
+              <span className="contact-title__accent">{contact.title[1]}</span>
             </h2>
-            <p className="section-heading__copy mx-auto">{contact.intro}</p>
+            <p className="section-heading__copy contact-intro">{contact.intro}</p>
           </header>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="contact-items">
             {contact.items.map((item) => {
               const linkProps = item.href ? getLinkSecurityProps(item.href) : {}
 
@@ -241,21 +241,15 @@ export default function Contact({ contact }) {
                   key={item.label}
                   href={item.href}
                   {...linkProps}
-                  className="contact-item text-left no-underline focus-visible"
+                  className="contact-item focus-visible"
                 >
-                  <span className="font-mono text-[10px] text-blue-400 tracking-[0.1em] block mb-1.5">
-                    {item.label}
-                  </span>
-                  <div className="font-mono text-[12px] text-text-muted break-all">
-                    {item.value}
-                  </div>
+                  <span className="contact-item__label">{item.label}</span>
+                  <div className="contact-item__value contact-item__value--break">{item.value}</div>
                 </a>
               ) : (
-                <div key={item.label} className="contact-item text-left">
-                  <span className="font-mono text-[10px] text-blue-400 tracking-[0.1em] block mb-1.5">
-                    {item.label}
-                  </span>
-                  <div className="font-mono text-[12px] text-text-muted">{item.value}</div>
+                <div key={item.label} className="contact-item">
+                  <span className="contact-item__label">{item.label}</span>
+                  <div className="contact-item__value">{item.value}</div>
                 </div>
               )
             })}
@@ -264,17 +258,15 @@ export default function Contact({ contact }) {
 
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="contact-form__header">
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-emerald-400">
-              Contact form
-            </span>
+            <span className="contact-form__eyebrow">Contact form</span>
           </div>
 
-          <div className="hidden" aria-hidden="true">
+          <div className="contact-honeypot" aria-hidden="true">
             <label htmlFor={`${formId}-company`}>Company</label>
             <input id={`${formId}-company`} name="company" tabIndex="-1" autoComplete="off" />
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="contact-grid">
             <label className="contact-field" htmlFor={fullNameId}>
               <span>{contact.form.fullName}</span>
               <input id={fullNameId} name="fullName" type="text" autoComplete="name" required />
@@ -285,7 +277,7 @@ export default function Contact({ contact }) {
               <input id={emailId} name="email" type="email" autoComplete="email" required />
             </label>
 
-            <label className="contact-field sm:col-span-2" htmlFor={phoneId}>
+            <label className="contact-field contact-field--wide" htmlFor={phoneId}>
               <span>{contact.form.phone}</span>
               <input
                 id={phoneId}
@@ -296,20 +288,18 @@ export default function Contact({ contact }) {
               />
             </label>
 
-            <label className="contact-field sm:col-span-2" htmlFor={messageId}>
+            <label className="contact-field contact-field--wide" htmlFor={messageId}>
               <span>{contact.form.message}</span>
               <textarea id={messageId} name="message" rows="6" required />
             </label>
 
-            <label className="contact-upload sm:col-span-2" htmlFor={attachmentId}>
+            <label className="contact-upload contact-field--wide" htmlFor={attachmentId}>
               <span className="contact-upload__icon" aria-hidden="true">
                 PDF
               </span>
-              <span className="min-w-0">
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-blue-400">
-                  {contact.form.attachment}
-                </span>
-                <span className="mt-2 block truncate text-[13px] text-text-muted">
+              <span className="contact-upload__body">
+                <span className="contact-upload__label">{contact.form.attachment}</span>
+                <span className="contact-upload__hint">
                   {attachmentName || contact.form.attachmentHint}
                 </span>
               </span>
@@ -329,14 +319,14 @@ export default function Contact({ contact }) {
             />
           </div>
 
-          <div className="mt-6 flex flex-col items-center gap-4">
+          <div className="contact-actions">
             <p
-              className={`min-h-5 text-center font-mono text-[11px] ${
+              className={`contact-feedback ${
                 status === 'success'
-                  ? 'text-emerald-400'
+                  ? 'contact-feedback--success'
                   : status === 'error'
-                    ? 'text-red-300'
-                    : 'text-text-muted'
+                    ? 'contact-feedback--error'
+                    : ''
               }`}
               aria-live="polite"
             >
@@ -346,8 +336,12 @@ export default function Contact({ contact }) {
             <button
               type="submit"
               disabled={status === 'pending'}
-              className={`btn-primary contact-submit justify-center disabled:cursor-not-allowed disabled:opacity-80 ${
-                status === 'success' ? '!bg-emerald-500' : status === 'error' ? '!bg-red-500' : ''
+              className={`btn-primary contact-submit ${
+                status === 'success'
+                  ? 'contact-submit--success'
+                  : status === 'error'
+                    ? 'contact-submit--error'
+                    : ''
               }`}
             >
               {status === 'pending' && (

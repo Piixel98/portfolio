@@ -76,7 +76,7 @@ export default function TurnstileField({ onTokenChange, resetSignal, siteKey }) 
   if (!siteKey) return null
 
   return (
-    <div className="contact-turnstile sm:col-span-2">
+    <div className="contact-turnstile">
       <div ref={containerRef} aria-describedby={statusId} />
       <p id={statusId} className="sr-only" aria-live="polite">
         {status === 'verified'

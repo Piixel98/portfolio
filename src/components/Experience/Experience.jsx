@@ -2,55 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import './Experience.css'
 
 function WorkIcon({ current = false, systems = false }) {
-  if (current) {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        aria-hidden="true"
-      >
-        <path d="M12 3v4" />
-        <path d="M12 17v4" />
-        <path d="M3 12h4" />
-        <path d="M17 12h4" />
-        <path d="m5.6 5.6 2.8 2.8" />
-        <path d="m15.6 15.6 2.8 2.8" />
-        <path d="m15.6 8.4 2.8-2.8" />
-        <path d="m5.6 18.4 2.8-2.8" />
-        <circle cx="12" cy="12" r="3.25" />
-      </svg>
-    )
-  }
+  const icon = current
+    ? '/icons/work-current.svg'
+    : systems
+      ? '/icons/work-systems.svg'
+      : '/icons/work-default.svg'
 
-  if (systems) {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        aria-hidden="true"
-      >
-        <rect x="4" y="5" width="16" height="6" rx="1.5" />
-        <rect x="4" y="13" width="16" height="6" rx="1.5" />
-        <path d="M8 8h.01" />
-        <path d="M8 16h.01" />
-        <path d="M12 8h4" />
-        <path d="M12 16h4" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path d="M9 6V4.75A1.75 1.75 0 0 1 10.75 3h2.5A1.75 1.75 0 0 1 15 4.75V6" />
-      <rect x="3" y="6" width="18" height="13" rx="2" />
-      <path d="M3 11.5h18" />
-      <path d="M10 11.5v1.5h4v-1.5" />
-    </svg>
-  )
+  return <img src={icon} alt="" aria-hidden="true" loading="lazy" decoding="async" />
 }
 
 function ExperienceEntry({ job, index, isActive, isSeen }) {

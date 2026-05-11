@@ -2,39 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import './Education.css'
 
 function DotGrid() {
-  return (
-    <svg className="edu-dotgrid" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="edu-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="1" cy="1" r="1" fill="currentColor" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#edu-dots)" />
-    </svg>
-  )
+  return <div className="edu-dotgrid" aria-hidden="true" />
 }
 
 function Corner({ pos = 'tl' }) {
-  const rotations = {
-    tl: 'translate(0,0)',
-    tr: 'rotate(90 12 12)',
-    br: 'rotate(180 12 12)',
-    bl: 'rotate(270 12 12)',
-  }
-
   return (
-    <svg
+    <img
+      src="/icons/education-corner.svg"
+      alt=""
       className={`edu-corner edu-corner--${pos}`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
       aria-hidden="true"
-    >
-      <g transform={rotations[pos]}>
-        <path d="M2 10 L2 2 L10 2" />
-      </g>
-    </svg>
+      loading="lazy"
+      decoding="async"
+    />
   )
 }
 

@@ -24,14 +24,14 @@ export default function Projects({ projects, skills }) {
 
   return (
     <>
-      <section id="projects" className="section-backdrop px-[5%] py-24">
-        <div className="mx-auto max-w-7xl">
+      <section id="projects" className="projects-section section-backdrop">
+        <div className="projects-shell">
           <header className="section-heading section-heading--centered">
             <span className="tag">{projects.tag}</span>
             <h2 className="section-title">{projects.title}</h2>
           </header>
 
-          <div className="grid gap-5 xl:grid-cols-3">
+          <div className="projects-grid">
             {projects.items.map((project, index) => (
               <ProjectCard
                 key={project.num}

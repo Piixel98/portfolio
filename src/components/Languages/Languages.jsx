@@ -1,8 +1,8 @@
 import './Languages.css'
 const LEVEL_COLOR = {
-  Advanced: 'text-blue-400 border-blue-500/30',
-  Basic: 'text-blue-300 border-blue-400/25',
-  Native: 'text-emerald-400 border-emerald-500/30',
+  Advanced: 'language-level--advanced',
+  Basic: 'language-level--basic',
+  Native: 'language-level--native',
 }
 
 const FLAGS = {
@@ -14,7 +14,7 @@ const FLAGS = {
 
 export default function Languages({ languages }) {
   return (
-    <section id="languages" className="section-backdrop px-[5%] py-24">
+    <section id="languages" className="languages-section section-backdrop">
       <div className="section-shell">
         <header className="section-heading section-heading--centered">
           <span className="tag">{languages.tag}</span>
@@ -28,7 +28,7 @@ export default function Languages({ languages }) {
 
               return (
                 <div key={lang.name} className="language-card">
-                  <div className="flex items-start justify-between gap-4 mb-5">
+                  <div className="language-card__head">
                     <div className="language-flag">
                       <img
                         src={flag?.src}
@@ -37,23 +37,19 @@ export default function Languages({ languages }) {
                         height="48"
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover"
+                        className="language-flag__img"
                       />
                     </div>
 
                     <div
-                      className={`font-mono text-[10px] tracking-wide border inline-block px-2.5 py-1 rounded-sm ${LEVEL_COLOR[lang.level] || LEVEL_COLOR.Advanced}`}
+                      className={`language-level ${LEVEL_COLOR[lang.level] || LEVEL_COLOR.Advanced}`}
                     >
                       {lang.level}
                     </div>
                   </div>
 
-                  <div className="font-mono text-[17px] font-medium text-text mb-1">
-                    {lang.name}
-                  </div>
-                  <div className="text-[12px] text-text-muted mb-5 min-h-8 leading-5">
-                    {lang.desc}
-                  </div>
+                  <div className="language-name">{lang.name}</div>
+                  <div className="language-desc">{lang.desc}</div>
 
                   <div className="language-progress" aria-hidden="true">
                     <div
@@ -61,7 +57,7 @@ export default function Languages({ languages }) {
                       style={{ transform: `scaleX(${lang.bar / 100})` }}
                     />
                   </div>
-                  <div className="mt-3 font-mono text-[10px] text-text-muted">{lang.bar}%</div>
+                  <div className="language-percent">{lang.bar}%</div>
                 </div>
               )
             })}

@@ -65,15 +65,10 @@ export default function Hero({ hero, profile }) {
   }, [charIdx, deleting, phrase.length, phrases.length, prefersReducedMotion])
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 px-[5%] overflow-hidden"
-    >
+    <section id="hero" className="hero-section">
       <div className="grid-bg" />
 
-      <pre className="absolute bottom-0 right-0 w-[52%] opacity-[0.04] font-mono text-[13px] leading-loose text-blue-400 pointer-events-none p-10 whitespace-pre hidden lg:block">
-        {hero.codeBackground}
-      </pre>
+      <pre className="hero-code-bg">{hero.codeBackground}</pre>
 
       <div className="hero-character" aria-hidden="true">
         <div className="hero-character__glow" />
@@ -92,19 +87,19 @@ export default function Hero({ hero, profile }) {
         />
       </div>
 
-      <div className="max-w-3xl lg:max-w-[58rem] xl:max-w-3xl relative z-10">
-        <div className="flex items-center gap-2.5 font-mono text-[12px] text-emerald-400 tracking-[0.15em] mb-6">
-          <span className="w-6 h-px bg-emerald-400 inline-block" />
+      <div className="hero-content">
+        <div className="hero-label">
+          <span />
           {hero.label}
         </div>
 
-        <h1 className="font-mono font-bold text-[clamp(44px,7vw,80px)] leading-[1.03] tracking-[-3px] mb-4">
+        <h1 className="hero-title">
           {profile.name}
           <br />
-          <span className="text-blue-400">{profile.surname}</span>
+          <span>{profile.surname}</span>
         </h1>
 
-        <div className="font-mono text-[clamp(15px,2vw,20px)] text-text-muted font-light mb-8 min-h-[30px]">
+        <div className="hero-typewriter">
           <span className="typewriter-line" style={{ '--typewriter-chars': displayedText.length }}>
             <span className="sr-only">{prefersReducedMotion ? phrases[0] : phrase}</span>
             <span className="typewriter-line__sizer" aria-hidden="true">
@@ -116,32 +111,15 @@ export default function Hero({ hero, profile }) {
           </span>
         </div>
 
-        <p className="max-w-[540px] text-text-muted text-[16px] leading-[1.75] mb-11">
-          {hero.description}
-        </p>
+        <p className="hero-description">{hero.description}</p>
 
-        <div className="flex gap-4 flex-wrap mb-12">
+        <div className="hero-actions">
           <a href={hero.primaryCta.href} className="btn-primary">
-            <span aria-hidden="true" className="font-mono">
-              &lt;/&gt;
-            </span>
+            <span aria-hidden="true">&lt;/&gt;</span>
             {hero.primaryCta.label}
           </a>
           <a href={hero.secondaryCta.href} className="btn-secondary">
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-[15px] w-[15px]"
-              focusable="false"
-            >
-              <rect x="4" y="6" width="16" height="12" rx="2" />
-              <path d="m5 8 7 5 7-5" />
-            </svg>
+            <img src="/icons/mail.svg" alt="" aria-hidden="true" loading="lazy" />
             {hero.secondaryCta.label}
           </a>
         </div>
