@@ -13,10 +13,7 @@ export default function Projects({ projects, skills }) {
   const projectTechnologiesByNum = useMemo(
     () =>
       new Map(
-        projects.items.map((project) => [
-          project.num,
-          resolveProjectTechnologies(project, skills),
-        ]),
+        projects.items.map((project) => [project.num, resolveProjectTechnologies(project, skills)]),
       ),
     [projects.items, skills],
   )

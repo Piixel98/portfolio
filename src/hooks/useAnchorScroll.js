@@ -40,13 +40,16 @@ export function scrollToHash(hash) {
       behavior,
     })
 
-    window.setTimeout(() => {
-      const correctedTop = getScrollTopForTarget(target)
+    window.setTimeout(
+      () => {
+        const correctedTop = getScrollTopForTarget(target)
 
-      if (Math.abs(window.scrollY - correctedTop) > 2) {
-        window.scrollTo({ top: correctedTop, behavior: 'auto' })
-      }
-    }, prefersReducedMotion ? 0 : 520)
+        if (Math.abs(window.scrollY - correctedTop) > 2) {
+          window.scrollTo({ top: correctedTop, behavior: 'auto' })
+        }
+      },
+      prefersReducedMotion ? 0 : 520,
+    )
   })
 
   return true

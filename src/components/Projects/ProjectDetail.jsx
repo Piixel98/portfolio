@@ -232,15 +232,13 @@ const PixelGlobe = memo(function PixelGlobe({ projectNum, stack }) {
   )
 })
 
-function useDeferredModalContent() {
+function useDeferredModalContent(resetKey) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    setReady(false)
-
     const timeoutId = window.setTimeout(() => setReady(true), 350)
     return () => window.clearTimeout(timeoutId)
-  }, [])
+  }, [resetKey])
 
   return ready
 }
@@ -258,7 +256,7 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
   const descriptionId = useId()
   const closeButtonRef = useRef(null)
   const panelRef = useRef(null)
-  const deferredContentReady = useDeferredModalContent()
+  const deferredContentReady = useDeferredModalContent(project.num)
 
   useEffect(() => {
     const handleKeyDown = (event) => {

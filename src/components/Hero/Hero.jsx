@@ -154,9 +154,7 @@ export default function Hero({ hero, profile }) {
               {badge}
             </span>
           ))}
-          <span className="hero-badge hero-badge--availability">
-            * {hero.availability}
-          </span>
+          <span className="hero-badge hero-badge--availability">* {hero.availability}</span>
         </div>
       </div>
     </section>

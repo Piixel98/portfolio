@@ -37,7 +37,9 @@ test('hero contact button lands at the start of contact on first load', async ({
 
   await expect
     .poll(() =>
-      page.locator('#contact').evaluate((element) => Math.round(element.getBoundingClientRect().top)),
+      page
+        .locator('#contact')
+        .evaluate((element) => Math.round(element.getBoundingClientRect().top)),
     )
     .toBeLessThanOrEqual(80)
 })
