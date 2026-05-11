@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef } from 'react'
-import FadeIn from '../FadeIn'
+import FadeIn from '../shared/FadeIn'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 import './About.css'
 

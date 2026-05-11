@@ -1,4 +1,4 @@
-import FadeIn from '../FadeIn'
+import FadeIn from '../shared/FadeIn'
 
 export default function ProjectCard({ project, index, onOpen }) {
   function handlePointerMove(event) {

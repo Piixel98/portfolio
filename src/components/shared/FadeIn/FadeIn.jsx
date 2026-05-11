@@ -1,5 +1,5 @@
 import { createElement } from 'react'
-import useFadeInElement from '../hooks/useFadeInElement'
+import useFadeInElement from '../../../hooks/useFadeInElement'
 import './FadeIn.css'
 
 export default function FadeIn({ as = 'div', className = '', ...props }) {
