@@ -1,5 +1,5 @@
 import { memo, useEffect, useId, useMemo, useRef, useState } from 'react'
-import SkillLogo from '../SkillLogo'
+import SkillLogo from '../shared/SkillLogo'
 
 const FOCUSABLE_SELECTOR = [
   'a[href]',

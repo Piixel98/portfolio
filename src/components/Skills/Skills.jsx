@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import FadeIn from '../FadeIn'
-import SkillLogo from '../SkillLogo'
+import SkillLogo from '../shared/SkillLogo'
 import SkillMarquee from './SkillMarquee'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 

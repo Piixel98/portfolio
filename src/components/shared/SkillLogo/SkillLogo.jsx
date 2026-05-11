@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './SkillLogo.css'
 
 function getInitials(name) {
   return name
