@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react'
 import FadeIn from '../FadeIn'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+import './About.css'
 
 function numberReducer(state, action) {
   switch (action.type) {

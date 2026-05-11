@@ -1,0 +1,38 @@
+@layer components {
+  .js-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+
+  .js-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .js-fade:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .js-fade:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .js-fade:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+
+  .js-fade:nth-child(5) {
+    transition-delay: 0.4s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-fade {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}

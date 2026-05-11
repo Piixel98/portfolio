@@ -3,6 +3,7 @@ import FadeIn from '../FadeIn'
 import SkillLogo from '../shared/SkillLogo'
 import SkillMarquee from './SkillMarquee'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+import './Skills.css'
 
 export default function Skills({ skills }) {
   const prefersReducedMotion = usePrefersReducedMotion()

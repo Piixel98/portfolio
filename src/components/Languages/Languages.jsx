@@ -1,3 +1,4 @@
+import './Languages.css'
 const LEVEL_COLOR = {
   Advanced: 'text-blue-400 border-blue-500/30',
   Basic: 'text-blue-300 border-blue-400/25',

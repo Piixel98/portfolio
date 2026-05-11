@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef } from 'react'
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+import './Hero.css'
 
 const initialTypeState = {
   phraseIdx: 0,
@@ -104,11 +105,8 @@ export default function Hero({ hero, profile }) {
         </h1>
 
         <div className="font-mono text-[clamp(15px,2vw,20px)] text-text-muted font-light mb-8 min-h-[30px]">
-          <span
-            className="typewriter-line"
-            aria-label={prefersReducedMotion ? phrases[0] : phrase}
-            style={{ '--typewriter-chars': displayedText.length }}
-          >
+          <span className="typewriter-line" style={{ '--typewriter-chars': displayedText.length }}>
+            <span className="sr-only">{prefersReducedMotion ? phrases[0] : phrase}</span>
             <span className="typewriter-line__sizer" aria-hidden="true">
               {longestPhrase}
             </span>

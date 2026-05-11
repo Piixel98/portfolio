@@ -1,6 +1,7 @@
 import { useCallback, useId, useReducer } from 'react'
 import TurnstileField from './TurnstileField'
 import { getLinkSecurityProps } from '../../utils/links'
+import './Contact.css'
 
 const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024
 const MAX_ATTACHMENT_MB = MAX_ATTACHMENT_BYTES / 1024 / 1024

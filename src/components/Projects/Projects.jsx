@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectDetail from './ProjectDetail'
 import { resolveProjectTechnologies } from './projectTech'
+import './Projects.css'
 
 export default function Projects({ projects, skills }) {
   const [activeProject, setActiveProject] = useState(null)
