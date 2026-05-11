@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useId, useMemo, useRef, useState } from 'react'
 import SkillLogo from '../SkillLogo'
 
 const FOCUSABLE_SELECTOR = [
@@ -59,7 +59,7 @@ function projectSpherePoint(point, rotation) {
   }
 }
 
-function PixelGlobe({ projectNum, stack }) {
+const PixelGlobe = memo(function PixelGlobe({ projectNum, stack }) {
   const [rotation, setRotation] = useState({ x: -8, y: 18 })
   const dragRef = useRef(null)
   const nodes = useMemo(
@@ -230,6 +230,27 @@ function PixelGlobe({ projectNum, stack }) {
       </svg>
     </button>
   )
+})
+
+function useDeferredModalContent() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setReady(false)
+
+    const timeoutId = window.setTimeout(() => setReady(true), 350)
+    return () => window.clearTimeout(timeoutId)
+  }, [])
+
+  return ready
+}
+
+function PixelGlobePlaceholder() {
+  return (
+    <div className="project-modal__globe project-modal__globe--placeholder" aria-hidden="true">
+      <div className="project-modal__globe-loader" />
+    </div>
+  )
 }
 
 export default function ProjectDetail({ project, projectTechnologies, onClose }) {
@@ -237,6 +258,7 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
   const descriptionId = useId()
   const closeButtonRef = useRef(null)
   const panelRef = useRef(null)
+  const deferredContentReady = useDeferredModalContent()
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -332,7 +354,11 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
             </div>
           </div>
 
-          <PixelGlobe projectNum={project.num} stack={project.stack} />
+          {deferredContentReady ? (
+            <PixelGlobe projectNum={project.num} stack={project.stack} />
+          ) : (
+            <PixelGlobePlaceholder />
+          )}
         </div>
 
         <div className="project-modal__grid">
@@ -365,24 +391,31 @@ export default function ProjectDetail({ project, projectTechnologies, onClose })
                   </div>
                   <span className="project-modal__count">{projectTechnologies.length} matched</span>
                 </div>
-                <div className="project-modal__related">
-                  {projectTechnologies.map((item) => (
-                    <div key={item.name} className="project-modal__related-card">
-                      <SkillLogo
-                        className="project-modal__related-logo"
-                        logo={item.logo}
-                        name={item.name}
-                        style={{ '--skill-color': item.color }}
-                      />
-                      <div>
-                        <div className="project-modal__related-name">{item.name}</div>
-                        <div className="project-modal__related-meta">
-                          {item.category} / {item.levelLabel}
+                {deferredContentReady ? (
+                  <div className="project-modal__related">
+                    {projectTechnologies.map((item) => (
+                      <div key={item.name} className="project-modal__related-card">
+                        <SkillLogo
+                          className="project-modal__related-logo"
+                          logo={item.logo}
+                          name={item.name}
+                          style={{ '--skill-color': item.color }}
+                        />
+                        <div>
+                          <div className="project-modal__related-name">{item.name}</div>
+                          <div className="project-modal__related-meta">
+                            {item.category} / {item.levelLabel}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="project-modal__related-skeleton" aria-hidden="true">
+                    <span />
+                    <span />
+                  </div>
+                )}
               </section>
             )}
           </div>

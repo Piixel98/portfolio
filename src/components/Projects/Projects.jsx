@@ -6,10 +6,23 @@ import { resolveProjectTechnologies } from './projectTech'
 export default function Projects({ projects, skills }) {
   const [activeProject, setActiveProject] = useState(null)
   const openerRef = useRef(null)
-  const projectTechnologies = useMemo(
-    () => (activeProject ? resolveProjectTechnologies(activeProject, skills) : []),
-    [activeProject, skills],
+  const projectsByNum = useMemo(
+    () => new Map(projects.items.map((project) => [project.num, project])),
+    [projects.items],
   )
+  const projectTechnologiesByNum = useMemo(
+    () =>
+      new Map(
+        projects.items.map((project) => [
+          project.num,
+          resolveProjectTechnologies(project, skills),
+        ]),
+      ),
+    [projects.items, skills],
+  )
+  const projectTechnologies = activeProject
+    ? (projectTechnologiesByNum.get(activeProject.num) ?? [])
+    : []
 
   return (
     <>
@@ -28,9 +41,7 @@ export default function Projects({ projects, skills }) {
                 index={index}
                 onOpen={(projectNum) => {
                   openerRef.current = document.activeElement
-                  setActiveProject(
-                    projects.items.find((project) => project.num === projectNum) ?? null,
-                  )
+                  setActiveProject(projectsByNum.get(projectNum) ?? null)
                 }}
               />
             ))}

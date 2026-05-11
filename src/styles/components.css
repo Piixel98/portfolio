@@ -1213,6 +1213,22 @@
     cursor: grabbing;
   }
 
+  .project-modal__globe--placeholder {
+    cursor: default;
+  }
+
+  .project-modal__globe-loader {
+    width: min(58%, 13rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(96, 165, 250, 0.14);
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.1), transparent 58%),
+      linear-gradient(90deg, transparent 0 46%, rgba(96, 165, 250, 0.22) 46% 54%, transparent 54%),
+      linear-gradient(0deg, transparent 0 46%, rgba(52, 211, 153, 0.16) 46% 54%, transparent 54%);
+    opacity: 0.78;
+  }
+
   .project-modal__globe::before,
   .project-modal__globe::after {
     position: absolute;
@@ -1347,6 +1363,19 @@
     display: grid;
     gap: 0.75rem;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  }
+
+  .project-modal__related-skeleton {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  }
+
+  .project-modal__related-skeleton span {
+    min-height: 5.25rem;
+    border: 1px solid rgba(147, 167, 205, 0.08);
+    border-radius: 0.55rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.025), rgba(96, 165, 250, 0.04));
   }
 
   .project-modal__related-card {
