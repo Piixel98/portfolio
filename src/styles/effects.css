@@ -53,10 +53,38 @@
   background-size: 60px 60px;
 }
 
-/* Typewriter cursor blink */
-.tw-cursor {
-  animation: blink 1s step-end infinite;
+/* Typewriter */
+.typewriter-line {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  color: var(--color-success);
+  white-space: nowrap;
 }
+
+.typewriter-line::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--color-accent);
+  content: '|';
+  animation: blink 1s step-end infinite;
+  transform: translateX(calc(var(--typewriter-chars, 0) * 1ch));
+  will-change: transform;
+}
+
+.typewriter-line__sizer {
+  display: inline-block;
+  visibility: hidden;
+}
+
+.typewriter-line__text {
+  position: absolute;
+  inset: 0 auto auto 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
 @keyframes blink {
   0%,
   100% {
@@ -337,7 +365,7 @@
     transition: none;
   }
 
-  .tw-cursor {
+  .typewriter-line::after {
     animation: none;
   }
 

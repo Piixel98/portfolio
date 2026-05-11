@@ -32,6 +32,9 @@ export default function Hero({ hero, profile }) {
   const timeoutRef = useRef(null)
   const phrases = hero.phrases
   const phrase = phrases[phraseIdx] || ''
+  const longestPhrase = phrases.reduce((longest, current) => {
+    return current.length > longest.length ? current : longest
+  }, '')
   const displayedText = prefersReducedMotion ? phrases[0] : phrase.slice(0, charIdx)
 
   useEffect(() => {
@@ -101,9 +104,17 @@ export default function Hero({ hero, profile }) {
         </h1>
 
         <div className="font-mono text-[clamp(15px,2vw,20px)] text-text-muted font-light mb-8 min-h-[30px]">
-          <span className="text-emerald-400">{displayedText}</span>
-          <span className="tw-cursor text-blue-400" aria-hidden="true">
-            |
+          <span
+            className="typewriter-line"
+            aria-label={prefersReducedMotion ? phrases[0] : phrase}
+            style={{ '--typewriter-chars': displayedText.length }}
+          >
+            <span className="typewriter-line__sizer" aria-hidden="true">
+              {longestPhrase}
+            </span>
+            <span className="typewriter-line__text" aria-hidden="true">
+              {displayedText}
+            </span>
           </span>
         </div>
 
@@ -137,16 +148,13 @@ export default function Hero({ hero, profile }) {
           </a>
         </div>
 
-        <div className="flex gap-3 flex-wrap">
+        <div className="hero-badges">
           {hero.badges.map((badge) => (
-            <span
-              key={badge}
-              className="font-mono text-[11px] border border-white/[0.07] px-3 py-1.5 rounded-full text-text-muted tracking-[0.05em]"
-            >
+            <span key={badge} className="hero-badge">
               {badge}
             </span>
           ))}
-          <span className="font-mono text-[11px] border border-emerald-500/40 px-3 py-1.5 rounded-full text-emerald-400 tracking-[0.05em]">
+          <span className="hero-badge hero-badge--availability">
             * {hero.availability}
           </span>
         </div>
