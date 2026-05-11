@@ -1,6 +1,10 @@
 # Jordi Sanchez Portfolio
 
-Personal portfolio, built with React, Vite and Tailwind CSS. Content is managed from a Zod-validated JSON file, with unit, accessibility, end-to-end, link and Lighthouse checks in CI.
+Personal portfolio built with React, Vite and Tailwind CSS. The current stable release is `1.0.0`.
+
+Content is managed from a Zod-validated JSON file. UI styles are colocated with each component, shared component styles live under `src/components/shared`, and static SVG icons are served from `public/icons` so they are requested only by the components that render them.
+
+The project includes unit, accessibility, end-to-end, link and Lighthouse checks in CI.
 
 ![Portfolio](./portfolio.gif)
 
@@ -11,6 +15,7 @@ Production URL: https://portfolio-iota-sandy-c1tlxc4d2t.vercel.app/
 - React 19
 - Vite 8
 - Tailwind CSS 4
+- Colocated component CSS
 - Zod
 - Sentry, Vercel Analytics and Vercel Speed Insights
 - Vitest + Testing Library
@@ -116,6 +121,43 @@ Content is validated with:
 
 If a new section or required field is added, update the JSON, schema and tests at the same time.
 
+## Styling Architecture
+
+Each section owns its JSX and CSS in the same folder:
+
+```text
+src/components/Hero/Hero.jsx
+src/components/Hero/Hero.css
+src/components/Projects/Projects.jsx
+src/components/Projects/Projects.css
+```
+
+Shared component styles are colocated with the shared component:
+
+```text
+src/components/shared/FadeIn/FadeIn.css
+src/components/shared/SkillLogo/SkillLogo.css
+```
+
+Global styles are limited to:
+
+- `src/styles/tokens.css`: design tokens.
+- `src/styles/base.css`: document-level defaults.
+- `src/styles/components.css`: reusable primitives such as tags, buttons and shared layout helpers.
+- `src/styles/effects.css`: global cursor and scroll-progress effects.
+
+Prefer component CSS for section-specific styles. Keep inline styles only for runtime values such as animation delays, CSS variables derived from data, progress values or pointer position.
+
+## Static Assets
+
+Public assets are loaded by URL from the component that needs them:
+
+- `public/icons`: reusable SVG UI icons.
+- `public/flags`: language flag SVGs.
+- `public/profile_character.webp`: optimized hero character image.
+
+Avoid embedding static SVG markup in components. Keep inline SVG only when it is generated from runtime data or requires interactive rendering, such as the project detail globe.
+
 ## Contact Form
 
 The form sends messages through the serverless function:
@@ -150,6 +192,14 @@ npm run e2e
 ```
 
 `npm run quality` covers the non-Playwright gates. Run `npm run e2e` separately because it builds and launches the preview server.
+
+For a release candidate, run:
+
+```powershell
+npm run format
+npm run quality
+npm run e2e
+```
 
 Lighthouse CI enforces accessibility, best-practices and SEO thresholds, plus bundle budgets in `lighthouserc.json`:
 
@@ -228,15 +278,18 @@ Current coverage:
 ## Structure
 
 ```text
-api/                         Contact form serverless function
-public/                      Static assets, sitemap, robots and 404 page
-scripts/                     Maintenance utilities
-src/App.jsx                  Main section composition
-src/components/              Components organized by section
-src/data/                    Editable JSON and Zod schema
-src/hooks/                   Reusable UI hooks
-src/services/                Observability integrations
-src/test/                    Unit test setup
-src/utils/                   Framework-independent helpers
-tests/e2e/                   Playwright tests
+api/                                Contact form serverless function
+public/                             Static assets, sitemap, robots and 404 page
+public/icons/                       Static SVG icons loaded on demand
+scripts/                            Maintenance utilities
+src/App.jsx                         Main section composition
+src/components/                     Components organized by section
+src/components/shared/              Shared UI primitives
+src/data/                           Editable JSON and Zod schema
+src/hooks/                          Reusable UI hooks
+src/services/                       Observability integrations
+src/styles/                         Global tokens, base styles and shared primitives
+src/test/                           Unit test setup
+src/utils/                          Framework-independent helpers
+tests/e2e/                          Playwright tests
 ```
