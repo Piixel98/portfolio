@@ -1757,6 +1757,7 @@
     bottom: auto;
     z-index: 1;
     width: clamp(18rem, 44vw, 38rem);
+    aspect-ratio: 785 / 1102;
     contain: layout paint style;
     pointer-events: none;
     transform: translateY(-43%);
@@ -1766,7 +1767,7 @@
     position: absolute;
     inset: -1.25rem;
     z-index: 0;
-    background: url('/profile_character.png') bottom center / contain no-repeat;
+    background: url('/profile_character.webp') bottom center / contain no-repeat;
     content: '';
     filter: blur(6px);
     opacity: 0.28;
@@ -1792,7 +1793,7 @@
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: url('/profile_character.png') bottom center / contain no-repeat;
+    background: url('/profile_character.webp') bottom center / contain no-repeat;
     clip-path: polygon(0 56%, 100% 56%, 100% 100%, 0 100%);
     filter: blur(9px);
     mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.92) 34%, transparent 78%);

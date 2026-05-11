@@ -75,8 +75,8 @@ export default function Hero({ hero, profile }) {
         <div className="hero-character__glow" />
         <div className="hero-character__arm-blur" />
         <img
-          src="/profile_character.png"
-          srcSet="/profile_character.png 785w"
+          src="/profile_character.webp"
+          srcSet="/profile_character.webp 785w"
           sizes="(max-width: 640px) 23rem, (max-width: 767px) 82vw, min(44vw, 38rem)"
           alt=""
           className="hero-character__image"
